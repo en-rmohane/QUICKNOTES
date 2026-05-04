@@ -28,14 +28,16 @@
                 <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Introduction</a></li>
                 
                 {% for u in data %}
-                    <li class="unit-title">{{ u.title }}</li>
-                    {% for t in u.topics %}
-                        <li>
-                            <a href="{{ url_for('topic', slug=t.slug) }}" class="{% if request.path == '/topic/' + t.slug %}active{% endif %}">
-                                {{ t.title }}
-                            </a>
-                        </li>
-                    {% endfor %}
+                    <details class="unit-dropdown" {% if loop.index == 1 %}open{% endif %}>
+                        <summary class="unit-title">{{ u.title }}</summary>
+                        {% for t in u.topics %}
+                            <li>
+                                <a href="{{ url_for('topic', slug=t.slug) }}" class="{% if request.path == '/topic/' + t.slug %}active{% endif %}">
+                                    {{ t.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </details>
                 {% endfor %}
             </ul>
         </aside>
