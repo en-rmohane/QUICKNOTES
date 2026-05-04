@@ -7,6 +7,7 @@ compiler_data = [
             {
                 "slug": "intro-compiler-types",
                 "title": "Introduction, Major Data Structures & Types of Compilers",
+                "subtopics": ["Introduction to Compilers", "Major Data Structures", "Types of Compilers", "Front-End and Back-End"],
                 "content": """
                     <h2>1. Introduction to Compilers</h2>
                     <p>A compiler is a specialized software program that translates source code written in a high-level programming language (like C, Java, or C++) into low-level machine code (binary) or an intermediate form that the computer's processor can execute directly.</p>
@@ -48,6 +49,7 @@ compiler_data = [
             {
                 "slug": "compiler-phases-lexical",
                 "title": "Compiler Structure, Phases & Lexical Analysis",
+                "subtopics": ["Analysis-Synthesis Model", "Phases of a Compiler", "Lexical Analysis Basics", "Categories of Tokens"],
                 "content": """
                     <h2>1. Analysis-Synthesis Model of Compilation</h2>
                     <p>Compilation is fundamentally broken into two steps:</p>
@@ -121,6 +123,7 @@ compiler_data = [
             {
                 "slug": "finite-automata",
                 "title": "Introduction to Finite Automata (DFA & NFA)",
+                "subtopics": ["What are Finite Automata?", "Types of FA (DFA vs NFA)", "DFA vs NFA in Compilers"],
                 "content": """
                     <h2>1. What are Finite Automata (FA)?</h2>
                     <p>Finite Automata are mathematical models of machines with a finite number of states. In compilers, they are used to recognize patterns (Regular Expressions) in the source code to identify tokens.</p>

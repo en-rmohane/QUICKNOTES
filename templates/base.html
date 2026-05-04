@@ -12,6 +12,12 @@
         <div class="logo">
             <h2>QUICK NOTES</h2>
         </div>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
         <nav class="nav-links">
             <a href="/">Home</a>
             <a href="#">Tutorials</a>
@@ -31,10 +37,17 @@
                     <details class="unit-dropdown" {% if loop.index == 1 %}open{% endif %}>
                         <summary class="unit-title">{{ u.title }}</summary>
                         {% for t in u.topics %}
-                            <li>
+                            <li class="topic-item">
                                 <a href="{{ url_for('topic', slug=t.slug) }}" class="{% if request.path == '/topic/' + t.slug %}active{% endif %}">
                                     {{ t.title }}
                                 </a>
+                                {% if request.path == '/topic/' + t.slug and t.subtopics %}
+                                    <ul class="subtopic-list">
+                                        {% for st in t.subtopics %}
+                                            <li><a href="#section-{{ loop.index }}">{{ st }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
                             </li>
                         {% endfor %}
                     </details>
