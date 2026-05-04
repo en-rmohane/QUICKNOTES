@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ topic.title }} - Compiler Design{% endblock %}
+
+{% block content %}
+<div class="article">
+    <div class="breadcrumb">
+        <a href="/">Home</a> &raquo; {{ unit.title }} &raquo; {{ topic.title }}
+    </div>
+    
+    <h1>{{ topic.title }}</h1>
+    
+    <div class="article-meta">
+        <span><i class="icon-calendar"></i> Last Updated : {{ "2026-05-04" }}</span>
+    </div>
+
+    <div class="article-content">
+        {{ topic.content | safe }}
+    </div>
+    
+    <div class="article-nav">
+        <!-- In a real app we would compute the previous and next topic dynamically -->
+        <a href="/" class="btn-nav">&laquo; Back to Home</a>
+    </div>
+</div>
+{% endblock %}

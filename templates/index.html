@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - QUICK NOTES{% endblock %}
+
+{% block content %}
+<div class="article">
+    <h1>QUICK NOTES - Compiler Design</h1>
+    <p>Welcome to QUICK NOTES, the comprehensive guide on Compiler Design. This tutorial covers advanced and highly detailed topics from Unit-III, Unit-IV, and Unit-V of the Compiler Design curriculum.</p>
+    
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        {% for u in data %}
+            <div class="unit-section">
+                <h3>{{ u.title }}</h3>
+                <ul>
+                    {% for t in u.topics %}
+                        <li><a href="{{ url_for('topic', slug=t.slug) }}">{{ t.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

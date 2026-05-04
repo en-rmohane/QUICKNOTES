@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}QUICK NOTES - Compiler Design{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <h2>QUICK NOTES</h2>
+        </div>
+        <nav class="nav-links">
+            <a href="/">Home</a>
+            <a href="#">Tutorials</a>
+            <a href="#">Algorithms</a>
+            <a href="#">Data Structures</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h3>Compiler Design</h3>
+            <ul>
+                <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Introduction</a></li>
+                
+                {% for u in data %}
+                    <li class="unit-title">{{ u.title }}</li>
+                    {% for t in u.topics %}
+                        <li>
+                            <a href="{{ url_for('topic', slug=t.slug) }}" class="{% if request.path == '/topic/' + t.slug %}active{% endif %}">
+                                {{ t.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            {% block content %}
+            {% endblock %}
+        </main>
+        
+        <!-- Right Sidebar for Ads/Extra Links (GFG style) -->
+        <aside class="right-sidebar">
+            <div class="ad-box">
+                <h4>Related Courses</h4>
+                <p>Master Data Structures and Algorithms with our premium courses.</p>
+                <button>Explore Now</button>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 QUICK NOTES. Built with Flask.</p>
+        <p><strong>DEVELOPED BY RAVI KUMAR MOHANE</strong></p>
+    </footer>
+</body>
+</html>
