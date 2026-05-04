@@ -278,15 +278,136 @@ footer {
     margin-top: 40px;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
+/* Global Table Responsiveness */
+.article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    display: table; /* Reset to table for better desktop rendering */
+}
+
+/* On mobile, make tables scrollable */
+@media (max-width: 768px) {
+    .article-content table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+.article-content th, .article-content td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.article-content th {
+    background-color: #f1f8e9;
+    font-weight: 700;
+}
+
+/* Ensure images and pre tags don't overflow */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre-wrap; /* Wrap long lines of code */
+    word-break: break-all;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
     .container {
+        gap: 15px;
+    }
+    .sidebar, .right-sidebar {
+        flex: 0 0 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 15px;
         flex-direction: column;
+        gap: 10px;
+        text-align: center;
     }
     
-    .sidebar, .right-sidebar {
-        flex: auto;
+    .nav-links {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-links a {
+        margin: 0 10px;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        flex-direction: column;
+        margin: 10px auto;
+    }
+    
+    .sidebar {
+        flex: none;
+        width: 100%;
         height: auto;
         position: static;
+        margin-bottom: 10px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .article h1 {
+        font-size: 1.8rem;
+    }
+
+    .right-sidebar {
+        display: none; /* Hide ads/extra info on small screens to save space */
+    }
+
+    /* Make sidebar links look like a pill menu on mobile */
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .sidebar .unit-title {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .sidebar li {
+        flex: 1 1 calc(50% - 10px); /* 2 columns on mobile */
+    }
+
+    .sidebar li a {
+        background: #f1f1f1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar li {
+        flex: 1 1 100%; /* 1 column on very small screens */
+    }
+    
+    .article h1 {
+        font-size: 1.5rem;
+    }
+
+    .article-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .article-content h3 {
+        font-size: 1.1rem;
     }
 }
