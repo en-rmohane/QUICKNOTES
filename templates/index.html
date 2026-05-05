@@ -4,19 +4,15 @@
 
 {% block content %}
 <div class="article">
-    <h1>QUICK NOTES - Compiler Design</h1>
-    <p>Welcome to QUICK NOTES, the comprehensive guide on Compiler Design. This tutorial covers advanced and highly detailed topics from Unit-III, Unit-IV, and Unit-V of the Compiler Design curriculum.</p>
+    <h1>QUICK NOTES - Educational Portal</h1>
+    <p>Welcome to QUICK NOTES, your comprehensive guide for Computer Science subjects. Select a course below to get started.</p>
     
-    <div class="toc">
-        <h2>Table of Contents</h2>
-        {% for u in data %}
-            <div class="unit-section">
-                <h3>{{ u.title }}</h3>
-                <ul>
-                    {% for t in u.topics %}
-                        <li><a href="{{ url_for('topic', slug=t.slug) }}">{{ t.title }}</a></li>
-                    {% endfor %}
-                </ul>
+    <div class="course-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px;">
+        {% for id, info in subjects.items() %}
+            <div class="course-card" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; transition: transform 0.3s ease;">
+                <h2 style="color: #0f9d58; margin-bottom: 10px;">{{ info.title }}</h2>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Master the core concepts of {{ info.title }} with our detailed, topic-wise quick notes.</p>
+                <a href="{{ url_for('course_home', subject=id) }}" class="btn" style="display: inline-block; background: #0f9d58; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">Start Learning</a>
             </div>
         {% endfor %}
     </div>

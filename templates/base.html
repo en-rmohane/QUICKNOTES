@@ -6,6 +6,10 @@
     <title>{% block title %}QUICK NOTES - Compiler Design{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'forest' });
+    </script>
 </head>
 <body>
     <header class="navbar">
@@ -29,19 +33,20 @@
     <div class="container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
-            <h3>Compiler Design</h3>
+            <h3>{% if course_title %}{{ course_title }}{% else %}Select Course{% endif %}</h3>
             <ul>
                 <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Introduction</a></li>
                 
+                {% if data %}
                 {% for u in data %}
-                    <details class="unit-dropdown" {% if loop.index == 1 %}open{% endif %}>
-                        <summary class="unit-title">{{ u.title }}</summary>
+                    <details class="unit-dropdown" open>
+                        <summary class="unit-title">{{ u.unit }}: {{ u.title }}</summary>
                         {% for t in u.topics %}
                             <li class="topic-item">
-                                <a href="{{ url_for('topic', slug=t.slug) }}" class="{% if request.path == '/topic/' + t.slug %}active{% endif %}">
+                                <a href="{{ url_for('topic', subject=subject, slug=t.slug) }}" class="{% if request.path == url_for('topic', subject=subject, slug=t.slug) %}active{% endif %}">
                                     {{ t.title }}
                                 </a>
-                                {% if request.path == '/topic/' + t.slug and t.subtopics %}
+                                {% if request.path == url_for('topic', subject=subject, slug=t.slug) and t.subtopics %}
                                     <ul class="subtopic-list">
                                         {% for st in t.subtopics %}
                                             <li><a href="#section-{{ loop.index }}">{{ st }}</a></li>
@@ -52,6 +57,9 @@
                         {% endfor %}
                     </details>
                 {% endfor %}
+                {% else %}
+                    <li class="topic-item"><a href="/">Explore All Courses</a></li>
+                {% endif %}
             </ul>
         </aside>
 
