@@ -15,6 +15,21 @@
                 <a href="{{ url_for('course_home', subject=id) }}" class="btn" style="display: inline-block; background: #0f9d58; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">Start Learning</a>
             </div>
         {% endfor %}
+        
+        <!-- New Card for Compiler Lab Manual (SBITM Betul) -->
+        <div class="course-card" style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(15,157,88,0.1); border: 2px solid #0f9d58; transition: transform 0.3s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="position: absolute; top: 15px; right: -30px; background: #0f9d58; color: white; padding: 4px 30px; transform: rotate(45deg); font-size: 0.65rem; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">SBITM</div>
+            <div>
+                <h2 style="color: #0b7a44; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-flask" style="color: #0f9d58;"></i> Compiler Design Lab
+                </h2>
+                <p style="color: #444; font-size: 0.95rem; margin-bottom: 20px;">
+                    <strong>Course Code: AD-604</strong><br>
+                    Official Lab Manual for <strong>SBITM Betul</strong> (Branch: AI & DS, Year: III Yr B.E, Sem: 6). Fully interactive, beautifully styled, and ready for printing.
+                </p>
+            </div>
+            <a href="{{ url_for('compiler_lab_manual') }}" class="btn" style="display: inline-block; background: #0b7a44; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color 0.2s;">Open Lab Manual</a>
+        </div>
     </div>
 </div>
 {% endblock %}

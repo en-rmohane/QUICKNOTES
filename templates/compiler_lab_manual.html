@@ -1,0 +1,3308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Design Laboratory Manual - SBITM Betul</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0f9d58;
+            --primary-dark: #0b7a44;
+            --primary-light: #e8f5e9;
+            --secondary: #1a73e8;
+            --bg-base: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.02);
+            --code-bg: #1e1e2e;
+            --code-text: #cdd6f4;
+        }
+
+        [data-theme="dark"] {
+            --bg-base: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --primary-light: rgba(15, 157, 88, 0.15);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white !important;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Hero Header Section */
+        .hero {
+            background: linear-gradient(135deg, #0f9d58 0%, #1e293b 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .meta-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Container Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .sidebar-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-link span.badge {
+            margin-left: auto;
+            background-color: rgba(0,0,0,0.05);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        .nav-link.active span.badge {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* Content Area Styling */
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 35px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-title-group h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-meta-info {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .card-meta-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Sections inside Cards */
+        .section-block {
+            margin-bottom: 30px;
+        }
+
+        .section-block h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        .section-block p, .section-block ol, .section-block ul {
+            font-size: 0.98rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            padding-left: 5px;
+        }
+
+        .section-block ol, .section-block ul {
+            padding-left: 25px;
+        }
+
+        .section-block li {
+            margin-bottom: 8px;
+        }
+
+        /* Beautiful Code Viewer */
+        .code-container {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background-color: var(--code-bg);
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #11111b;
+            padding: 10px 20px;
+            border-bottom: 1px solid #313244;
+            color: #a6adc8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .code-header .lang-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .code-header button {
+            background: none;
+            border: 1px solid #313244;
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: #cdd6f4;
+            cursor: pointer;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .code-header button:hover {
+            background-color: rgba(255,255,255,0.05);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .code-container pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .code-container code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.92rem;
+            color: var(--code-text);
+            white-space: pre;
+        }
+
+        /* Output Showcase block */
+        .output-showcase {
+            background-color: #0c0f17;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .output-header {
+            background-color: #06080c;
+            padding: 10px 20px;
+            border-bottom: 1px solid #1a202c;
+            color: #48bb78;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .output-body {
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+
+        /* Compilation Commands */
+        .compilation-commands {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 15px 20px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 15px 0;
+        }
+
+        .compilation-commands h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .compilation-commands code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Interactive Simulator Panel */
+        .simulator-panel {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sim-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .sim-header h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sim-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sim-control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sim-control-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        .sim-control-group select, .sim-control-group input {
+            padding: 10px 15px;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: white;
+            border-radius: var(--radius-md);
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sim-control-group select:focus, .sim-control-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .sim-output {
+            background-color: #020617;
+            border-radius: var(--radius-md);
+            border: 1px solid #1e293b;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #38bdf8;
+            min-height: 150px;
+            white-space: pre-wrap;
+        }
+
+        .sim-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .sim-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer h3 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        footer .developer-tag {
+            color: var(--primary);
+            font-weight: 700;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* Print Layout Rules */
+        @media print {
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+
+            .navbar, .sidebar, .navbar-actions, .search-box, .code-header button, .sim-btn, .simulator-panel, .toast {
+                display: none !important;
+            }
+
+            .main-container {
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .card {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin-bottom: 50px !important;
+                page-break-after: always;
+            }
+
+            .card:last-child {
+                page-break-after: avoid;
+            }
+
+            .code-container, .output-showcase {
+                border: 1px solid #ccc !important;
+                background-color: #fafafa !important;
+                page-break-inside: avoid;
+            }
+
+            .code-container code, .output-body {
+                color: black !important;
+            }
+
+            .code-header, .output-header {
+                background-color: #eee !important;
+                color: black !important;
+                border-bottom: 1px solid #ccc !important;
+            }
+
+            .hero {
+                background: white !important;
+                color: black !important;
+                border-bottom: 2px solid black !important;
+                padding: 40px 0 !important;
+            }
+
+            .meta-badge {
+                border: 1px solid #ccc !important;
+                background: none !important;
+                color: black !important;
+            }
+
+            .section-block h3 {
+                border-left-color: black !important;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            .hero {
+                padding: 40px 20px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .card {
+                padding: 20px;
+            }
+            .sim-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <a href="#" class="navbar-brand">
+            <i class="fa-solid fa-laptop-code"></i> SBITM LAB PORTAL
+        </a>
+        <div class="navbar-actions">
+            <button class="nav-btn" id="theme-toggle" onclick="toggleTheme()">
+                <i class="fa-solid fa-moon"></i> Dark Mode
+            </button>
+            <button class="nav-btn btn-primary" onclick="window.print()">
+                <i class="fa-solid fa-print"></i> Print Manual / PDF
+            </button>
+        </div>
+    </header>
+
+    <!-- Lab Cover Hero Header -->
+    <section class="hero">
+        <div class="hero-logo"><i class="fa-solid fa-gears"></i></div>
+        <h1>SHRI BALAJI INSTITUTE OF TECHNOLOGY AND MANAGEMENT, BETUL</h1>
+        <h2>Department of Computer Science and Engineering</h2>
+        <div style="font-weight: 700; font-size: 1.2rem; margin-top:-15px; margin-bottom: 20px; color:#a3e635;">
+            BRANCH: Artificial Intelligence and Data Science (AI & DS)
+        </div>
+        
+        <div class="hero-meta">
+            <div class="meta-badge"><i class="fa-solid fa-code"></i> Subject Code: AD-604</div>
+            <div class="meta-badge"><i class="fa-solid fa-book"></i> Compiler Design Laboratory</div>
+            <div class="meta-badge"><i class="fa-solid fa-calendar-days"></i> Year: III Year B.E. / Sem: 6</div>
+            <div class="meta-badge"><i class="fa-solid fa-graduation-cap"></i> Session: 2024-25</div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- Interactive Navigation Sidebar -->
+        <aside class="sidebar">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="Search experiments..." onkeyup="filterExperiments()">
+            </div>
+            
+            <h3 class="sidebar-title">LIST OF EXPERIMENTS</h3>
+            <ul class="nav-list" id="sidebar-nav">
+                <li class="nav-item">
+                    <a href="#exp1" class="nav-link active">
+                        <i class="fa-solid fa-table"></i> Symbol Table
+                        <span class="badge">01</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp2" class="nav-link">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i> Lexical Analyzer in C
+                        <span class="badge">02</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp3" class="nav-link">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Lexical Analyzer (LEX)
+                        <span class="badge">03</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp4a" class="nav-link">
+                        <i class="fa-solid fa-square-root-variable"></i> Arithmetic Parser (YACC)
+                        <span class="badge">4A</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp4b" class="nav-link">
+                        <i class="fa-solid fa-font"></i> Variable Validation (YACC)
+                        <span class="badge">4B</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp4c" class="nav-link">
+                        <i class="fa-solid fa-calculator"></i> Calculator (LEX/YACC)
+                        <span class="badge">4C</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp5" class="nav-link">
+                        <i class="fa-solid fa-diagram-project"></i> AST / TAC (YACC)
+                        <span class="badge">05</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp6" class="nav-link">
+                        <i class="fa-solid fa-shield-halved"></i> Type Checking
+                        <span class="badge">06</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp7" class="nav-link">
+                        <i class="fa-solid fa-layer-group"></i> Stack Storage
+                        <span class="badge">07</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp8" class="nav-link">
+                        <i class="fa-solid fa-circle-nodes"></i> DAG Construction
+                        <span class="badge">08</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp9" class="nav-link">
+                        <i class="fa-solid fa-bolt"></i> Code Optimization
+                        <span class="badge">09</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp10a" class="nav-link">
+                        <i class="fa-solid fa-arrow-turn-down"></i> Control Flow Analysis
+                        <span class="badge">10A</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#exp10b" class="nav-link">
+                        <i class="fa-solid fa-arrows-spin"></i> Data Flow Analysis
+                        <span class="badge">10B</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Experiments Content Panel -->
+        <section class="content">
+            
+            <!-- Experiment 1 -->
+            <article class="card" id="exp1">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-table"></i> EX. NO: 1 - IMPLEMENTATION OF SYMBOL TABLE</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write a C program to implement a symbol table that dynamically stores identifier declarations and memory addresses during token analysis.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Read a mathematical/logical expression from the user, terminated by the character <code>$</code>.</li>
+                        <li>Scan the expression character by character.</li>
+                        <li>If a scanned character is an alphabet (identifying a variable name):
+                            <ul>
+                                <li>Check if the next character is an operator (e.g. <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>=</code>) or if it's the last character of the expression.</li>
+                                <li>If yes, dynamically allocate memory for the symbol identifier using the <code>malloc()</code> function.</li>
+                                <li>Insert the identifier character and its allocated virtual memory address into the tracking arrays.</li>
+                                <li>Print the identifier, its address, and classification type ("identifier").</li>
+                            </ul>
+                        </li>
+                        <li>After table generation, prompt the user to input a symbol to search.</li>
+                        <li>Search for the symbol in the created lookup table. If found, display its details along with the virtual memory address. Otherwise, notify that it is not found.</li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM (Standard-Compliant C Code):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> symbol_table.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    int i = 0, j = 0, x = 0, n, flag = 0;
+    void *p, *add[15];
+    char ch, srch, b[15], d[15], c;
+    
+    printf("Enter expression terminated by $:\n");
+    while ((c = getchar()) != '$' && i < 14) {
+        b[i] = c;
+        i++;
+    }
+    b[i] = '\0';
+    n = i - 1;
+    
+    printf("\nGiven expression: %s\n", b);
+    printf("\nSymbol Table:\n");
+    printf("Symbol\tAddress\t\tType\n");
+    printf("------------------------------------\n");
+    
+    while (j <= n) {
+        c = b[j];
+        if (isalpha((unsigned char)c)) {
+            if (j == n) {
+                p = malloc(sizeof(char));
+                add[x] = p;
+                d[x] = c;
+                printf("%c\t%p\tidentifier\n", c, p);
+                x++;
+            } else {
+                ch = b[j + 1];
+                if (ch == '/' || ch == '+' || ch == '-' || ch == '*' || ch == '=') {
+                    p = malloc(sizeof(char));
+                    add[x] = p;
+                    d[x] = c;
+                    printf("%c\t%p\tidentifier\n", c, p);
+                    x++;
+                }
+            }
+        }
+        j++;
+    }
+    
+    // Clear input buffer
+    while ((c = getchar()) != '\n' && c != EOF);
+    
+    printf("\nEnter the identifier to be searched: ");
+    srch = getchar();
+    for (i = 0; i < x; i++) {
+        if (srch == d[i]) {
+            printf("Symbol '%c' found @ Address %p\n", srch, add[i]);
+            flag = 1;
+            break;
+        }
+    }
+    if (flag == 0) {
+        printf("Symbol not found\n");
+    }
+    
+    // Clean up allocated memory
+    for (i = 0; i < x; i++) {
+        free(add[i]);
+    }
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc symbol_table.c -o symbol_table</code><br>
+                    <code>./symbol_table</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter expression terminated by $:
+a=b+c$
+
+Given expression: a=b+c
+Symbol Table:
+Symbol  Address         Type
+------------------------------------
+a       0x55d7f1d4f2a0  identifier
+b       0x55d7f1d4f2c0  identifier
+c       0x55d7f1d4f2e0  identifier
+
+Enter the identifier to be searched: b
+Symbol 'b' found @ Address 0x55d7f1d4f2c0</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 2 -->
+            <article class="card" id="exp2">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-magnifying-glass-chart"></i> EX. NO: 2 - DEVELOP A LEXICAL ANALYZER TO RECOGNIZE FEW PATTERNS IN C</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write a C program to implement a lexical analyzer that processes standard input and classifies character tokens into identifiers, operators, numbers, keywords, and special characters.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Read a sample C program block from input, terminated by EOF (Ctrl+D on Linux/MacOS, Ctrl+Z on Windows). Write this buffer content to a temporary file <code>input.txt</code>.</li>
+                        <li>Open the temporary file for reading. Open separate working files for writing identifiers (<code>identifier.txt</code>) and special characters (<code>specialchar.txt</code>).</li>
+                        <li>Read character-by-character from the source file:
+                            <ul>
+                                <li>If the character is a digit, scan recursively to group digits together into a single numerical token. Store it in a numerical array.</li>
+                                <li>If the character is an alphabet, scan recursively to group characters, digits, underscores, and <code>$</code> symbols to form an identifier token. Write this token to <code>identifier.txt</code> followed by a space.</li>
+                                <li>If the character is a newline (<code>\n</code>), increment the line number counter.</li>
+                                <li>If it is a space or tab, ignore it.</li>
+                                <li>Otherwise, write it to <code>specialchar.txt</code> as a special symbol or operator.</li>
+                            </ul>
+                        </li>
+                        <li>Close all open file streams.</li>
+                        <li>Print all grouped constants/numbers extracted from the input.</li>
+                        <li>Read tokens from <code>identifier.txt</code>. For each token, compare it against a list of reserved C keywords (e.g. <code>for</code>, <code>while</code>, <code>do</code>, <code>int</code>, <code>float</code>, <code>char</code>).
+                            <ul>
+                                <li>If matched, classify it as a **Keyword**.</li>
+                                <li>Otherwise, classify it as an **Identifier**.</li>
+                            </ul>
+                        </li>
+                        <li>Read and print the special characters recorded in <code>specialchar.txt</code>.</li>
+                        <li>Print the total number of lines detected in the program block.</li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM:</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> lexical_analyzer.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+void keyword(char str[10]) {
+    if (strcmp("for", str) == 0 || strcmp("while", str) == 0 || strcmp("do", str) == 0 ||
+        strcmp("int", str) == 0 || strcmp("float", str) == 0 || strcmp("char", str) == 0 ||
+        strcmp("double", str) == 0 || strcmp("static", str) == 0 || strcmp("switch", str) == 0 ||
+        strcmp("case", str) == 0 || strcmp("void", str) == 0 || strcmp("printf", str) == 0) {
+        printf("\n%s is a keyword", str);
+    } else {
+        printf("\n%s is an identifier", str);
+    }
+}
+
+int main() {
+    FILE *f1, *f2, *f3;
+    char c, str[10];
+    int num[100], lineno = 1, tokenvalue = 0, i = 0, j = 0, k = 0;
+    
+    printf("\nEnter the C program (Press Ctrl+D/Ctrl+Z at start of a new line to end):\n");
+    f1 = fopen("input.txt", "w");
+    if (f1 == NULL) {
+        printf("Error opening file for writing!\n");
+        return 1;
+    }
+    while ((c = getchar()) != EOF) {
+        putc(c, f1);
+    }
+    fclose(f1);
+    
+    f1 = fopen("input.txt", "r");
+    f2 = fopen("identifier.txt", "w");
+    f3 = fopen("specialchar.txt", "w");
+    
+    if (f1 == NULL || f2 == NULL || f3 == NULL) {
+        printf("Error opening working files!\n");
+        return 1;
+    }
+    
+    while ((c = getc(f1)) != EOF) {
+        if (isdigit(c)) {
+            tokenvalue = c - '0';
+            c = getc(f1);
+            while (isdigit(c)) {
+                tokenvalue = tokenvalue * 10 + (c - '0');
+                c = getc(f1);
+            }
+            num[i++] = tokenvalue;
+            ungetc(c, f1);
+        } else if (isalpha(c)) {
+            putc(c, f2);
+            c = getc(f1);
+            while (isdigit(c) || isalpha(c) || c == '_' || c == '$') {
+                putc(c, f2);
+                c = getc(f1);
+            }
+            putc(' ', f2);
+            ungetc(c, f1);
+        } else if (c == ' ' || c == '\t') {
+            // skip whitespace
+        } else if (c == '\n') {
+            lineno++;
+        } else {
+            putc(c, f3);
+        }
+    }
+    
+    fclose(f2);
+    fclose(f3);
+    fclose(f1);
+    
+    printf("\nThe numbers in the program are:");
+    for (j = 0; j < i; j++) {
+        printf(" %d", num[j]);
+    }
+    printf("\n");
+    
+    f2 = fopen("identifier.txt", "r");
+    if (f2 != NULL) {
+        printf("\nKeywords and Identifiers classification:");
+        while ((c = getc(f2)) != EOF) {
+            if (c != ' ') {
+                if (k < 9) str[k++] = c;
+            } else {
+                str[k] = '\0';
+                if (k > 0) keyword(str);
+                k = 0;
+            }
+        }
+        fclose(f2);
+    }
+    
+    f3 = fopen("specialchar.txt", "r");
+    if (f3 != NULL) {
+        printf("\n\nSpecial characters are:\n");
+        while ((c = getc(f3)) != EOF) {
+            printf("%c\t", c);
+        }
+        printf("\n");
+        fclose(f3);
+    }
+    
+    printf("\nTotal number of lines: %d\n", lineno);
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc lexical_analyzer.c -o lexical_analyzer</code><br>
+                    <code>./lexical_analyzer</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter the C program (Press Ctrl+D/Ctrl+Z at start of a new line to end):
+int a = 20;
+printf("%d", a);
+
+The numbers in the program are: 20
+
+Keywords and Identifiers classification:
+int is a keyword
+a is an identifier
+printf is a keyword
+
+Special characters are:
+=       ;       (       "       %       d       "       ,       )       ;
+
+Total number of lines: 2</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 3 -->
+            <article class="card" id="exp3">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-wand-magic-sparkles"></i> EX. NO: 3 - IMPLEMENTATION OF LEXICAL ANALYZER USING LEX TOOL</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: LEX / FLEX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To design and implement a Lexical Analyzer using the FLEX tool to parse standard C files, recognizing preprocessor directives, keywords, identifiers, constants, comments, and blocks.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>FLEX PROGRAM:</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> lexprogram.l</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>%{
+/* program to recognize a C program structures and tokens */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int COMMENT = 0;
+%}
+
+identifier [a-zA-Z][a-zA-Z0-9]*
+number [0-9]+
+
+%%
+#.* { printf("\n%s is a PREPROCESSOR DIRECTIVE", yytext); }
+int |
+float |
+char |
+double |
+while |
+for |
+do |
+if |
+break |
+continue |
+void |
+switch |
+case |
+long |
+struct |
+const |
+typedef |
+return |
+else |
+goto { if(!COMMENT) printf("\n\t%s is a KEYWORD", yytext); }
+
+"/*" { COMMENT = 1; printf("\n COMMENT BEGINS"); }
+"*/" { COMMENT = 0; printf("\n COMMENT ENDS"); }
+
+{identifier}\( { if(!COMMENT) printf("\n\n FUNCTION\n\t%s", yytext); }
+\{ { if(!COMMENT) printf("\n BLOCK BEGINS"); }
+\} { if(!COMMENT) printf("\n BLOCK ENDS"); }
+{identifier}(\[[0-9]*\])? { if(!COMMENT) printf("\n %s is an IDENTIFIER", yytext); }
+\".*\" { if(!COMMENT) printf("\n\t%s is a STRING", yytext); }
+{number} { if(!COMMENT) printf("\n\t%s is a NUMBER", yytext); }
+\)(\;)? { if(!COMMENT) { printf("\n\t"); ECHO; printf("\n"); } }
+\( { ECHO; }
+= { if(!COMMENT) printf("\n\t%s is an ASSIGNMENT OPERATOR", yytext); }
+"&lt;=" |
+"&gt;=" |
+"&lt;" |
+"==" |
+"&gt;" { if(!COMMENT) printf("\n\t%s is a RELATIONAL OPERATOR", yytext); }
+[ \t\n] { /* Skip whitespaces and newlines */ }
+. { /* Ignore any other character */ }
+%%
+
+int main(int argc, char **argv) {
+    if (argc > 1) {
+        FILE *file = fopen(argv[1], "r");
+        if (!file) {
+            printf("Could not open %s\n", argv[1]);
+            exit(1);
+        }
+        yyin = file;
+    }
+    yylex();
+    printf("\n\n");
+    return 0;
+}
+
+int yywrap() {
+    return 1;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE INPUT FILE (input.txt):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-file-lines"></i> input.txt</span>
+                        </div>
+                        <pre><code>/*comment line*/
+#include&lt;stdio.h&gt;
+main()
+{
+int a,b;
+a=20;
+printf("%d",a);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION AND RUN COMMANDS:</h4>
+                    <code>flex lexprogram.l</code><br>
+                    <code>gcc lex.yy.c -o scanner</code><br>
+                    <code>./scanner input.txt</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body"> COMMENT BEGINS
+ COMMENT ENDS
+#include<stdio.h> is a PREPROCESSOR DIRECTIVE
+
+ FUNCTION
+        main()
+        )
+
+ BLOCK BEGINS
+        int is a KEYWORD
+ a is an IDENTIFIER
+ b is an IDENTIFIER
+ a is an IDENTIFIER
+        = is an ASSIGNMENT OPERATOR
+        20 is a NUMBER
+
+ FUNCTION
+        printf(
+        "%d" is a STRING
+ a is an IDENTIFIER
+        );
+
+ BLOCK ENDS</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 4A -->
+            <article class="card" id="exp4a">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-square-root-variable"></i> EX. NO: 4A - RECOGNIZE ARITHMETIC EXPRESSIONS (+, -, *, /) USING YACC</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Tool: YACC / BISON</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write a YACC parser specification to recognize and validate valid arithmetic expressions containing operands, brackets, and operators (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>).</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>YACC SPECIFICATION PROGRAM:</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> arithexp.y</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>%{
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdlib.h&gt;
+
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%token num let
+%left '+' '-'
+%left '*' '/'
+
+%%
+Stmt : Stmt '\n'
+{ 
+    printf("\n.. Valid Expression.. \n");
+    exit(0);
+}
+ | expr
+ | error '\n'
+{ 
+    printf("\n.. Invalid Expression ..\n");
+    exit(0);
+}
+;
+
+expr : num
+ | let
+ | expr '+' expr
+ | expr '-' expr
+ | expr '*' expr
+ | expr '/' expr
+ | '(' expr ')'
+ ;
+%%
+
+int main() {
+    printf("Enter an expression to validate: ");
+    yyparse();
+    return 0;
+}
+
+int yylex() {
+    int ch;
+    while ((ch = getchar()) == ' ');
+    if (isdigit(ch))
+        return num;
+    if (isalpha(ch))
+        return let;
+    return ch;
+}
+
+void yyerror(const char *s) {
+    printf("%s\n", s);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>bison -d arithexp.y</code><br>
+                    <code>gcc arithexp.tab.c -o parser</code><br>
+                    <code>./parser</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter an expression to validate: (a+b)*c
+.. Valid Expression..
+
+Enter an expression to validate: a++b
+syntax error
+.. Invalid Expression ..</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 4B -->
+            <article class="card" id="exp4b">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-font"></i> EX. NO: 4B - RECOGNIZE VALID VARIABLES USING YACC</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Tool: YACC / BISON</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To design a YACC program to validate variable declarations that must start with a letter followed by any combination of letters and digits.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>YACC SPECIFICATION PROGRAM:</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> variablevalid.y</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>%{
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdlib.h&gt;
+
+int yylex(void);
+int yyerror(const char *s);
+%}
+
+%token let dig
+
+%%
+TERM : XTERM '\n'
+ {
+     printf(" \nAccepted\n" );
+     exit(0);
+ }
+ | error
+ {
+     printf(" \nRejected\n" );
+     exit(0);
+ }
+;
+
+XTERM : XTERM let
+ | XTERM dig
+ | let
+;
+%%
+
+int yylex() {
+    char ch;
+    while ((ch = getchar()) == ' ');
+    if (isalpha((unsigned char)ch))
+        return let;
+    if (isdigit((unsigned char)ch))
+        return dig;
+    return ch;
+}
+
+int main() {
+    printf("Enter a variable name: ");
+    yyparse();
+    return 0;
+}
+
+int yyerror(const char *s) {
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>bison -d variablevalid.y</code><br>
+                    <code>gcc variablevalid.tab.c -o var_validator</code><br>
+                    <code>./var_validator</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter a variable name: count123
+ 
+Accepted
+
+Enter a variable name: 9val
+ 
+Rejected</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 4C -->
+            <article class="card" id="exp4c">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-calculator"></i> EX. NO: 4C - IMPLEMENTATION OF CALCULATOR USING LEX & YACC</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Tools: LEX & YACC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To implement an arithmetic calculator capable of performing addition, subtraction, multiplication, division, modulo operations, and logical operators with variables using Lex and Yacc tools.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>YACC SPECIFICATION (calc.y):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> calc.y</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>%{
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int regs[26];
+int base;
+
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%start list
+%token DIGIT LETTER
+%left '|'
+%left '&'
+%left '+' '-'
+%left '*' '/' '%'
+%left UMINUS 
+
+%%
+list: /*empty */
+ | list stat '\n'
+ | list error '\n'
+ {
+     yyerrok;
+ }
+;
+
+stat: expr
+ {
+     printf("Result: %d\n", $1);
+ }
+ | LETTER '=' expr
+ {
+     regs[$1] = $3;
+ }
+;
+
+expr: '(' expr ')'
+ {
+     $$ = $2;
+ }
+ | expr '*' expr
+ {
+     $$ = $1 * $3;
+ }
+ | expr '/' expr
+ {
+     if($3 == 0) {
+         yyerror("Divide by Zero error!");
+         $$ = 0;
+     } else {
+         $$ = $1 / $3;
+     }
+ }
+ | expr '%' expr
+ {
+     $$ = $1 % $3;
+ }
+ | expr '+' expr
+ {
+     $$ = $1 + $3;
+ }
+ | expr '-' expr
+ {
+     $$ = $1 - $3;
+ }
+ | expr '&' expr
+ {
+     $$ = $1 & $3;
+ }
+ | expr '|' expr
+ {
+     $$ = $1 | $3;
+ }
+ | '-' expr %prec UMINUS
+ {
+     $$ = -$2;
+ }
+ | LETTER
+ {
+     $$ = regs[$1];
+ }
+ | number
+;
+
+number: DIGIT
+ {
+     $$ = $1;
+     base = ($1 == 0) ? 8 : 10;
+ }
+ | number DIGIT
+ {
+     $$ = base * $1 + $2;
+ }
+;
+%%
+
+int main() {
+    printf("Lex & Yacc Calculator. Enter Expressions:\n");
+    yyparse();
+    return 0;
+}
+
+void yyerror(const char *s) {
+    fprintf(stderr, "Error: %s\n", s);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>LEX SPECIFICATION (calc.l):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> calc.l</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>%{
+#include &lt;stdio.h&gt;
+#include "calc.tab.h"
+int c;
+extern int yylval;
+%}
+
+%%
+" " ;
+[a-z] {
+     c = yytext[0];
+     yylval = c - 'a';
+     return(LETTER);
+ }
+[0-9] {
+     c = yytext[0];
+     yylval = c - '0';
+     return(DIGIT);
+ }
+[^a-z0-9\b] {
+     c = yytext[0];
+     return(c);
+ }
+%%
+
+int yywrap() {
+    return 1;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>bison -d calc.y</code><br>
+                    <code>flex calc.l</code><br>
+                    <code>gcc lex.yy.c calc.tab.c -o calculator</code><br>
+                    <code>./calculator</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Lex & Yacc Calculator. Enter Expressions:
+x=5
+y=20
+x+y*2
+Result: 45
+y/x
+Result: 4</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 5 -->
+            <article class="card" id="exp5">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-diagram-project"></i> EX. NO: 5 - CONVERT BNF RULES INTO YACC FORM AND WRITE CODE TO GENERATE INTERMEDIATE CODE (QUADRUPLES)</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Tools: LEX & YACC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write Lex and Yacc specifications to parse standard C structural constructs (variable assignments, arithmetic nodes, if-else statements, and loops) and translate them into machine-independent Intermediate Quadruple format.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>YACC GRAMMAR SPECIFICATION (yaccbnf.y):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> yaccbnf.y</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>%{
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct quad
+{
+    char op[5];
+    char arg1[10];
+    char arg2[10];
+    char result[10];
+} QUAD[30];
+
+struct stack
+{
+    int items[100];
+    int top;
+} stk;
+
+int Index=0, tIndex=0, StNo, Ind, tInd;
+extern int LineNo;
+
+int yylex(void);
+void yyerror(const char *s);
+void push(int data);
+int pop(void);
+void AddQuadruple(char op[5], char arg1[10], char arg2[10], char result[10]);
+%}
+
+%union
+{
+    char var[10];
+}
+
+%token &lt;var&gt; NUM VAR RELOP
+%token MAIN IF ELSE WHILE TYPE
+%type &lt;var&gt; EXPR ASSIGNMENT CONDITION IFST ELSEST WHILELOOP
+%left '-' '+'
+%left '*' '/'
+
+%%
+PROGRAM : MAIN BLOCK
+;
+
+BLOCK: '{' CODE '}'
+;
+
+CODE: BLOCK
+ | STATEMENT CODE
+ | STATEMENT
+;
+
+STATEMENT: DESCT ';'
+ | ASSIGNMENT ';'
+ | CONDST
+ | WHILEST
+;
+
+DESCT: TYPE VARLIST
+;
+
+VARLIST: VAR ',' VARLIST
+ | VAR
+;
+
+ASSIGNMENT: VAR '=' EXPR {
+     strcpy(QUAD[Index].op, "=");
+     strcpy(QUAD[Index].arg1, $3);
+     strcpy(QUAD[Index].arg2, "");
+     strcpy(QUAD[Index].result, $1);
+     strcpy($$, QUAD[Index++].result);
+ }
+;
+
+EXPR: EXPR '+' EXPR { AddQuadruple("+", $1, $3, $$); }
+ | EXPR '-' EXPR { AddQuadruple("-", $1, $3, $$); }
+ | EXPR '*' EXPR { AddQuadruple("*", $1, $3, $$); }
+ | EXPR '/' EXPR { AddQuadruple("/", $1, $3, $$); }
+ | '-' EXPR { AddQuadruple("UMIN", $2, "", $$); }
+ | '(' EXPR ')' { strcpy($$, $2); }
+ | VAR
+ | NUM
+;
+
+CONDST: IFST {
+    Ind = pop();
+    sprintf(QUAD[Ind].result, "%d", Index);
+    Ind = pop();
+    sprintf(QUAD[Ind].result, "%d", Index);
+}
+| IFST ELSEST
+;
+
+IFST: IF '(' CONDITION ')' {
+    strcpy(QUAD[Index].op, "==");
+    strcpy(QUAD[Index].arg1, $3);
+    strcpy(QUAD[Index].arg2, "FALSE");
+    strcpy(QUAD[Index].result, "-1");
+    push(Index);
+    Index++;
+ }
+ BLOCK {
+    strcpy(QUAD[Index].op, "GOTO");
+    strcpy(QUAD[Index].arg1, "");
+    strcpy(QUAD[Index].arg2, "");
+    strcpy(QUAD[Index].result, "-1");
+    push(Index);
+    Index++;
+ }
+;
+
+ELSEST: ELSE {
+    tInd = pop();
+    Ind = pop();
+    push(tInd);
+    sprintf(QUAD[Ind].result, "%d", Index);
+ }
+ BLOCK {
+    Ind = pop();
+    sprintf(QUAD[Ind].result, "%d", Index);
+ }
+;
+
+CONDITION: VAR RELOP VAR { 
+    AddQuadruple($2, $1, $3, $$);
+    StNo = Index - 1;
+ }
+ | VAR
+ | NUM
+;
+
+WHILEST: WHILELOOP {
+    Ind = pop();
+    sprintf(QUAD[Ind].result, "%d", StNo);
+    Ind = pop();
+    sprintf(QUAD[Ind].result, "%d", Index);
+ }
+;
+
+WHILELOOP: WHILE '(' CONDITION ')' {
+     strcpy(QUAD[Index].op, "==");
+     strcpy(QUAD[Index].arg1, $3);
+     strcpy(QUAD[Index].arg2, "FALSE");
+     strcpy(QUAD[Index].result, "-1");
+     push(Index);
+     Index++;
+ }
+ BLOCK {
+     strcpy(QUAD[Index].op, "GOTO");
+     strcpy(QUAD[Index].arg1, "");
+     strcpy(QUAD[Index].arg2, "");
+     strcpy(QUAD[Index].result, "-1");
+     push(Index);
+     Index++;
+ }
+;
+%%
+
+extern FILE *yyin;
+
+int main(int argc, char *argv[]) {
+    stk.top = -1;
+    FILE *fp;
+    int i;
+    if(argc > 1) {
+        fp = fopen(argv[1], "r");
+        if(!fp) {
+            printf("\nFile not found\n");
+            exit(1);
+        }
+        yyin = fp;
+    }
+    yyparse();
+    printf("\n\n\t\t --------------------------------------");
+    printf("\n\t\t Pos\tOperator\tArg1\tArg2\tResult");
+    printf("\n\t\t --------------------------------------");
+    for(i=0; i<Index; i++) {
+        printf("\n\t\t %d\t %s\t\t %s\t %s\t %s", i, QUAD[i].op, QUAD[i].arg1, QUAD[i].arg2, QUAD[i].result);
+    }
+    printf("\n\t\t --------------------------------------\n\n");
+    return 0;
+}
+
+void push(int data) {
+    stk.top++;
+    if(stk.top == 100) {
+        printf("\nStack overflow\n");
+        exit(1);
+    }
+    stk.items[stk.top] = data;
+}
+
+int pop() {
+    int data;
+    if(stk.top == -1) {
+        printf("\nStack underflow\n");
+        exit(1);
+    }
+    data = stk.items[stk.top--];
+    return data;
+}
+
+void AddQuadruple(char op[5], char arg1[10], char arg2[10], char result[10]) {
+    strcpy(QUAD[Index].op, op);
+    strcpy(QUAD[Index].arg1, arg1);
+    strcpy(QUAD[Index].arg2, arg2);
+    sprintf(QUAD[Index].result, "t%d", tIndex++);
+    strcpy(result, QUAD[Index++].result);
+}
+
+void yyerror(const char *s) {
+    printf("\nError on line no:%d: %s", LineNo, s);
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>LEX SPECIFICATION (lexbnf.l):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> lexbnf.l</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>%{
+#include "yaccbnf.tab.h"
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+int LineNo = 1;
+%}
+
+identifier [a-zA-Z][_a-zA-Z0-9]*
+number [0-9]+|([0-9]*\.[0-9]+)
+
+%%
+main\(\) { return MAIN; }
+if { return IF; }
+else { return ELSE; }
+while { return WHILE; }
+int |
+char |
+float { return TYPE; }
+{identifier} { strcpy(yylval.var, yytext); return VAR; }
+{number} { strcpy(yylval.var, yytext); return NUM; }
+"&lt;" |
+"&gt;" |
+"&gt;=" |
+"&lt;=" |
+"==" { strcpy(yylval.var, yytext); return RELOP; }
+[ \t] ;
+\n { LineNo++; }
+. { return yytext[0]; }
+%%
+
+int yywrap() {
+    return 1;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>TEST INPUT PROGRAM (input.c):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-file-lines"></i> input.c</span>
+                        </div>
+                        <pre><code>main()
+{
+ int a,b,c;
+ a=10;
+ b=20;
+ if(a&lt;b)
+ {
+     a=a+b;
+ }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>bison -d yaccbnf.y</code><br>
+                    <code>flex lexbnf.l</code><br>
+                    <code>gcc lex.yy.c yaccbnf.tab.c -o bnf_translator</code><br>
+                    <code>./bnf_translator input.c</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TRANSCRIPTION OF QUADRUPLES:</div>
+                        <div class="output-body">                 --------------------------------------
+                 Pos    Operator         Arg1    Arg2    Result
+                 --------------------------------------
+                 0       =               10              a
+                 1       =               20              b
+                 2       <               a       b       t0
+                 3       ==              t0      FALSE   6
+                 4       +               a       b       t1
+                 5       =               t1              a
+                 6       GOTO                            7
+                 --------------------------------------</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 6 -->
+            <article class="card" id="exp6">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-shield-halved"></i> EX. NO: 6 - IMPLEMENT TYPE CHECKING</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write a C program to implement semantic analysis for type checking, verifying whether the operations and assignments within an expression conform to declared variable types.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Input the number of variables to declare.</li>
+                        <li>For each variable, read its name identifier and type specification ('f' for float, 'i' for integer).</li>
+                        <li>Read a mathematical expression from standard input, terminated by the character <code>$</code>.</li>
+                        <li>Analyze the expression's operations:
+                            <ul>
+                                <li>Scan the expression to check if it contains a division operator (<code>/</code>). If a division exists, flag that the operation result requires a <code>float</code> receiver to prevent precision loss.</li>
+                            </ul>
+                        </li>
+                        <li>Examine the assigned identifier (the left-hand side variable on the LHS):
+                            <ul>
+                                <li>Find the declared type of the LHS variable.</li>
+                                <li>If division is active (float required) and the assigned identifier is not declared as a <code>float</code> type (e.g., declared as <code>int</code>), raise a **Semantic error: Must be float type**.</li>
+                                <li>Otherwise, confirm with the message **Datatype is correctly defined**.</li>
+                            </ul>
+                        </li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM (Standard-Compliant C Code):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> typecheck.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+    int n, i, k, flag = 0;
+    char vari[15], typ[15], b[15], c;
+    
+    printf("Enter the number of variables: ");
+    if (scanf("%d", &n) != 1) return 1;
+    
+    for(i = 0; i < n; i++) {
+        printf("Enter the variable[%d]: ", i);
+        scanf(" %c", &vari[i]);
+        printf("Enter the variable-type[%d] (float-f, int-i): ", i);
+        scanf(" %c", &typ[i]);
+        if(typ[i] == 'f') {
+            flag = 1;
+        }
+    }
+    
+    printf("Enter the Expression (end with $): ");
+    i = 0;
+    // Clear newline
+    getchar(); 
+    while((c = getchar()) != '$' && i < 14) {
+        b[i] = c;
+        i++;
+    }
+    b[i] = '\0';
+    k = i;
+    
+    for(i = 0; i < k; i++) {
+        if(b[i] == '/') {
+            flag = 1;
+            break;
+        }
+    }
+    
+    for(i = 0; i < n; i++) {
+        if(b[0] == vari[i]) {
+            if(flag == 1) {
+                if(typ[i] == 'f') {
+                    printf("\nThe datatype is correctly defined..!\n");
+                    break;
+                } else {
+                    printf("\nSemantic Error: Identifier %c must be a float type..!\n", vari[i]);
+                    break;
+                }
+            } else {
+                printf("\nThe datatype is correctly defined..!\n");
+                break;
+            }
+        }
+    }
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc typecheck.c -o typecheck</code><br>
+                    <code>./typecheck</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT (Error Scenario):</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter the number of variables: 2
+Enter the variable[0]: x
+Enter the variable-type[0] (float-f, int-i): i
+Enter the variable[1]: y
+Enter the variable-type[1] (float-f, int-i): f
+Enter the Expression (end with $): x=y/2$
+
+Semantic Error: Identifier x must be a float type..!</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 7 -->
+            <article class="card" id="exp7">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-layer-group"></i> EX. NO: 7 - STORAGE ALLOCATION STRATEGIES: STACK IMPLEMENTATION</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write a C program to implement a Stack storage allocation strategy showcasing activation records allocation, push operations, pop operations, and current stack layouts.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Initialize <code>top = -1</code> to represent an empty runtime stack.</li>
+                        <li>Prompt the user to define a maximum limit size for the stack.</li>
+                        <li>Provide a loop with options:
+                            <ul>
+                                <li>**Option 1: Push**: Check if <code>top >= max - 1</code>. If yes, print stack overflow warning. Else, increment <code>top</code> and store the value in <code>stack[top]</code>.</li>
+                                <li>**Option 2: Pop**: Check if <code>top <= -1</code>. If yes, print stack underflow. Else, display the popped element and decrement <code>top</code>.</li>
+                                <li>**Option 3: Display**: Traverse index from <code>top</code> down to <code>0</code> and print the values currently resident in the stack frame.</li>
+                                <li>**Option 4: Exit**.</li>
+                            </ul>
+                        </li>
+                        <li>Loop until Option 4 is chosen.</li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM:</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> memory_stack.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+
+int stack[100], choice, n, top, x, i;
+
+void push(void);
+void pop(void);
+void display(void);
+
+int main() {
+    top = -1;
+    printf("\nEnter the size of STACK [MAX=100]: ");
+    if (scanf("%d", &n) != 1) return 1;
+    
+    printf("\n\t STACK OPERATIONS USING ARRAY");
+    printf("\n\t--------------------------------");
+    printf("\n\t 1.PUSH\n\t 2.POP\n\t 3.DISPLAY\n\t 4.EXIT");
+    
+    do {
+        printf("\nEnter the Choice: ");
+        if (scanf("%d", &choice) != 1) break;
+        switch(choice) {
+            case 1:
+                push();
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                printf("\n\t EXIT POINT\n");
+                break;
+            default:
+                printf("\n\t Please Enter a Valid Choice (1/2/3/4)");
+        }
+    } while(choice != 4);
+    return 0;
+}
+
+void push() {
+    if(top >= n - 1) {
+        printf("\n\tSTACK is over flow");
+    } else {
+        printf(" Enter a value to be pushed: ");
+        scanf("%d", &x);
+        top++;
+        stack[top] = x;
+    }
+}
+
+void pop() {
+    if(top <= -1) {
+        printf("\n\t Stack is under flow");
+    } else {
+        printf("\n\t The popped element is %d", stack[top]);
+        top--;
+    }
+}
+
+void display() {
+    if(top >= 0) {
+        printf("\n The elements in STACK \n");
+        for(i = top; i >= 0; i--) {
+            printf("%d\n", stack[i]);
+        }
+        printf("\nPress Next Choice");
+    } else {
+        printf("\n The STACK is empty");
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc memory_stack.c -o memory_stack</code><br>
+                    <code>./memory_stack</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter the size of STACK [MAX=100]: 3
+
+         STACK OPERATIONS USING ARRAY
+        --------------------------------
+         1.PUSH
+         2.POP
+         3.DISPLAY
+         4.EXIT
+Enter the Choice: 1
+ Enter a value to be pushed: 50
+Enter the Choice: 1
+ Enter a value to be pushed: 100
+Enter the Choice: 3
+
+ The elements in STACK 
+100
+50
+
+Press Next Choice</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 8 -->
+            <article class="card" id="exp8">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-circle-nodes"></i> EX. NO: 8 - CONSTRUCTION OF DAG</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write a C program that parses expressions (with priority parenthesis) and constructs a Directed Acyclic Graph (DAG) for optimizing intermediate representation.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Create a structure block representing a DAG node with label, left pointer, and right pointer attributes.</li>
+                        <li>Request a math expression (containing prior nested parentheses e.g. <code>((a+b)*(a+b))</code>) from the user.</li>
+                        <li>Locate innermost brackets iteratively and match identifier and operator priorities.</li>
+                        <li>Assign relational parent-child graph connections by storing child node index positions inside left and right pointer entries.</li>
+                        <li>Print the constructed DAG table containing pointer indexes, left nodes, right nodes, and operator/variable labels.</li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM (Standard-Compliant C Code):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> dag_construction.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+struct da {
+    int ptr, left, right;
+    char label;
+} dag[25];
+
+int main() {
+    int ptr, j, n = 0, i = 0, x, y;
+    char store, input1[50], input[25], var;
+    
+    for (i = 0; i < 25; i++) {
+        dag[i].ptr = i;
+        dag[i].left = -1;
+        dag[i].right = -1;
+        dag[i].label = '\0';
+    }
+    
+    printf("Hint: Provide the expression inside parenthesis stating the priority option\n");
+    printf("For Example: a+b*c is given as (a+(b*c))\n");
+    printf("\nENTER THE EXPRESSION: ");
+    if (scanf("%s", input1) != 1) return 1;
+    
+    for (i = 0; i < 25; i++) {
+        input[i] = '\0';
+    }
+    
+    a:
+    for (i = 0; input1[i] != ')' && input1[i] != '\0'; i++);
+    if (input1[i] == '\0') goto end_process;
+    
+    for (j = i; j >= 0 && input1[j] != '('; j--);
+    
+    for (x = j + 1; x < i; x++) {
+        if (isalpha((unsigned char)input1[x])) {
+            input[n++] = input1[x];
+        } else if (input1[x] != '0') {
+            store = input1[x];
+            input[n++] = store;
+        }
+    }
+    
+    for (x = j; x <= i; x++) {
+        input1[x] = '0';
+    }
+    
+    if (input1[0] != '0') goto a;
+    
+    end_process:
+    for (i = 0; i < n; i++) {
+        dag[i].label = input[i];
+        dag[i].ptr = i;
+        if (!isalpha((unsigned char)input[i]) && !isdigit((unsigned char)input[i])) {
+            dag[i].right = i - 1;
+            ptr = i;
+            var = input[i - 1];
+            if (isalpha((unsigned char)var)) {
+                ptr = ptr - 2;
+            } else {
+                ptr = i - 1;
+                b:
+                if (!isalpha((unsigned char)var) && !isdigit((unsigned char)var)) {
+                    ptr = dag[ptr].left;
+                    var = input[ptr];
+                    goto b;
+                } else {
+                    ptr = ptr - 1;
+                }
+            }
+            dag[i].left = ptr;
+        }
+    }
+    
+    printf("\n DAG FOR GIVEN EXPRESSION");
+    printf("\n\n PTR \t LEFT PTR \t RIGHT PTR \t LABEL");
+    printf("\n-----------------------------------------------------");
+    for (i = 0; i < n; i++) {
+        printf("\n %d\t\t%d\t\t%d\t\t%c", dag[i].ptr, dag[i].left, dag[i].right, dag[i].label);
+    }
+    printf("\n-----------------------------------------------------\n\n");
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc dag_construction.c -o dag_construction</code><br>
+                    <code>./dag_construction</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">ENTER THE EXPRESSION: (a+(b*c))
+
+ DAG FOR GIVEN EXPRESSION
+
+ PTR     LEFT PTR        RIGHT PTR       LABEL
+-----------------------------------------------------
+ 0              -1              -1              b
+ 1              -1              -1              c
+ 2              0               1               *
+ 3              -1              -1              a
+ 4              3               2               +
+-----------------------------------------------------</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 9 -->
+            <article class="card" id="exp9">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-bolt"></i> EX. NO: 9 - IMPLEMENTATION OF SIMPLE CODE OPTIMIZATION TECHNIQUES</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To write a C program to implement basic compiler backend optimization methodologies, including dead code elimination, common subexpression elimination, and duplicate statement elimination.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Input the count of intermediate instructions.</li>
+                        <li>Read three-address code instructions as LHS variable keys and RHS value strings.</li>
+                        <li>**Phase 1: Dead Code Elimination**: Check if the assigned LHS variable is used anywhere in subsequent RHS statements. If it is never queried, eliminate the statement entirely from compilation.</li>
+                        <li>**Phase 2: Common Subexpression Elimination**: Scan RHS strings. If matching expressions are identified, replace the duplicate operations with the original variable reference and update succeeding statements.</li>
+                        <li>**Phase 3: Duplicate Production Elimination**: Compare final generated optimize outputs and remove duplicate definitions.</li>
+                        <li>Print the finalized, optimized intermediate representation.</li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM (Standard C Code):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> code_optimizer.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct op {
+    char l;
+    char r[20];
+} op[10], pr[10];
+
+int main() {
+    int a, i, k, j, n, z = 0, m, q;
+    char *p, *l;
+    char temp, t;
+    char *tem;
+    
+    printf("Enter number of values: ");
+    if (scanf("%d", &n) != 1) return 1;
+    
+    for (i = 0; i < n; i++) {
+        printf("\tLeft identifier: ");
+        scanf(" %c", &op[i].l);
+        printf("\tRight expression: ");
+        scanf("%s", op[i].r);
+    }
+    
+    printf("\nIntermediate Code:\n");
+    for (i = 0; i < n; i++) {
+        printf("%c = %s\n", op[i].l, op[i].r);
+    }
+    
+    // Dead Code Elimination
+    for (i = 0; i < n - 1; i++) {
+        temp = op[i].l;
+        for (j = 0; j < n; j++) {
+            p = strchr(op[j].r, temp);
+            if (p) {
+                pr[z].l = op[i].l;
+                strcpy(pr[z].r, op[i].r);
+                z++;
+                break;
+            }
+        }
+    }
+    pr[z].l = op[n - 1].l;
+    strcpy(pr[z].r, op[n - 1].r);
+    z++;
+    
+    printf("\nAfter Dead Code Elimination:\n");
+    for (k = 0; k < z; k++) {
+        printf("%c = %s\n", pr[k].l, pr[k].r);
+    }
+    
+    // Common Subexpression Elimination
+    for (m = 0; m < z; m++) {
+        tem = pr[m].r;
+        for (j = m + 1; j < z; j++) {
+            p = strstr(tem, pr[j].r);
+            if (p) {
+                t = pr[j].l;
+                pr[j].l = pr[m].l;
+                for (i = 0; i < z; i++) {
+                    l = strchr(pr[i].r, t);
+                    if (l) {
+                        a = l - pr[i].r;
+                        pr[i].r[a] = pr[m].l;
+                    }
+                }
+            }
+        }
+    }
+    
+    // Duplicate statement elimination
+    for (i = 0; i < z; i++) {
+        for (j = i + 1; j < z; j++) {
+            q = strcmp(pr[i].r, pr[j].r);
+            if ((pr[i].l == pr[j].l) && !q) {
+                pr[i].l = '\0';
+                strcpy(pr[i].r, "\0");
+            }
+        }
+    }
+    
+    printf("\nOptimized Code:\n");
+    for (i = 0; i < z; i++) {
+        if (pr[i].l != '\0') {
+            printf("%c = %s\n", pr[i].l, pr[i].r);
+        }
+    }
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc code_optimizer.c -o code_optimizer</code><br>
+                    <code>./code_optimizer</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter number of values: 4
+        Left identifier: a
+        Right expression: 10
+        Left identifier: b
+        Right expression: c+d
+        Left identifier: e
+        Right expression: c+d
+        Left identifier: f
+        Right expression: b+e
+
+Intermediate Code:
+a = 10
+b = c+d
+e = c+d
+f = b+e
+
+After Dead Code Elimination:
+b = c+d
+e = c+d
+f = b+e
+
+Optimized Code:
+b = c+d
+f = b+b</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 10A -->
+            <article class="card" id="exp10a">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-arrow-turn-down"></i> EX. NO: 10A - IMPLEMENTATION OF CONTROL FLOW ANALYSIS</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To implement Control Flow Analysis in C by partition intermediate code blocks into Basic Blocks based on program leaders, displaying the control flow topology.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Open the file <code>cdp.txt</code> containing three-address code instructions.</li>
+                        <li>Read and construct a linked list of statements.</li>
+                        <li>Identify basic block **Leaders** based on the following rules:
+                            <ul>
+                                <li>The first statement is a leader.</li>
+                                <li>Any statement that is the target of a conditional or unconditional goto (labeled statements like <code>L1:</code>) is a leader.</li>
+                                <li>Any statement that immediately follows a conditional or unconditional goto is a leader.</li>
+                            </ul>
+                        </li>
+                        <li>Define basic blocks: A basic block starts at a leader and includes all statements up to, but not including, the next leader.</li>
+                        <li>Map out connections between blocks to display the Control Flow Graph.</li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM (Standard-Compliant C Code):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> control_flow.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+struct Listnode {
+    char data[50];
+    int leader, block, u_goto, c_goto;
+    struct Listnode *next;
+    char label[10], target[10];
+} *temp, *cur, *first = NULL, *last = NULL, *cur1;
+
+void createnode(char code[50]) {
+    temp = (struct Listnode *)malloc(sizeof(struct Listnode));
+    strcpy(temp->data, code);
+    strcpy(temp->label, "");
+    strcpy(temp->target, "");
+    temp->leader = 0;
+    temp->block = 0;
+    temp->u_goto = 0;
+    temp->c_goto = 0;
+    temp->next = NULL;
+    
+    if (first == NULL) {
+        first = temp;
+        last = temp;
+    } else {
+        last->next = temp;
+        last = temp;
+    }
+}
+
+int main() {
+    char codeline[50];
+    char c, dup[50], target[10];
+    char *substring, *token;
+    int i = 0, block, block1;
+    int j = 0;
+    FILE *fpr = fopen("cdp.txt", "r");
+    if (!fpr) {
+        printf("Error opening cdp.txt file! Create it first.\n");
+        return 1;
+    }
+    
+    while ((c = getc(fpr)) != EOF) {
+        if (c != '\n') {
+            codeline[i] = c;
+            i++;
+        } else {
+            codeline[i] = '\0';
+            createnode(codeline);
+            i = 0;
+        }
+    }
+    codeline[i] = '\0';
+    if(strlen(codeline) > 0) {
+        createnode(codeline);
+    }
+    fclose(fpr);
+    
+    // Find leaders
+    cur = first;
+    if (cur != NULL) cur->leader = 1;
+    
+    while (cur != NULL) {
+        substring = strstr(cur->data, "if");
+        if (substring == NULL) {
+            if (strstr(cur->data, "goto") != NULL) {
+                cur->u_goto = 1;
+                if (cur->next != NULL) cur->next->leader = 1;
+            }
+        } else {
+            cur->c_goto = 1;
+            if (cur->next != NULL) cur->next->leader = 1;
+        }
+        
+        if (strstr(cur->data, ":") != NULL) {
+            cur->leader = 1;
+        }
+        if (strstr(cur->data, "call") != NULL) {
+            cur->leader = 1;
+        }
+        if (strstr(cur->data, "return") != NULL) {
+            cur->leader = 1;
+            if (cur->next != NULL) cur->next->leader = 1;
+        }
+        cur = cur->next;
+    }
+    
+    // Extract labels and targets
+    cur = first;
+    while (cur != NULL) {
+        if (cur->u_goto == 1 || cur->c_goto == 1) {
+            substring = strstr(cur->data, ":");
+            if (substring != NULL) {
+                token = strstr(substring, "L");
+                if (token != NULL) strcpy(cur->target, token);
+            } else {
+                substring = strstr(cur->data, "L");
+                if (substring != NULL) strcpy(cur->target, substring);
+            }
+        }
+        if (strstr(cur->data, ":") != NULL) {
+            strcpy(dup, cur->data);
+            token = strtok(dup, ":");
+            if (token != NULL) strcpy(cur->label, token);
+        }
+        cur = cur->next;
+    }
+    
+    // Identify blocks
+    cur = first;
+    j = 1;
+    while (cur != NULL) {
+        if (cur->leader == 1) {
+            cur->block = j;
+            j++;
+        } else {
+            cur->block = j - 1;
+        }
+        cur = cur->next;
+    }
+    
+    printf("\n......Basic Blocks......\n");
+    cur = first;
+    j = 1;
+    while (cur != NULL) {
+        printf("\nBlock %d:\n", cur->block);
+        int current_block = cur->block;
+        while(cur != NULL && cur->block == current_block) {
+            printf("\t%s\n", cur->data);
+            cur = cur->next;
+        }
+    }
+    
+    printf("\n.......Control Flow.......\n");
+    cur = first;
+    while (cur != NULL) {
+        if (cur->next != NULL && cur->block != cur->next->block) {
+            block = cur->block;
+            if (cur->u_goto == 1) {
+                strcpy(target, cur->target);
+                cur1 = first;
+                while (cur1 != NULL) {
+                    if (strcmp(cur1->label, target) == 0) {
+                        block1 = cur1->block;
+                        printf("\tBlock %d ----------> Block %d\n", block, block1);
+                    }
+                    cur1 = cur1->next;
+                }
+            } else if (cur->c_goto == 1) {
+                strcpy(target, cur->target);
+                cur1 = first;
+                while (cur1 != NULL) {
+                    if (strcmp(cur1->label, target) == 0) {
+                        block1 = cur1->block;
+                        printf("\tBlock %d ---TRUE---> Block %d / ---FALSE---> Block %d\n", block, block1, block + 1);
+                    }
+                    cur1 = cur1->next;
+                }
+            } else if (strstr(cur->data, "return") == NULL) {
+                printf("\tBlock %d ----------> Block %d\n", block, block + 1);
+            } else {
+                printf("\tBlock %d ----------> NULL\n", block);
+            }
+        }
+        cur = cur->next;
+    }
+    
+    // Clean memory
+    cur = first;
+    while(cur != NULL) {
+        struct Listnode *next = cur->next;
+        free(cur);
+        cur = next;
+    }
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>INPUT FILE (cdp.txt):</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-file-lines"></i> cdp.txt</span>
+                        </div>
+                        <pre><code>m <- 0
+v <- 0
+L1: if v<n goto L2
+r <- v
+s <- 0
+return
+L2: if r>=n goto L1
+v <- v+1</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc control_flow.c -o control_flow</code><br>
+                    <code>./control_flow</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TOPOLOGY OUTPUT:</div>
+                        <div class="output-body">......Basic Blocks......
+
+Block 1:
+        m <- 0
+        v <- 0
+
+Block 2:
+        L1: if v<n goto L2
+
+Block 3:
+        r <- v
+        s <- 0
+        return
+
+Block 4:
+        L2: if r>=n goto L1
+
+Block 5:
+        v <- v+1
+
+.......Control Flow.......
+        Block 1 ----------> Block 2
+        Block 2 ---TRUE---> Block 4 / ---FALSE---> Block 3
+        Block 3 ----------> NULL
+        Block 4 ---TRUE---> Block 2 / ---FALSE---> Block 5
+        Block 5 ----------> NULL</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Experiment 10B -->
+            <article class="card" id="exp10b">
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <h2><i class="fa-solid fa-arrows-spin"></i> EX. NO: 10B - IMPLEMENTATION OF DATA FLOW ANALYSIS</h2>
+                        <div class="card-meta-info">
+                            <span><i class="fa-solid fa-hourglass-start"></i> Status: Complete</span>
+                            <span><i class="fa-solid fa-laptop"></i> Language: C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <h3>AIM:</h3>
+                    <p>To implement data flow analysis (Liveness Analysis) in C to identify statement lifespans and live ranges of variables in intermediate representations.</p>
+                </div>
+
+                <div class="section-block">
+                    <h3>ALGORITHM:</h3>
+                    <ol>
+                        <li>Start the program.</li>
+                        <li>Input the total number of three-address equations.</li>
+                        <li>For each statement, read the LHS variable destination and the RHS expression arguments.</li>
+                        <li>Display the Intermediate Code labeled with program line numbers.</li>
+                        <li>**Liveness Analysis**:
+                            <ul>
+                                <li>Scan all statements. For a defined variable at statement <code>i</code> (LHS), search all succeeding statement expressions.</li>
+                                <li>If the variable is used in the RHS of statement <code>j</code>, output that the variable is **live** at that line.</li>
+                            </ul>
+                        </li>
+                        <li>Stop the program.</li>
+                    </ol>
+                </div>
+
+                <div class="section-block">
+                    <h3>PROGRAM:</h3>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="lang-indicator"><i class="fa-solid fa-code"></i> data_flow.c</span>
+                            <button onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                        </div>
+                        <pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+struct op {
+    char l[20];
+    char r[20];
+} op[10];
+
+int main() {
+    int i, j, n, lineno = 1;
+    char *match;
+    
+    printf("Enter number of values: ");
+    if (scanf("%d", &n) != 1) return 1;
+    
+    for (i = 0; i < n; i++) {
+        printf("\tLeft variable: ");
+        scanf("%s", op[i].l);
+        printf("\tRight expression: ");
+        scanf("%s", op[i].r);
+    }
+    
+    printf("\nIntermediate Code:\n");
+    for (i = 0; i < n; i++) {
+        printf("Line No = %d \t %s = %s\n", lineno, op[i].l, op[i].r);
+        lineno++;
+    }
+    
+    printf("\n*** Data Flow Analysis (Liveness Range) ***\n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            match = strstr(op[j].r, op[i].l);
+            if (match) {
+                printf("Variable '%s' is live at expression RHS '%s' (Statement %d)\n", op[i].l, op[j].r, j + 1);
+            }
+        }
+    }
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="compilation-commands">
+                    <h4><i class="fa-solid fa-terminal"></i> COMPILATION COMMANDS:</h4>
+                    <code>gcc data_flow.c -o data_flow</code><br>
+                    <code>./data_flow</code>
+                </div>
+
+                <div class="section-block">
+                    <h3>SAMPLE OUTPUT:</h3>
+                    <div class="output-showcase">
+                        <div class="output-header"><i class="fa-solid fa-rectangle-list"></i> TERMINAL OUTPUT:</div>
+                        <div class="output-body">Enter number of values: 3
+        Left variable: x
+        Right expression: 10
+        Left variable: y
+        Right expression: x+5
+        Left variable: z
+        Right expression: y*2
+
+Intermediate Code:
+Line No = 1      x = 10
+Line No = 2      y = x+5
+Line No = 3      z = y*2
+
+*** Data Flow Analysis (Liveness Range) ***
+Variable 'x' is live at expression RHS 'x+5' (Statement 2)
+Variable 'y' is live at expression RHS 'y*2' (Statement 3)</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Simulator Panel -->
+            <section class="simulator-panel" id="compiler-simulator">
+                <div class="sim-header">
+                    <h3><i class="fa-solid fa-terminal"></i> INTERACTIVE SYMBOL TABLE & TYPE CHECKING SIMULATOR</h3>
+                </div>
+                <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 20px;">
+                    Test the compiler compiler-design phases directly in your browser. Enter an assignment expression to simulate Lexical Analysis, Symbol Table address allocations, and Semantic Type Checking.
+                </p>
+                <div class="sim-controls">
+                    <div class="sim-control-group">
+                        <label for="sim-input">Enter C Code Expression (e.g. x=y/2 or a=b+c):</label>
+                        <input type="text" id="sim-input" value="a=b/5">
+                    </div>
+                    <div class="sim-control-group">
+                        <label for="sim-type">Target Variable Type Allocation (LHS):</label>
+                        <select id="sim-type">
+                            <option value="int">int (Integer)</option>
+                            <option value="float" selected>float (Floating Point)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="sim-btn" onclick="runSimulation()">
+                    <i class="fa-solid fa-circle-play"></i> Run Simulation
+                </button>
+                
+                <h4 style="font-size: 0.9rem; color: #94a3b8; margin: 20px 0 10px 0;">EXECUTION LOGS / OUTPUT CONSOLE:</h4>
+                <div class="sim-output" id="sim-log">
+Console Ready. Press "Run Simulation" to execute...
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <!-- Toast Banner -->
+    <div class="toast" id="copy-toast">
+        <i class="fa-solid fa-circle-check"></i> Code copied to clipboard successfully!
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>Shri Balaji Institute of Technology and Management, Betul (SBITM)</h3>
+        <p>AD-604: Compiler Design Laboratory Manual - Year 2024-25</p>
+        <p class="developer-tag">Designed & Developed by Ravi Kumar Mohane (AI & DS)</p>
+    </footer>
+
+    <script>
+        // Theme toggler
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('theme-toggle');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.removeAttribute('data-theme');
+                themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Dark Mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Apply saved theme preference on load
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-toggle').innerHTML = '<i class="fa-solid fa-sun"></i> Light Mode';
+            }
+            
+            // Setup active link trackers
+            setupActiveNavLinks();
+        });
+
+        // Search Filter for Experiments
+        function filterExperiments() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h2').innerText.toLowerCase();
+                const content = card.innerText.toLowerCase();
+                const id = card.getAttribute('id');
+                const matchingLink = document.querySelector(`a[href="#${id}"]`);
+                
+                if (title.includes(query) || content.includes(query)) {
+                    card.style.display = 'block';
+                    if(matchingLink) matchingLink.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                    if(matchingLink) matchingLink.style.display = 'none';
+                }
+            });
+        }
+
+        // Setup active scroll class on sidebar navigation items
+        function setupActiveNavLinks() {
+            const links = document.querySelectorAll('.nav-link');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    links.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Dynamic scroll spy
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const cards = document.querySelectorAll('.card');
+                
+                cards.forEach(card => {
+                    const cardTop = card.offsetTop;
+                    const cardHeight = card.clientHeight;
+                    if (pageYOffset >= (cardTop - 150)) {
+                        current = card.getAttribute('id');
+                    }
+                });
+                
+                if (current) {
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${current}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Copy Code to Clipboard Utility
+        function copyCode(btn) {
+            const pre = btn.closest('.code-container').querySelector('pre');
+            const code = pre.innerText;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const toast = document.getElementById('copy-toast');
+                toast.classList.add('show');
+                
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+                }, 2500);
+            });
+        }
+
+        // Interactive Compiler Simulator logic
+        function runSimulation() {
+            const expression = document.getElementById('sim-input').value.trim();
+            const targetType = document.getElementById('sim-type').value;
+            const logBox = document.getElementById('sim-log');
+            
+            if(!expression) {
+                logBox.innerHTML = "Error: Input expression cannot be empty!";
+                return;
+            }
+            
+            logBox.innerHTML = "Initializing Compilation Phases...\n";
+            
+            setTimeout(() => {
+                logBox.innerHTML += "\n[1/3] Run Lexical Scan & DFA Tokenizer:\n";
+                // Simple parser split
+                const tokens = [];
+                let hasDivision = false;
+                let buffer = "";
+                
+                for(let i = 0; i < expression.length; i++) {
+                    const char = expression[i];
+                    if (char === '/' || char === '+' || char === '-' || char === '*' || char === '=') {
+                        if(buffer) {
+                            tokens.push({ lexeme: buffer, type: isNaN(buffer) ? "IDENTIFIER" : "NUMBER" });
+                            buffer = "";
+                        }
+                        tokens.push({ lexeme: char, type: char === '=' ? "ASSIGN_OP" : "MATH_OP" });
+                        if(char === '/') hasDivision = true;
+                    } else if (/[a-zA-Z0-9]/.test(char)) {
+                        buffer += char;
+                    }
+                }
+                if(buffer) {
+                    tokens.push({ lexeme: buffer, type: isNaN(buffer) ? "IDENTIFIER" : "NUMBER" });
+                }
+                
+                tokens.forEach(tok => {
+                    logBox.innerHTML += `  -> Token: [${tok.type}] \tLexeme: "${tok.lexeme}"\n`;
+                });
+                
+                setTimeout(() => {
+                    logBox.innerHTML += "\n[2/3] Building Dynamic Symbol Table:\n";
+                    const symbolTable = [];
+                    const identifiers = tokens.filter(t => t.type === "IDENTIFIER");
+                    
+                    identifiers.forEach((ident, idx) => {
+                        const mockAddress = "0x" + (Math.floor(Math.random() * 900000) + 100000).toString(16).toUpperCase();
+                        symbolTable.push({ name: ident.lexeme, address: mockAddress });
+                        logBox.innerHTML += `  -> Symbol: '${ident.lexeme}' \tRegistered @ Address: [${mockAddress}] (Type: identifier)\n`;
+                    });
+                    
+                    setTimeout(() => {
+                        logBox.innerHTML += "\n[3/3] Semantic Analysis & Type Checker:\n";
+                        const assignedVar = tokens[0] && tokens[0].type === "IDENTIFIER" ? tokens[0].lexeme : "unknown";
+                        
+                        logBox.innerHTML += `  -> Left Hand Side assigned variable: '${assignedVar}' [Decl Type: ${targetType}]\n`;
+                        if(hasDivision) {
+                            logBox.innerHTML += `  -> Warning/Condition: Division operator '/' detected in expression RHS.\n`;
+                            logBox.innerHTML += `  -> Semantic Constraint: Result requires a floating-point receiver.\n`;
+                            
+                            if (targetType === "float") {
+                                logBox.innerHTML += `\n[SUCCESS] Semantic Analysis passed. The receiver '${assignedVar}' is correctly defined as a float!`;
+                            } else {
+                                logBox.innerHTML += `\n[SEMANTIC ERROR] Compilation Failed! LHS identifier '${assignedVar}' is defined as 'int' but assigned a divisional division quotient expression. Try changing type to 'float'.`;
+                            }
+                        } else {
+                            logBox.innerHTML += `\n[SUCCESS] Semantic Analysis passed. Datatype assignments are fully compatible.`;
+                        }
+                    }, 800);
+                }, 800);
+            }, 500);
+        }
+    </script>
+</body>
+</html>

@@ -25,6 +25,10 @@ SUBJECTS = {
 def index():
     return render_template('index.html', subjects=SUBJECTS)
 
+@app.route('/compiler-lab-manual')
+def compiler_lab_manual():
+    return render_template('compiler_lab_manual.html')
+
 @app.route('/course/<subject>')
 def course_home(subject):
     if subject not in SUBJECTS:
