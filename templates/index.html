@@ -9,10 +9,19 @@
     
     <div class="course-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px;">
         {% for id, info in subjects.items() %}
-            <div class="course-card" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; transition: transform 0.3s ease;">
-                <h2 style="color: #0f9d58; margin-bottom: 10px;">{{ info.title }}</h2>
-                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">Master the core concepts of {{ info.title }} with our detailed, topic-wise quick notes.</p>
-                <a href="{{ url_for('course_home', subject=id) }}" class="btn" style="display: inline-block; background: #0f9d58; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">Start Learning</a>
+            {% set theme_color = '#5b3cc4' if id == 'gk' else '#0f9d58' %}
+            {% set bg_gradient = 'linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%)' if id == 'gk' else 'white' %}
+            {% set border_style = '2px solid #5b3cc4' if id == 'gk' else '1px solid #eee' %}
+            <div class="course-card" style="background: {{ bg_gradient }}; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: {{ border_style }}; transition: transform 0.3s ease;">
+                <h2 style="color: {{ theme_color }}; margin-bottom: 10px;">{{ info.title }}</h2>
+                <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">
+                    {% if id == 'gk' %}
+                        Learn general knowledge, history, and polity through engaging stories and interactive illustrations.
+                    {% else %}
+                        Master the core concepts of {{ info.title }} with our detailed, topic-wise quick notes.
+                    {% endif %}
+                </p>
+                <a href="{{ url_for('course_home', subject=id) }}" class="btn" style="display: inline-block; background: {{ theme_color }}; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 500;">Start Learning</a>
             </div>
         {% endfor %}
         
@@ -29,6 +38,21 @@
                 </p>
             </div>
             <a href="{{ url_for('compiler_lab_manual') }}" class="btn" style="display: inline-block; background: #0b7a44; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color 0.2s;">Open Lab Manual</a>
+        </div>
+
+        <!-- New Card for GeoVerse 3D Geography -->
+        <div class="course-card" style="background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%); padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(59,130,246,0.1); border: 2px solid #3b82f6; transition: transform 0.3s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="position: absolute; top: 15px; right: -30px; background: #3b82f6; color: white; padding: 4px 30px; transform: rotate(45deg); font-size: 0.65rem; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">UPSC</div>
+            <div>
+                <h2 style="color: #1e3a8a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    🌍 GeoVerse 3D Globe
+                </h2>
+                <p style="color: #444; font-size: 0.95rem; margin-bottom: 20px;">
+                    <strong>3D Interactive Geography Portal</strong><br>
+                    Interactive 3D Earth, Köppen Climate Maps, Population Density, Spaced Repetition Flashcards, and UPSC Geography Quiz Engine.
+                </p>
+            </div>
+            <a href="http://localhost:8501" target="_blank" class="btn" style="display: inline-block; background: #3b82f6; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color 0.2s;">Launch GeoVerse 3D</a>
         </div>
     </div>
 </div>

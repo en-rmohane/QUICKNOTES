@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap');
+
+/* Main App Wrapper overrides */
+html, body, [data-testid="stAppViewContainer"] {
+    background-color: #0b0f19;
+    color: #f3f4f6;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Custom fonts for titles and headers */
+h1, h2, h3, [data-testid="stHeader"] {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+/* Sidebar Styling Overrides */
+[data-testid="stSidebar"] {
+    background-color: #121826 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom premium gradient text header */
+.gradient-header {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.8rem;
+    font-weight: 800;
+    text-shadow: 0 4px 12px rgba(96, 165, 250, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+/* Glassmorphism Containers */
+.glass-card {
+    background: rgba(22, 28, 45, 0.65) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    padding: 24px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    margin-bottom: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    border-color: rgba(96, 165, 250, 0.3) !important;
+    box-shadow: 0 12px 40px 0 rgba(96, 165, 250, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Micro Badge/Pill items */
+.badge-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background-color: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.badge-pill-violet {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.badge-pill-emerald {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Stat Display Card styling */
+.stat-box {
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.stat-box:last-child {
+    border-right: none;
+}
+.stat-val {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #60a5fa;
+    margin-bottom: 0px;
+    font-family: 'Outfit', sans-serif;
+}
+.stat-label {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Timeline/Notes entry item styling */
+.note-item {
+    border-left: 2px solid #8b5cf6;
+    padding-left: 16px;
+    margin-left: 8px;
+    margin-bottom: 16px;
+}
+
+/* Streamlit Button customization overrides */
+.stButton>button {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 24px !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+
+.stButton>button:hover {
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4) !important;
+    transform: scale(1.02) !important;
+}
+
+/* Quick utility for flex structures */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

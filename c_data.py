@@ -368,6 +368,212 @@ c_programming_data = [
                         </div>
                     </div>
                 """
+            },
+            {
+                "slug": "datatypes-in-c",
+                "title": "Chapter 3: Datatypes and Memory Mechanics",
+                "subtopics": [
+                    "Introduction to Datatypes",
+                    "Memory Allocation Mechanics",
+                    "Storing Values in Memory",
+                    "Classification of Datatypes",
+                    "Primitive Datatypes: Footprints and Ranges",
+                    "Type Modifiers (signed, unsigned, short, long)",
+                    "sizeof Operator: Dynamic Exploration"
+                ],
+                "content": """
+                    <div class="learning-path">
+                        <h2>1. Introduction to Datatypes</h2>
+                        <p>A <strong>datatype</strong> is a keyword that represents the type of data being stored into a variable (or memory block). It is the most fundamental concept in any typed programming language because the computer must know how to interpret the binary sequences stored in its hardware.</p>
+                        
+                        <div class="info-card" style="background: #e8f5e9; padding: 15px; border-radius: 8px; border-left: 5px solid #2e7d32; margin: 15px 0;">
+                            <strong>In C, declaring a variable specifies two things:</strong>
+                            <ul>
+                                <li>The <strong>type of data</strong> (which determines size and interpretation rules).</li>
+                                <li>The <strong>identifier name</strong> (which acts as a label for that memory block).</li>
+                            </ul>
+                        </div>
+
+                        <h2>2. Memory Allocation Mechanics</h2>
+                        <p>Consider the declaration statement:</p>
+                        <pre style="background: #2d3436; color: white; padding: 15px; border-radius: 8px; font-family: monospace;">int num;</pre>
+                        <p>When the compiler compiles this line, it performs two distinct operations behind the scenes:</p>
+                        <ol>
+                            <li><strong>Memory Allocation:</strong> It reserves a contiguous block of memory. In a standard 16-bit compiler environment (such as Turbo C), an <code>int</code> consumes <strong>2 bytes</strong> of memory.</li>
+                            <li><strong>Identifier Binding:</strong> It registers the name <code>num</code> to bind to this specific allocated memory address, enabling you to read or write to it easily.</li>
+                        </ol>
+
+                        <!-- Figure 3.1 -->
+                        <div class="figure-container" style="display: flex; flex-direction: column; align-items: center; margin: 30px 0; gap: 12px;">
+                            <div style="font-weight: 700; font-size: 1.05rem; color: #2e7d32; background: #e8f5e9; padding: 6px 15px; border-radius: 20px; border: 1px solid #c8e6c9; display: inline-block;">
+                                Figure 3.1: Variable num of int Type Created in Memory
+                            </div>
+                            <div class="memory-box" style="display: flex; border: 2px solid #333; border-radius: 8px; background-color: #ffffff; overflow: hidden; width: 340px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+                                <div style="flex: 1; padding: 18px; border-right: 1px solid #eee; background: linear-gradient(135deg, #f1f8e9 0%, #d0e7b8 100%);">
+                                    <div style="font-size: 0.75rem; color: #555; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;">Label</div>
+                                    <strong style="color: #2e7d32; font-size: 1.25rem; font-family: 'Courier New', Courier, monospace;">num</strong>
+                                </div>
+                                <div style="flex: 2; padding: 18px; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                    <div style="font-size: 0.75rem; color: #777; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;">Contents</div>
+                                    <span style="color: #c62828; font-family: monospace; font-size: 0.9rem; font-style: italic; font-weight: bold;">[ Garbage Value ]</span>
+                                </div>
+                                <div style="flex: 1.2; padding: 18px; border-left: 1px solid #eee; background: linear-gradient(135deg, #f1f8e9 0%, #d0e7b8 100%);">
+                                    <div style="font-size: 0.75rem; color: #555; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;">Reserved Size</div>
+                                    <strong style="color: #0288d1; font-size: 1rem;">2 Bytes</strong>
+                                </div>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #666; font-style: italic;">Memory address e.g. <code style="color: #d63384; font-weight: bold;">0x10A4</code> is mapped to the variable name.</div>
+                        </div>
+
+                        <h2>3. Storing Values in Memory</h2>
+                        <p>Once a variable is declared, it is ready to receive values. We can store an integer value using the assignment operator (<code>=</code>):</p>
+                        <pre style="background: #2d3436; color: white; padding: 15px; border-radius: 8px; font-family: monospace;">num = 15;  /* stores 15 into num */</pre>
+                        <p>When this statement runs, the compiler locates the memory address registered under the name <code>num</code> and overwrites whatever data (garbage values) was there with the binary representation of the integer <code>15</code>.</p>
+
+                        <!-- Figure 3.2 -->
+                        <div class="figure-container" style="display: flex; flex-direction: column; align-items: center; margin: 30px 0; gap: 12px;">
+                            <div style="font-weight: 700; font-size: 1.05rem; color: #2e7d32; background: #e8f5e9; padding: 6px 15px; border-radius: 20px; border: 1px solid #c8e6c9; display: inline-block;">
+                                Figure 3.2: Integer value 15 Stored in num
+                            </div>
+                            <div class="memory-box" style="display: flex; border: 2px solid #333; border-radius: 8px; background-color: #ffffff; overflow: hidden; width: 340px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+                                <div style="flex: 1; padding: 18px; border-right: 1px solid #eee; background: linear-gradient(135deg, #f1f8e9 0%, #d0e7b8 100%);">
+                                    <div style="font-size: 0.75rem; color: #555; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;">Label</div>
+                                    <strong style="color: #2e7d32; font-size: 1.25rem; font-family: 'Courier New', Courier, monospace;">num</strong>
+                                </div>
+                                <div style="flex: 2; padding: 18px; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                    <div style="font-size: 0.75rem; color: #777; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;">Contents</div>
+                                    <strong style="color: #1565c0; font-size: 1.6rem; font-family: monospace;">15</strong>
+                                </div>
+                                <div style="flex: 1.2; padding: 18px; border-left: 1px solid #eee; background: linear-gradient(135deg, #f1f8e9 0%, #d0e7b8 100%);">
+                                    <div style="font-size: 0.75rem; color: #555; text-transform: uppercase; font-weight: bold; margin-bottom: 5px;">Reserved Size</div>
+                                    <strong style="color: #0288d1; font-size: 1rem;">2 Bytes</strong>
+                                </div>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #666; font-style: italic;">The value is converted to binary <code style="color: #0288d1;">00000000 00001111</code> and stored.</div>
+                        </div>
+
+                        <h2>4. Classification of Datatypes</h2>
+                        <p>C provides a rich set of datatypes to handle different forms of numeric and textual structures. They are generally categorized as follows:</p>
+                        
+                        <div class="mermaid" style="text-align: center; margin: 25px 0;">
+                            graph TD
+                                DT[Data Types in C] --> Prim[Primary / Basic]
+                                DT --> Der[Derived Types]
+                                DT --> User[User-Defined]
+                                DT --> V[Void]
+
+                                Prim --> P1["Integer (int)"]
+                                Prim --> P2["Character (char)"]
+                                Prim --> P3["Floating Point (float)"]
+                                Prim --> P4["Double Precision (double)"]
+
+                                Der --> D1[Arrays]
+                                Der --> D2[Pointers]
+                                Der --> D3[Structures]
+                                Der --> D4[Unions]
+
+                                User --> U1[enum]
+                                User --> U2[typedef]
+                        </div>
+
+                        <h2>5. Primitive Datatypes: Footprints and Ranges</h2>
+                        <p>Primitive datatypes are built directly into the C compiler. The size they occupy varies depending on the processor architecture and compiler (16-bit DOS Turbo C vs modern 32/64-bit GCC/MSVC compiler).</p>
+
+                        <table style="width:100%; border-collapse: collapse; margin: 20px 0; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <tr style="background: #2e7d32; color: white;">
+                                <th style="padding: 12px; border: 1px solid #ddd;">Type</th>
+                                <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">Size (16-bit)</th>
+                                <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">Size (32/64-bit)</th>
+                                <th style="padding: 12px; border: 1px solid #ddd;">Range (16-bit typical)</th>
+                                <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">Specifier</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;"><code>char</code></td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">1 Byte</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">1 Byte</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">-128 to 127</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center; color: #d63384; font-weight: bold;">%c</td>
+                            </tr>
+                            <tr style="background: #fcfcfc;">
+                                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;"><code>int</code></td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">2 Bytes</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">4 Bytes</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">-32,768 to 32,767</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center; color: #d63384; font-weight: bold;">%d / %i</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;"><code>float</code></td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">4 Bytes</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">4 Bytes</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">1.2E-38 to 3.4E+38</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center; color: #d63384; font-weight: bold;">%f</td>
+                            </tr>
+                            <tr style="background: #fcfcfc;">
+                                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;"><code>double</code></td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">8 Bytes</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">8 Bytes</td>
+                                <td style="padding: 12px; border: 1px solid #ddd;">2.3E-308 to 1.7E+308</td>
+                                <td style="padding: 12px; border: 1px solid #ddd; text-align: center; color: #d63384; font-weight: bold;">%lf</td>
+                            </tr>
+                        </table>
+
+                        <h2>6. Type Modifiers</h2>
+                        <p>C provides <strong>modifiers</strong> to alter the size or range of primary datatypes to suit specific memory optimization needs. These are: <code>signed</code>, <code>unsigned</code>, <code>short</code>, and <code>long</code>.</p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;">
+                            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border-top: 4px solid #0288d1;">
+                                <h4 style="margin-top: 0; color: #0288d1;">Signed vs Unsigned</h4>
+                                <p style="font-size: 0.9rem; margin-bottom: 0;"><strong>Signed (default):</strong> Represents both positive and negative values. Uses the most significant bit (MSB) as a sign bit (0 for +, 1 for -).
+                                <br><strong>Unsigned:</strong> Represents ONLY non-negative values (0 and positive). Doubles the positive range since no sign bit is required.</p>
+                            </div>
+                            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border-top: 4px solid #7b1fa2;">
+                                <h4 style="margin-top: 0; color: #7b1fa2;">Short vs Long</h4>
+                                <p style="font-size: 0.9rem; margin-bottom: 0;"><strong>Short:</strong> Restricts size, typically 2 bytes, reducing memory if range allows.
+                                <br><strong>Long:</strong> Extends size, typically 4 bytes for <code>long int</code> and 8 bytes for <code>long long int</code>, offering extremely large number scales.</p>
+                            </div>
+                        </div>
+
+                        <h2>7. The sizeof Operator</h2>
+                        <p>To write robust code that compiles correctly across different machines, you should use the <code>sizeof</code> operator. It evaluates the size of a variable or datatype in bytes at compile time.</p>
+                        <pre style="background: #2d3436; color: white; padding: 15px; border-radius: 8px; font-family: monospace;">
+#include &lt;stdio.h&gt;
+
+int main() {
+    int val = 100;
+    printf("Size of variable val: %zu bytes\\n", sizeof(val));
+    printf("Size of double type: %zu bytes\\n", sizeof(double));
+    return 0;
+}</pre>
+
+                        <hr>
+
+                        <div class="interview-prep" style="background: #fff3e0; padding: 25px; border-radius: 12px; border-left: 6px solid #ff9800; margin-top: 40px;">
+                            <h2 style="color: #e65100; margin-top: 0; display: flex; align-items: center;">
+                                <span style="font-size: 28px; margin-right: 10px;">🎯</span> Career-Ready: Chapter 3 Interview Prep
+                            </h2>
+                            
+                            <div class="question-box" style="margin-bottom: 20px;">
+                                <strong style="display: block; color: #bf360c; font-size: 1rem; margin-bottom: 5px;">Q1: What exactly does the compiler do when we declare a variable?</strong>
+                                <p style="margin: 0; color: #444;"><em>Answer:</em> The compiler executes two steps: First, it reserves a chunk of memory based on the size of the variable's datatype (e.g., 2 bytes for an int in 16-bit environments). Second, it links the variable's name (identifier) with that allocated memory block's address, so any future references to the identifier refer to that location.</p>
+                            </div>
+
+                            <div class="question-box" style="margin-bottom: 20px;">
+                                <strong style="display: block; color: #bf360c; font-size: 1rem; margin-bottom: 5px;">Q2: What is a 'garbage value' and how does it relate to variable creation?</strong>
+                                <p style="margin: 0; color: #444;"><em>Answer:</em> When the compiler reserves memory for a newly declared variable (e.g., Figure 3.1), it does not clean the memory space by default. It simply points the variable name to it. The block still contains whatever binary data was left there by previously running applications. This unpredictable data is called a 'garbage value'. Initialize your variables immediately to avoid bugs.</p>
+                            </div>
+
+                            <div class="question-box" style="margin-bottom: 20px;">
+                                <strong style="display: block; color: #bf360c; font-size: 1rem; margin-bottom: 5px;">Q3: What happens when an integer overflow occurs? Explain with an unsigned 16-bit int range.</strong>
+                                <p style="margin: 0; color: #444;"><em>Answer:</em> Integer overflow happens when a calculation exceeds the maximum capacity of its datatype. For instance, an <code>unsigned short int</code> on a 16-bit compiler has a maximum value of 65,535. Adding 1 to it overflows, wrapping it back to 0 due to binary rollover.</p>
+                            </div>
+
+                            <div class="question-box">
+                                <strong style="display: block; color: #bf360c; font-size: 1rem; margin-bottom: 5px;">Q4: Why does a compiler size vary between 16-bit, 32-bit, and 64-bit architectures for basic types?</strong>
+                                <p style="margin: 0; color: #444;"><em>Answer:</em> The size of basic types like <code>int</code> is generally optimized to match the size of the processor's registers (word size). On a 16-bit processor, registers are 16 bits (2 bytes), so `int` is 2 bytes. On 32-bit and 64-bit systems, `int` is typically 4 bytes for maximum hardware access speed.</p>
+                            </div>
+                        </div>
+                    </div>
+                """
             }
         ]
     }

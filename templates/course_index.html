@@ -7,15 +7,17 @@
     <h1>{{ course.title }}</h1>
     <p>Comprehensive study material and quick notes for {{ course.title }}. Select a topic below to explore.</p>
     
+    {% set theme_color = '#5b3cc4' if subject == 'gk' else '#0f9d58' %}
+    {% set border_color = '#f3e8ff' if subject == 'gk' else '#f1f8e9' %}
     <div class="toc" style="margin-top: 30px;">
         <h2>Table of Contents</h2>
         {% for u in data %}
             <div class="unit-section" style="margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
-                <h3 style="color: #0f9d58; border-bottom: 2px solid #f1f8e9; padding-bottom: 10px; margin-bottom: 15px;">{{ u.unit }}: {{ u.title }}</h3>
+                <h3 style="color: {{ theme_color }}; border-bottom: 2px solid {{ border_color }}; padding-bottom: 10px; margin-bottom: 15px;">{{ u.unit }}: {{ u.title }}</h3>
                 <ul style="list-style: none; padding-left: 0;">
                     {% for t in u.topics %}
                         <li style="margin-bottom: 12px;">
-                            <a href="{{ url_for('topic', subject=subject, slug=t.slug) }}" style="text-decoration: none; color: #333; font-weight: 500; transition: color 0.2s;">
+                            <a href="{{ url_for('topic', subject=subject, slug=t.slug) }}" style="text-decoration: none; color: #333; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='{{ theme_color }}'" onmouseout="this.style.color='#333'">
                                 &#10148; {{ t.title }}
                             </a>
                         </li>

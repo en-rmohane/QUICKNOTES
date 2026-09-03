@@ -10,6 +10,24 @@
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true, theme: 'forest' });
     </script>
+    {% if subject == 'gk' %}
+    <style>
+        .sidebar h3 {
+            border-bottom: 2px solid #5b3cc4 !important;
+        }
+        .sidebar .unit-title {
+            color: #4c1d95 !important;
+        }
+        .sidebar li a.active {
+            background-color: #5b3cc4 !important;
+            color: white !important;
+        }
+        .sidebar li a:hover {
+            background-color: #f5f3ff !important;
+            color: #5b3cc4 !important;
+        }
+    </style>
+    {% endif %}
 </head>
 <body>
     <header class="navbar">
