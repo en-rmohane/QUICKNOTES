@@ -8,6 +8,1490 @@ and terminal outputs.
 
 cpp_oop_data = [
     # =========================================================================
+    # UNIT 1: OBJECT-ORIENTED THINKING & OBJECT-ORIENTED PROGRAMMING
+    # =========================================================================
+    {
+        "unit": "UNIT 1",
+        "title": "Object-Oriented Thinking & Object-Oriented Programming",
+        "topics": [
+            {
+                "slug": "unit-1-object-oriented-thinking-and-oop",
+                "title": "Unit 1: Object-Oriented Thinking & OOP (Complete Notes)",
+                "subtopics": [
+                    "1. Object-Oriented Thinking (Definition, Real-World Examples, C++ Code, Advantages & Disadvantages)",
+                    "2. Object-Oriented Programming (Definition, Objectives, Car Example, Characteristics, Advantages & Disadvantages)",
+                    "3. Procedural Programming (Definition, Student Result C Code, Characteristics, Advantages & Disadvantages)",
+                    "4. Comparison of Procedural and Object-Oriented Programming (Comparison Table, Flow Differences)",
+                    "5. Features of Object-Oriented Paradigm (All 10 Features with Code)",
+                    "6. Merits and Demerits of Object-Oriented Methodology (E-commerce Real-World Scenario)",
+                    "7. Object Model (Elements, Library Management System, C++ Class)",
+                    "8. Elements of OOPs (10 Core Elements Summary)",
+                    "9. Class (Definition, House Blueprint Analogy, C++ Syntax)",
+                    "10. Object (Definition, BMW Analogy, State/Behavior/Identity, C++ Code)",
+                    "11. Encapsulation (ATM Analogy, Data Hiding, C++ BankAccount)",
+                    "12. Abstraction (Mobile Phone Analogy, C++ ATM Class)",
+                    "13. Inheritance (Vehicle Analogy, C++ Code, 5 Types: Single, Multiple, Multilevel, Hierarchical, Hybrid)",
+                    "14. Polymorphism (Compile-Time vs. Run-Time, Payment Analogy, Overloading & Overriding Code)",
+                    "15. Message Passing (Restaurant Analogy, Printer & Computer C++ Code)",
+                    "16. Dynamic Binding (Universal Remote Analogy, Virtual Functions & Base Pointer Code)",
+                    "17. I/O Processing (Input/Processing/Output Flow, cin, cout, >>, <<, getline())",
+                    "18. Important: Four Pillars of OOP (E-A-I-P) & Procedural vs OOP Flow Chart"
+                ],
+                "content": """
+<div class="learning-path">
+    <div class="board-banner" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 25px; border-radius: 12px; margin-bottom: 25px;">
+        <h1 style="font-size: 2.2rem; margin-bottom: 8px; font-weight: 800;">🌟 UNIT 1 — OBJECT-ORIENTED THINKING & OBJECT-ORIENTED PROGRAMMING</h1>
+        <p style="font-size: 1.15rem; margin: 0;">Comprehensive Notes covering Object-Oriented Thinking, Procedural vs OOP, Object Model, The Four Pillars (E-A-I-P), Dynamic Binding, and I/O Streams</p>
+    </div>
+
+    <!-- 1. OBJECT-ORIENTED THINKING -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">1. OBJECT-ORIENTED THINKING</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Object-Oriented Thinking (OOT)</strong> is a problem-solving approach in which a problem is analyzed and designed in terms of objects, their properties, their behaviors, and the relationships between them.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            In simple words, object-oriented thinking means looking at a problem in the same way we look at the real world. In the real world, we interact with different entities or objects. Each object has some characteristics and performs certain actions.
+        </p>
+        
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            For example, in a <strong>college management system</strong>, we can identify objects such as:
+        </p>
+        <ul style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li>Student</li>
+            <li>Teacher</li>
+            <li>Course</li>
+            <li>Classroom</li>
+            <li>Department</li>
+            <li>Examination</li>
+        </ul>
+
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Each object has its own data and behavior. For example, a <strong>Student</strong> may have:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 15px 0;">
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">Properties (Data / Attributes)</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #475569; line-height: 1.6;">
+                    <li>Name</li>
+                    <li>Roll Number</li>
+                    <li>Age</li>
+                    <li>Course</li>
+                    <li>Marks</li>
+                </ul>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">Behaviors (Actions / Methods)</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #475569; line-height: 1.6;">
+                    <li>Attend class</li>
+                    <li>Study</li>
+                    <li>Give examination</li>
+                    <li>Pay fees</li>
+                </ul>
+            </div>
+        </div>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Thus, object-oriented thinking helps us identify the objects involved in a problem before writing the actual program.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Consider a <strong>Banking System</strong>.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Instead of thinking: <em>"First take account number, then take amount, then calculate balance..."</em>, we think in terms of objects:
+        </p>
+        <div class="mermaid" style="text-align: center; margin: 15px 0;">
+graph TD
+    B["<b>Bank</b>"] --> C["Customer"]
+    B --> A["Account"]
+    B --> T["Transaction"]
+        </div>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            An <strong>Account</strong> has:
+        </p>
+        <ul style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li>Account Number</li>
+            <li>Account Holder</li>
+            <li>Balance</li>
+            <li>Account Type</li>
+        </ul>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            and performs:
+        </p>
+        <ul style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li><code>deposit()</code></li>
+            <li><code>withdraw()</code></li>
+            <li><code>checkBalance()</code></li>
+        </ul>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            This is object-oriented thinking because we are identifying the entities involved and their responsibilities.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class BankAccount
+{
+private:
+    int accountNumber;
+    double balance;
+
+public:
+    void deposit(double amount)
+    {
+        balance += amount;
+    }
+
+    void withdraw(double amount)
+    {
+        if (amount &lt;= balance)
+            balance -= amount;
+    }
+
+    void displayBalance()
+    {
+        cout &lt;&lt; "Balance: " &lt;&lt; balance &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    BankAccount account;
+
+    account.deposit(5000);
+    account.withdraw(1000);
+    account.displayBalance();
+
+    return 0;
+}</code></pre>
+        <p style="font-size: 1rem; color: #475569; margin-top: 10px;">
+            Here, we first identified <code>BankAccount</code> as an object-oriented entity and then defined its data and behavior.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li><strong>Natural representation:</strong> Real-world entities can be represented naturally as objects.</li>
+                    <li><strong>Better problem understanding:</strong> Breaking a problem into objects makes complex problems easier to understand.</li>
+                    <li><strong>Easier design:</strong> Objects and their relationships can be identified before programming.</li>
+                    <li><strong>Supports reusability:</strong> Once objects/classes are designed, they can be reused.</li>
+                    <li><strong>Easier maintenance:</strong> Each object generally has a specific responsibility, making changes easier.</li>
+                </ol>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li><strong>Requires proper analysis:</strong> Incorrect identification of objects can result in poor program design.</li>
+                    <li><strong>Can be complex:</strong> Large systems may contain hundreds or thousands of interacting objects.</li>
+                    <li><strong>More planning is required:</strong> Object-oriented design generally requires more planning before coding.</li>
+                    <li><strong>Not always necessary:</strong> For very small programs, object-oriented thinking may introduce unnecessary complexity.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div style="background: #eff6ff; padding: 15px; border-radius: 8px; border-left: 5px solid #2563eb; margin-top: 20px;">
+            <strong>📌 Key Point:</strong> Object-Oriented Thinking is the process of understanding and designing a problem in terms of objects, their properties, behaviors, and relationships.
+        </div>
+    </div>
+
+    <!-- 2. OBJECT-ORIENTED PROGRAMMING -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">2. OBJECT-ORIENTED PROGRAMMING</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Object-Oriented Programming (OOP)</strong> is a programming paradigm in which software is designed and developed using objects and classes.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            An object contains data and functions that operate on that data. OOP allows programmers to model real-world entities inside a computer program.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            The main objective of OOP is to make programs:
+        </p>
+        <ul style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li>Modular</li>
+            <li>Reusable</li>
+            <li>Secure</li>
+            <li>Maintainable</li>
+            <li>Flexible</li>
+            <li>Easy to understand</li>
+        </ul>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            OOP is based on several important concepts such as: <strong>Class, Object, Encapsulation, Abstraction, Inheritance, Polymorphism, Data hiding, Message passing, Dynamic binding</strong>.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Consider a <strong>Car</strong>. A car has properties such as: <em>Color, Model, Speed, Engine Number, Fuel Level</em>. It also performs actions: <em>start(), stop(), accelerate(), brake()</em>. In OOP, we can represent this car as a class.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Car
+{
+public:
+    string color;
+    int speed;
+
+    void start()
+    {
+        cout &lt;&lt; "Car started" &lt;&lt; endl;
+    }
+
+    void accelerate()
+    {
+        speed += 10;
+        cout &lt;&lt; "Speed: " &lt;&lt; speed &lt;&lt; endl;
+    }
+
+    void stop()
+    {
+        cout &lt;&lt; "Car stopped" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Car c1;
+
+    c1.color = "Black";
+    c1.speed = 0;
+
+    c1.start();
+    c1.accelerate();
+    c1.stop();
+
+    return 0;
+}</code></pre>
+        
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px; margin: 15px 0;">
+            <strong>Breakdown:</strong><br/>
+            <code>Car</code> &rarr; Class<br/>
+            <code>c1</code> &rarr; Object<br/>
+            <code>color</code> &rarr; Data<br/>
+            <code>speed</code> &rarr; Data<br/>
+            <code>start()</code> &rarr; Behavior<br/>
+            <code>stop()</code> &rarr; Behavior
+        </div>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Main Characteristics of OOP</h3>
+        <ol style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li><strong>Class:</strong> A class is a blueprint used to create objects.</li>
+            <li><strong>Object:</strong> An object is an instance of a class.</li>
+            <li><strong>Encapsulation:</strong> Data and functions are combined into one unit.</li>
+            <li><strong>Abstraction:</strong> Unnecessary implementation details are hidden.</li>
+            <li><strong>Inheritance:</strong> Existing classes can be reused to create new classes.</li>
+            <li><strong>Polymorphism:</strong> One interface can have multiple forms.</li>
+            <li><strong>Data Hiding:</strong> Internal data can be protected from direct access.</li>
+        </ol>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li><strong>Reusability:</strong> Code can be reused through inheritance and classes.</li>
+                    <li><strong>Security:</strong> Encapsulation and data hiding improve data security.</li>
+                    <li><strong>Maintainability:</strong> Programs can be divided into independent classes.</li>
+                    <li><strong>Modularity:</strong> Large programs can be divided into smaller modules.</li>
+                    <li><strong>Real-world modeling:</strong> Real-world entities can be represented easily.</li>
+                    <li><strong>Flexibility:</strong> Polymorphism allows flexible program design.</li>
+                </ol>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li><strong>Complexity:</strong> OOP contains many concepts that beginners need time to understand.</li>
+                    <li><strong>Memory requirement:</strong> Objects and additional OOP mechanisms may require more memory.</li>
+                    <li><strong>Development time:</strong> Designing classes and relationships can take additional time.</li>
+                    <li><strong>Performance overhead:</strong> Some OOP mechanisms can introduce additional processing overhead.</li>
+                    <li><strong>Not suitable for every problem:</strong> Small and simple problems may be easier to solve using procedural programming.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div style="background: #eff6ff; padding: 15px; border-radius: 8px; border-left: 5px solid #2563eb; margin-top: 20px;">
+            <strong>📌 Key Point:</strong> OOP organizes a program around objects that contain data and behavior, making software modular, reusable, maintainable, and easier to model.
+        </div>
+    </div>
+
+    <!-- 3. PROCEDURAL PROGRAMMING -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">3. PROCEDURAL PROGRAMMING</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Procedural Programming</strong> is a programming paradigm in which a program is organized as a sequence of functions or procedures that perform specific tasks.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            The primary focus is on: <strong>"What steps should be performed to solve the problem?"</strong>
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            In procedural programming, the program is usually divided into several functions. Each function performs a particular operation.
+            Examples of procedural programming languages include: <strong>C, Pascal, FORTRAN, COBOL</strong>. <em>C is one of the most commonly used procedural programming languages.</em>
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Suppose we want to calculate a student's result. The procedural approach may be:
+        </p>
+        <ol style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li>Take student name</li>
+            <li>Take marks</li>
+            <li>Calculate total</li>
+            <li>Calculate percentage</li>
+            <li>Calculate grade</li>
+            <li>Display result</li>
+        </ol>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            We can create separate functions: <code>input()</code>, <code>calculateTotal()</code>, <code>calculatePercentage()</code>, <code>calculateGrade()</code>, <code>display()</code>. The focus is on functions and the sequence of operations.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C Example</h3>
+        <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int calculateTotal(int a, int b, int c)
+{
+    return a + b + c;
+}
+
+float calculatePercentage(int total)
+{
+    return total / 3.0;
+}
+
+int main()
+{
+    int m1, m2, m3;
+    int total;
+    float percentage;
+
+    printf("Enter marks: ");
+    scanf("%d %d %d", &m1, &m2, &m3);
+
+    total = calculateTotal(m1, m2, m3);
+    percentage = calculatePercentage(total);
+
+    printf("Total = %d\\n", total);
+    printf("Percentage = %.2f\\n", percentage);
+
+    return 0;
+}</code></pre>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Characteristics</h3>
+        <ol style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li><strong>Functions are the primary unit:</strong> Programs are divided into functions.</li>
+            <li><strong>Top-down approach:</strong> The problem is divided into smaller tasks.</li>
+            <li><strong>Data and functions are separate:</strong> Data may be shared between functions.</li>
+            <li><strong>Sequential execution:</strong> Statements generally execute according to the defined flow.</li>
+            <li><strong>Limited data protection:</strong> There is comparatively less support for data hiding.</li>
+        </ol>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li><strong>Simple for small programs:</strong> Procedural programming is easy to understand for simple problems.</li>
+                    <li><strong>Easy implementation:</strong> Functions can be directly created for individual tasks.</li>
+                    <li><strong>Efficient:</strong> Procedural programs can be efficient because they generally have less abstraction overhead.</li>
+                    <li><strong>Easy to learn:</strong> Languages like C provide a relatively straightforward programming model.</li>
+                </ol>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li><strong>Difficult to maintain large programs:</strong> Large programs can contain hundreds of functions.</li>
+                    <li><strong>Less data security:</strong> Data can be accessed by multiple functions.</li>
+                    <li><strong>Limited reusability:</strong> Code reuse is less powerful compared with OOP inheritance and class-based reuse.</li>
+                    <li><strong>Difficult real-world modeling:</strong> Representing real-world entities is less natural.</li>
+                    <li><strong>Changes can affect multiple functions:</strong> A change in shared data may require modifications in several functions.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. COMPARISON -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">4. COMPARISON OF PROCEDURAL AND OBJECT-ORIENTED PROGRAMMING</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Procedural and Object-Oriented Programming are two different approaches to software development. Procedural programming focuses primarily on functions and procedures, whereas OOP focuses primarily on objects and classes.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example (Banking Application)</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 15px 0;">
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">Procedural approach</h4>
+                <p style="color: #475569; font-size: 0.95rem;">We may create separate functions where data is stored separately:</p>
+                <ul style="color: #475569; font-size: 0.95rem; margin: 0; padding-left: 20px;">
+                    <li><code>createAccount()</code></li>
+                    <li><code>deposit()</code></li>
+                    <li><code>withdraw()</code></li>
+                    <li><code>checkBalance()</code></li>
+                    <li><code>closeAccount()</code></li>
+                </ul>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">Object-oriented approach</h4>
+                <p style="color: #475569; font-size: 0.95rem;">We create an <code>Account</code> class combining data & behavior:</p>
+                <div class="mermaid" style="text-align: center;">
+graph TD
+    Acc["<b>Account</b>"] --> D["Data: accountNumber, balance"]
+    Acc --> B["Behavior: deposit(), withdraw(), checkBalance()"]
+                </div>
+            </div>
+        </div>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Comparison Table</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 1rem;">
+            <thead>
+                <tr style="background: #1e3a8a; color: white;">
+                    <th style="padding: 10px; border: 1px solid #cbd5e1;">Feature</th>
+                    <th style="padding: 10px; border: 1px solid #cbd5e1;">Procedural Programming</th>
+                    <th style="padding: 10px; border: 1px solid #cbd5e1;">OOP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Main unit</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Function</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold; color: #16a34a;">Object/Class</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Approach</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Top-down</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold; color: #16a34a;">Bottom-up</td>
+                </tr>
+                <tr style="background: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Main focus</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Procedures</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Objects</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Data & functions</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Separate</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Combined</td>
+                </tr>
+                <tr style="background: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Data hiding</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Limited</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Strong</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Security</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Lower</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; color: #16a34a; font-weight: bold;">Higher</td>
+                </tr>
+                <tr style="background: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Reusability</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Limited</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">High</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Inheritance</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Not supported as a core feature</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Supported</td>
+                </tr>
+                <tr style="background: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Polymorphism</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Not a core feature</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Supported</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Real-world modeling</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Difficult</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Easy</td>
+                </tr>
+                <tr style="background: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Large programs</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Difficult</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Easier</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Maintenance</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Difficult</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Easier</td>
+                </tr>
+                <tr style="background: #f8fafc;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; font-weight: bold;">Examples</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">C, Pascal</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">C++, Java, C#</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages of OOP over Procedural Programming</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Better data security</li>
+                    <li>Better code reusability</li>
+                    <li>Easier maintenance</li>
+                    <li>Better real-world modeling</li>
+                    <li>Supports inheritance</li>
+                    <li>Supports polymorphism</li>
+                    <li>Better modularity</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages of OOP</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>More complex</li>
+                    <li>Requires more planning</li>
+                    <li>May use additional memory</li>
+                    <li>Can have performance overhead</li>
+                    <li>Not always necessary for simple programs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. FEATURES OF OOP PARADIGM -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">5. FEATURES OF OBJECT-ORIENTED PARADIGM</h2>
+        
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            The <strong>Object-Oriented Paradigm</strong> is a programming approach that organizes software around objects rather than only functions.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0;">
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">1. Objects</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 5px;">Objects represent entities.</p>
+                <code>Student s1;</code>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">2. Classes</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 5px;">Classes define structure & behavior.</p>
+                <code>class Student { };</code>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">3. Encapsulation</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin: 0;">Combining data and functions into one class.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">4. Abstraction</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin: 0;">Showing essential information and hiding implementation details.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">5. Inheritance</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 5px;">Creating a new class from an existing class.</p>
+                <code>class Dog : public Animal { };</code>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">6. Polymorphism</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin: 0;">Allowing the same interface/name to behave differently.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">7. Data Hiding</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin: 0;">Protecting internal data using access control.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">8. Message Passing</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 5px;">Objects communicate through method calls.</p>
+                <code>student.display();</code>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">9. Dynamic Binding</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin: 0;">The method to execute can be determined at runtime.</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">10. Reusability</h4>
+                <p style="color: #475569; font-size: 0.95rem; margin: 0;">Existing code can be reused in new programs.</p>
+            </div>
+        </div>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            A <strong>University Management System</strong> can contain:
+        </p>
+        <div class="mermaid" style="text-align: center; margin: 15px 0;">
+graph TD
+    U["<b>University</b>"] --> S["Student"]
+    U --> T["Teacher"]
+    U --> C["Course"]
+    U --> D["Department"]
+    U --> E["Examination"]
+        </div>
+        <p style="font-size: 1rem; color: #475569;">Each object has its own properties and behavior.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Modularity</li>
+                    <li>Reusability</li>
+                    <li>Security</li>
+                    <li>Maintainability</li>
+                    <li>Flexibility</li>
+                    <li>Real-world representation</li>
+                    <li>Reduced duplication</li>
+                    <li>Easier extension</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>More complex than simple procedural programs</li>
+                    <li>Requires proper design</li>
+                    <li>May require more memory</li>
+                    <li>Development can take longer</li>
+                    <li>Some mechanisms introduce overhead</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. MERITS AND DEMERITS OF OO METHODOLOGY -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">6. MERITS AND DEMERITS OF OBJECT-ORIENTED METHODOLOGY</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Object-oriented methodology</strong> is a systematic approach to software development where systems are analyzed, designed, and implemented using objects and their relationships.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Merits</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li><strong>Modularity:</strong> The system can be divided into classes and objects.</li>
+                    <li><strong>Reusability:</strong> Existing classes can be reused.</li>
+                    <li><strong>Data Security:</strong> Data hiding protects internal information.</li>
+                    <li><strong>Easy Maintenance:</strong> Changes can often be made within individual classes.</li>
+                    <li><strong>Extensibility:</strong> New features can be added using inheritance and polymorphism.</li>
+                    <li><strong>Real-world modeling:</strong> Real-world entities can be represented naturally.</li>
+                    <li><strong>Reduced duplication:</strong> Reusable classes reduce repeated code.</li>
+                    <li><strong>Better scalability:</strong> OOP is suitable for large software systems.</li>
+                </ol>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Demerits</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li><strong>Complexity:</strong> The concepts can be difficult initially.</li>
+                    <li><strong>More development time:</strong> Designing classes requires planning.</li>
+                    <li><strong>Memory usage:</strong> Objects can require additional memory.</li>
+                    <li><strong>Performance:</strong> Some OOP mechanisms introduce overhead.</li>
+                    <li><strong>Poor design can cause problems:</strong> Incorrect relationships between classes can make the program complicated.</li>
+                </ol>
+            </div>
+        </div>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example (E-commerce Application)</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Objects might be: <strong>Customer, Product, Cart, Order, Payment, Delivery</strong>. Each class handles its own responsibility. If we want to add a new payment method, we can extend the payment system without rewriting the entire application. This demonstrates the <em>maintainability</em> and <em>extensibility</em> advantages of OOP.
+        </p>
+    </div>
+
+    <!-- 7. OBJECT MODEL -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">7. OBJECT MODEL</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            An <strong>Object Model</strong> is a conceptual model that represents a software system as a collection of objects, classes, attributes, operations, and relationships. It describes how objects are structured and how they interact with one another. An object model helps developers understand the structure of a system before implementation.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Main Elements of Object Model</h3>
+        <ol style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li><strong>Object:</strong> Represents an entity.</li>
+            <li><strong>Class:</strong> Defines a group/type of similar objects.</li>
+            <li><strong>Attributes:</strong> Represent object data.</li>
+            <li><strong>Operations:</strong> Represent object behavior.</li>
+            <li><strong>Relationships:</strong> Represent connections between objects.</li>
+        </ol>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example (Library Management System)</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Objects:</strong> Student, Book, Librarian, Library, Issue, Return.<br/>
+            A <strong>Book</strong> may have attributes (<em>Book ID, Title, Author, Price, Availability</em>) and operations (<em>issue(), returnBook(), displayDetails()</em>).<br/>
+            <strong>Relationship:</strong> <code>Student ---- borrows ----&gt; Book</code>
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Representation</h3>
+        <pre><code class="language-cpp">class Book
+{
+private:
+    int bookId;
+    string title;
+    bool available;
+
+public:
+    void issueBook()
+    {
+        available = false;
+    }
+
+    void returnBook()
+    {
+        available = true;
+    }
+};</code></pre>
+        <p style="font-size: 1rem; color: #475569;">This class represents the object model of a book.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Helps understand system structure</li>
+                    <li>Makes design easier</li>
+                    <li>Helps identify relationships</li>
+                    <li>Supports modular development</li>
+                    <li>Makes complex systems easier to visualize</li>
+                    <li>Helps before actual implementation</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Designing a detailed object model takes time</li>
+                    <li>Poor modeling can lead to poor implementation</li>
+                    <li>Large systems can have complicated object relationships</li>
+                    <li>Requires knowledge of object-oriented design</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. ELEMENTS OF OOPS -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">8. ELEMENTS OF OOPS</h2>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            The major elements of Object-Oriented Programming are:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin: 15px 0;">
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>1. Class:</strong> A blueprint for objects. (<code>class Student { };</code>)</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>2. Object:</strong> An instance of a class. (<code>Student s1;</code>)</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>3. Encapsulation:</strong> Binding data and methods together.</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>4. Abstraction:</strong> Hiding unnecessary implementation details.</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>5. Inheritance:</strong> Acquiring properties and behavior from another class.</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>6. Polymorphism:</strong> One interface with multiple forms.</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>7. Data Hiding:</strong> Restricting direct access to internal data.</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>8. Message Passing:</strong> Communication between objects. (<code>s1.display();</code>)</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>9. Dynamic Binding:</strong> Selecting the appropriate method during runtime.</div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 6px;"><strong>10. Reusability:</strong> Using existing code again.</div>
+        </div>
+    </div>
+
+    <!-- 9. CLASS -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">9. CLASS</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            A <strong>class</strong> is a user-defined data type and a blueprint or template for creating objects.
+            A class can contain: <em>Data members, Member functions, Constructors, Destructors, Access specifiers</em>.
+        </p>
+
+        <pre><code class="language-cpp">class Student
+{
+private:
+    string name;
+    int age;
+
+public:
+    void display()
+    {
+        cout &lt;&lt; name &lt;&lt; " " &lt;&lt; age;
+    }
+};</code></pre>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Think of a class as a <strong>blueprint of a house</strong>. The blueprint specifies: <em>Number of rooms, Doors, Windows, Kitchen, Bathroom</em>. But the blueprint itself is not an actual house.
+        </p>
+        <p style="font-size: 1rem; color: #334155;">
+            Similarly: <code>Class &rarr; Blueprint</code> and <code>Object &rarr; Actual entity</code>. One class can create many objects:
+        </p>
+        <pre><code class="language-cpp">Student s1;
+Student s2;
+Student s3;</code></pre>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Provides structure</li>
+                    <li>Supports encapsulation</li>
+                    <li>Allows multiple objects</li>
+                    <li>Supports reusability</li>
+                    <li>Makes programs organized</li>
+                    <li>Makes maintenance easier</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Requires additional design</li>
+                    <li>Can be unnecessary for very small programs</li>
+                    <li>Large class hierarchies can become complicated</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. OBJECT -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">10. OBJECT</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            An <strong>object</strong> is an instance of a class. An object represents a specific entity and contains its own state while using the behavior defined by its class.
+        </p>
+        <code>Student s1; // Student -&gt; Class, s1 -&gt; Object</code>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Consider a class <code>Car</code>. Actual cars are objects: <em>Car 1 &rarr; Black BMW, Car 2 &rarr; White BMW, Car 3 &rarr; Red BMW</em>. All belong to the same general category but have different states.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">class Student
+{
+public:
+    string name;
+    int age;
+
+    void display()
+    {
+        cout &lt;&lt; name &lt;&lt; " " &lt;&lt; age;
+    }
+};
+
+int main()
+{
+    Student s1;
+
+    s1.name = "Ravi";
+    s1.age = 20;
+
+    s1.display();
+
+    return 0;
+}</code></pre>
+        <p style="font-size: 1rem; color: #475569;">Here <code>s1</code> is an object.</p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Characteristics of Objects</h3>
+        <ul style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li><strong>State:</strong> Data stored in the object.</li>
+            <li><strong>Behavior:</strong> Operations performed by the object.</li>
+            <li><strong>Identity:</strong> Unique existence of the object.</li>
+        </ul>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Represents real-world entities</li>
+                    <li>Supports modularity</li>
+                    <li>Makes programs easier to understand</li>
+                    <li>Provides object-level organization</li>
+                    <li>Allows multiple instances</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Large numbers of objects may consume memory</li>
+                    <li>Object interactions can become complex</li>
+                    <li>Requires proper class design</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. ENCAPSULATION -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">11. ENCAPSULATION</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Encapsulation</strong> is the process of combining data and the functions that operate on that data into a single unit called a class. It also commonly involves controlling access to the internal state of an object.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Consider an <strong>ATM</strong>. The user interacts with: <em>Withdraw, Deposit, Check Balance</em>. The internal banking process is not directly accessible. The ATM encapsulates the internal operations.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">class BankAccount
+{
+private:
+    double balance;
+
+public:
+    void deposit(double amount)
+    {
+        if (amount &gt; 0)
+            balance += amount;
+    }
+
+    double getBalance()
+    {
+        return balance;
+    }
+};</code></pre>
+        <p style="font-size: 1rem; color: #475569;">
+            Here, Data (<code>balance</code>) and Functions (<code>deposit()</code>, <code>getBalance()</code>) are inside the same class. Access can be controlled using: <code>private</code>, <code>protected</code>, <code>public</code>.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ol style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li><strong>Data protection:</strong> Internal data can be protected.</li>
+                    <li><strong>Modularity:</strong> Data and behavior stay together.</li>
+                    <li><strong>Maintenance:</strong> Internal implementation can be changed without changing how users interact with the class.</li>
+                    <li><strong>Control:</strong> Access can be controlled using private/protected/public.</li>
+                </ol>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>May increase code complexity</li>
+                    <li>Requires proper access design</li>
+                    <li>Excessive encapsulation can sometimes make simple code unnecessarily complicated</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12. ABSTRACTION -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">12. ABSTRACTION</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Abstraction</strong> is the process of representing only the essential features of an object while hiding unnecessary implementation details. The user focuses on <em>what</em> an object does, rather than <em>how</em> it does it internally.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            When using a <strong>mobile phone</strong>, you can: <em>Call, Message, Take Photo, Play Music</em>. You don't need to understand the internal electronic circuits and software algorithms to use these functions. That is abstraction.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">class ATM
+{
+public:
+    void withdraw(int amount)
+    {
+        verifyAccount();
+        checkBalance();
+        processTransaction();
+        dispenseCash();
+    }
+
+private:
+    void verifyAccount()
+    {
+        // Internal implementation
+    }
+
+    void checkBalance()
+    {
+        // Internal implementation
+    }
+
+    void processTransaction()
+    {
+        // Internal implementation
+    }
+
+    void dispenseCash()
+    {
+        // Internal implementation
+    }
+};</code></pre>
+        <p style="font-size: 1rem; color: #475569;">
+            The user only needs: <code>atm.withdraw(500);</code>. The complex implementation remains hidden.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Reduces complexity</li>
+                    <li>Improves usability</li>
+                    <li>Protects implementation details</li>
+                    <li>Makes software easier to understand</li>
+                    <li>Improves maintainability</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Designing abstraction properly can be difficult</li>
+                    <li>Too much abstraction can make debugging harder</li>
+                    <li>Requires additional design effort</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13. INHERITANCE -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">13. INHERITANCE</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Inheritance</strong> is an OOP mechanism in which a new class acquires the properties and behaviors of an existing class.
+            The existing class is called the <strong>Base / Parent / Super Class</strong>. The new class is called the <strong>Derived / Child / Sub Class</strong>.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <div class="mermaid" style="text-align: center; margin: 15px 0;">
+graph TD
+    V["<b>Vehicle</b><br/>start(), stop(), speed"] --> C["Car"]
+    V --> B["Bus"]
+    V --> T["Truck"]
+        </div>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            All vehicles have common features: <code>start()</code>, <code>stop()</code>, <code>speed</code>. Instead of writing these features separately for every class, they can be placed in <code>Vehicle</code>.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Vehicle
+{
+public:
+    void start()
+    {
+        cout &lt;&lt; "Vehicle started" &lt;&lt; endl;
+    }
+};
+
+class Car : public Vehicle
+{
+public:
+    void drive()
+    {
+        cout &lt;&lt; "Car is driving" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Car c;
+
+    c.start();
+    c.drive();
+
+    return 0;
+}</code></pre>
+        <p style="font-size: 1rem; color: #475569;"><code>Car</code> inherits <code>start()</code> from <code>Vehicle</code>.</p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Types of Inheritance</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 15px 0;">
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">1. Single</h4>
+                <p style="font-size: 0.9rem; color: #475569;">One derived class inherits from one base class (A &rarr; B).</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">2. Multiple</h4>
+                <p style="font-size: 0.9rem; color: #475569;">One class inherits from multiple base classes (A, B &rarr; C).</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">3. Multilevel</h4>
+                <p style="font-size: 0.9rem; color: #475569;">Inheritance occurs in multiple levels (A &rarr; B &rarr; C).</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">4. Hierarchical</h4>
+                <p style="font-size: 0.9rem; color: #475569;">Multiple classes inherit from one base class (A &rarr; B, C, D).</p>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">5. Hybrid</h4>
+                <p style="font-size: 0.9rem; color: #475569;">Combination of two or more types of inheritance.</p>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Code reuse</li>
+                    <li>Reduces duplication</li>
+                    <li>Easy extension</li>
+                    <li>Supports hierarchical classification</li>
+                    <li>Easier maintenance</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Creates dependency between classes</li>
+                    <li>Deep inheritance can become complicated</li>
+                    <li>Changes in base classes may affect derived classes</li>
+                    <li>Multiple inheritance can create ambiguity</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 14. POLYMORPHISM -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">14. POLYMORPHISM</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Polymorphism</strong> means "many forms." In OOP, polymorphism allows the same function, interface, or operation to behave differently depending on the context.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Types of Polymorphism</h3>
+        
+        <h4 style="color: #1e40af;">1. Compile-Time Polymorphism</h4>
+        <p style="font-size: 1rem; color: #334155;">The decision is made during compilation. Common techniques: <em>Function overloading, Operator overloading</em>.</p>
+        <pre><code class="language-cpp">class Calculator
+{
+public:
+    int add(int a, int b)
+    {
+        return a + b;
+    }
+
+    double add(double a, double b)
+    {
+        return a + b;
+    }
+};</code></pre>
+
+        <h4 style="color: #1e40af; margin-top: 15px;">2. Run-Time Polymorphism</h4>
+        <p style="font-size: 1rem; color: #334155;">The decision is made during program execution. Commonly achieved using: <em>Function overriding, Virtual functions</em>.</p>
+        <pre><code class="language-cpp">class Animal
+{
+public:
+    virtual void sound()
+    {
+        cout &lt;&lt; "Animal sound";
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout &lt;&lt; "Dog barks";
+    }
+};</code></pre>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            A person may use a single word: <strong>"Pay"</strong>. But payment can happen through: <em>Cash, Card, UPI, Net Banking</em>. The operation is conceptually the same, but implementation differs.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Flexibility</li>
+                    <li>Code reuse</li>
+                    <li>Extensibility</li>
+                    <li>Supports loose coupling</li>
+                    <li>Makes programs easier to expand</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Can make programs more difficult to understand</li>
+                    <li>Runtime polymorphism can introduce overhead</li>
+                    <li>Requires proper class design</li>
+                    <li>Debugging can sometimes be more difficult</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 15. MESSAGE PASSING -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">15. MESSAGE PASSING</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Message Passing</strong> is a mechanism through which objects communicate with one another by sending requests or calling methods. In OOP, an object may request another object to perform a particular operation.
+        </p>
+        <code>student.display(); // student receives request to execute display()</code>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example (Restaurant)</h3>
+        <div class="mermaid" style="text-align: center; margin: 15px 0;">
+graph LR
+    C["Customer"] -- "Order food" --> W["Waiter"]
+    W -- "Request" --> K["Kitchen"]
+        </div>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            The customer does not directly prepare the food. A request is passed through another entity. Similarly, objects communicate by sending requests.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">class Printer
+{
+public:
+    void print()
+    {
+        cout &lt;&lt; "Printing document";
+    }
+};
+
+class Computer
+{
+public:
+    void sendToPrinter(Printer &p)
+    {
+        p.print();
+    }
+};</code></pre>
+        <p style="font-size: 1rem; color: #475569;">The <code>Computer</code> object sends a request to the <code>Printer</code> object.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Supports object communication</li>
+                    <li>Improves modularity</li>
+                    <li>Reduces direct dependency</li>
+                    <li>Supports distributed systems</li>
+                    <li>Makes responsibilities clear</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Too many messages can make a system complex</li>
+                    <li>Communication overhead may occur</li>
+                    <li>Incorrect object relationships can cause design problems</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 16. DYNAMIC BINDING -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">16. DYNAMIC BINDING</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>Dynamic Binding</strong> is the process in which the method to be executed is determined at runtime rather than at compile time. It is strongly associated with runtime polymorphism.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Real-World Example</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            Suppose you have a <strong>universal remote control</strong>. You press: <em>Power</em>. The actual action depends on the device: <em>TV &rarr; TV turns on, AC &rarr; AC turns on, Projector &rarr; Projector turns on</em>. The same operation produces different behavior depending on the actual object.
+        </p>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ Example</h3>
+        <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Animal
+{
+public:
+    virtual void sound()
+    {
+        cout &lt;&lt; "Animal sound" &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal
+{
+public:
+    void sound() override
+    {
+        cout &lt;&lt; "Dog barks" &lt;&lt; endl;
+    }
+};
+
+class Cat : public Animal
+{
+public:
+    void sound() override
+    {
+        cout &lt;&lt; "Cat meows" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Animal *a;
+
+    Dog d;
+    Cat c;
+
+    a = &d;
+    a-&gt;sound();
+
+    a = &c;
+    a-&gt;sound();
+
+    return 0;
+}</code></pre>
+        <div style="background: #1e293b; color: #38bdf8; padding: 12px; border-radius: 6px; margin-top: 10px; font-family: monospace;">
+            <strong>Output:</strong><br/>
+            Dog barks<br/>
+            Cat meows
+        </div>
+        <p style="font-size: 1rem; color: #475569; margin-top: 8px;">The method selected depends on the actual object at runtime.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Supports runtime polymorphism</li>
+                    <li>Provides flexibility</li>
+                    <li>Makes systems extensible</li>
+                    <li>Reduces dependency on specific implementations</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Can introduce runtime overhead</li>
+                    <li>Debugging can be harder</li>
+                    <li>Requires proper inheritance and virtual function design</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 17. I/O PROCESSING -->
+    <div class="concept-section" style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">17. I/O PROCESSING</h2>
+        
+        <h3 style="color: #1e40af; margin-top: 15px;">Definition</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            <strong>I/O Processing</strong> means Input/Output Processing. It refers to the process through which a program receives data from external sources, processes that data, and produces results for external devices or destinations.
+        </p>
+
+        <div class="mermaid" style="text-align: center; margin: 15px 0;">
+graph LR
+    I["<b>INPUT</b><br/>Keyboard, File, Network"] --> P["<b>PROCESSING</b><br/>CPU / Logic"] --> O["<b>OUTPUT</b><br/>Monitor, Printer, File"]
+        </div>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">C++ I/O (<iostream>)</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">
+            C++ provides console I/O through the <code>&lt;iostream&gt;</code> library. The two most commonly used objects are:
+        </p>
+        <ul style="color: #334155; line-height: 1.8; font-size: 1rem; margin-left: 20px;">
+            <li><code>cin</code> &rarr; Standard Input (reads from keyboard)</li>
+            <li><code>cout</code> &rarr; Standard Output (displays on screen)</li>
+        </ul>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">Example</h3>
+        <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a, b;
+
+    cout &lt;&lt; "Enter two numbers: ";
+    cin &gt;&gt; a &gt;&gt; b;
+
+    cout &lt;&lt; "Sum = " &lt;&lt; a + b;
+
+    return 0;
+}</code></pre>
+        <div style="background: #1e293b; color: #38bdf8; padding: 12px; border-radius: 6px; margin-top: 10px; font-family: monospace;">
+            <strong>Input:</strong> 10 20<br/>
+            <strong>Output:</strong> Sum = 30
+        </div>
+
+        <h3 style="color: #1e40af; margin-top: 20px;">I/O Operators</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 15px 0;">
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">Extraction Operator <code>&gt;&gt;</code></h4>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 5px;">Used with <code>cin</code>.</p>
+                <code>cin &gt;&gt; a;</code>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;">Insertion Operator <code>&lt;&lt;</code></h4>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 5px;">Used with <code>cout</code>.</p>
+                <code>cout &lt;&lt; a;</code>
+            </div>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #1e40af; margin-top: 0;"><code>getline()</code></h4>
+                <p style="color: #475569; font-size: 0.95rem; margin-bottom: 5px;">Reads complete line including spaces.</p>
+                <code>string name;<br/>getline(cin, name);</code>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #166534; margin-top: 0;">Advantages of I/O Processing</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #15803d; line-height: 1.6;">
+                    <li>Allows interaction with users</li>
+                    <li>Allows programs to receive data</li>
+                    <li>Allows results to be displayed</li>
+                    <li>Supports file and device communication</li>
+                    <li>Essential for interactive applications</li>
+                </ul>
+            </div>
+            <div style="background: #fef2f2; border: 1px solid #fca5a5; padding: 15px; border-radius: 8px;">
+                <h4 style="color: #991b1b; margin-top: 0;">Disadvantages</h4>
+                <ul style="margin: 0; padding-left: 20px; color: #b91c1c; line-height: 1.6;">
+                    <li>Input errors can cause incorrect results</li>
+                    <li>I/O operations can be slower than memory operations</li>
+                    <li>Improper input handling can cause program errors</li>
+                    <li>Large amounts of I/O can affect performance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPORTANT EXAM RECAP: FOUR PILLARS & CORE DIFFERENCE -->
+    <div class="concept-section" style="background: #eff6ff; border-radius: 12px; padding: 25px; margin-bottom: 25px; border: 2px solid #3b82f6;">
+        <h2 style="color: #1e3a8a; border-bottom: 2px solid #bfdbfe; padding-bottom: 8px;">IMPORTANT: FOUR PILLARS OF OOP</h2>
+        <p style="font-size: 1.1rem; font-weight: bold; color: #1e40af;">These are extremely important for exams. Remember: E-A-I-P</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 15px 0;">
+            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #2563eb;">
+                <h4 style="color: #1e40af; margin-top: 0;">1. Encapsulation (E)</h4>
+                <p style="color: #334155; font-size: 0.95rem; margin: 0;">Binding data and methods together into a single unit.</p>
+            </div>
+            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #2563eb;">
+                <h4 style="color: #1e40af; margin-top: 0;">2. Abstraction (A)</h4>
+                <p style="color: #334155; font-size: 0.95rem; margin: 0;">Showing essential features and hiding implementation details.</p>
+            </div>
+            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #2563eb;">
+                <h4 style="color: #1e40af; margin-top: 0;">3. Inheritance (I)</h4>
+                <p style="color: #334155; font-size: 0.95rem; margin: 0;">Acquiring properties and behaviors from an existing class.</p>
+            </div>
+            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #2563eb;">
+                <h4 style="color: #1e40af; margin-top: 0;">4. Polymorphism (P)</h4>
+                <p style="color: #334155; font-size: 0.95rem; margin: 0;">One interface/name having multiple forms.</p>
+            </div>
+        </div>
+
+        <h3 style="color: #1e40af; margin-top: 25px;">MOST IMPORTANT DIFFERENCE</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 15px;">
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                <h4 style="color: #dc2626; margin-top: 0;">PROCEDURAL PROGRAMMING</h4>
+                <p style="color: #475569; font-size: 0.95rem;">Problem &rarr; Functions &rarr; Operations &rarr; Data</p>
+                <p style="color: #1e293b; font-weight: bold; margin-bottom: 0;">Focus &rarr; "What steps should be performed?"</p>
+            </div>
+            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                <h4 style="color: #16a34a; margin-top: 0;">OBJECT-ORIENTED PROGRAMMING</h4>
+                <p style="color: #475569; font-size: 0.95rem;">Problem &rarr; Objects &rarr; Classes &rarr; Data + Behavior &rarr; Interaction</p>
+                <p style="color: #1e293b; font-weight: bold; margin-bottom: 0;">Focus &rarr; "What objects are involved and how do they interact?"</p>
+            </div>
+        </div>
+    </div>
+</div>
+"""
+            }
+        ]
+    },
+    # =========================================================================
     # PART I: FOUNDATIONS OF OBJECT-ORIENTED PROGRAMMING (Chapters 1 - 4)
     # =========================================================================
     {
