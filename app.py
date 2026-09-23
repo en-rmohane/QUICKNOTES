@@ -44,6 +44,18 @@ def index():
 def compiler_lab_manual():
     return render_template('compiler_lab_manual.html')
 
+@app.route('/ds-lab-manual')
+def ds_lab_manual():
+    return render_template('ds_lab_manual.html')
+
+@app.route('/cpp-lab-manual')
+def cpp_lab_manual():
+    return render_template('cpp_lab_manual.html')
+
+@app.route('/lab-manuals')
+def lab_manuals():
+    return render_template('lab_manuals.html')
+
 @app.route('/course/<subject>')
 def course_home(subject):
     if subject not in SUBJECTS:

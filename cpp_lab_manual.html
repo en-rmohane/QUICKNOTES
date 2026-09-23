@@ -1,0 +1,3545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBJECT-ORIENTED PROGRAMMING LABORATORY MANUAL (USING C++) - Laboratory Manual</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --bg-base: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --code-bg: #0f172a;
+            --code-text: #e2e8f0;
+            --terminal-bg: #030712;
+            --terminal-green: #22c55e;
+            --radius-lg: 14px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 24px -4px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-base: #0b0f19;
+            --bg-card: #131c2e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --primary-light: rgba(37, 99, 235, 0.15);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 36px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .nav-btn.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .nav-btn.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Layout */
+        .main-container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Sidebar Index */
+        .sidebar {
+            position: sticky;
+            top: 85px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            max-height: calc(100vh - 110px);
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-search {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            background: var(--bg-base);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .sidebar-search:focus {
+            border-color: var(--primary);
+        }
+
+        .index-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .index-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .index-item a:hover, .index-item.active a {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .exp-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Content Area */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* College Header Card */
+        .record-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .record-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #2563eb, #38bdf8, #22c55e);
+        }
+
+        .college-header {
+            text-align: center;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .college-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .college-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .manual-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 12px;
+            color: var(--text-main);
+            background: var(--primary-light);
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .student-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            background: var(--bg-base);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .meta-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-val {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Index Table */
+        .index-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        .index-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .index-table th {
+            background: var(--bg-base);
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .index-table td {
+            padding: 9px 14px;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .index-table tr:hover {
+            background: var(--primary-light);
+        }
+
+        /* Experiment Card */
+        .exp-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            scroll-margin-top: 90px;
+            transition: box-shadow 0.2s;
+        }
+
+        .exp-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .exp-title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .exp-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .exp-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .exp-section {
+            margin-bottom: 24px;
+        }
+
+        .section-heading {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-heading i {
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .text-box {
+            background: var(--bg-base);
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            font-size: 0.92rem;
+            color: var(--text-main);
+        }
+
+        /* Algorithm List */
+        .algo-steps {
+            list-style: none;
+            counter-reset: algo-counter;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .algo-steps li {
+            counter-increment: algo-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: var(--bg-base);
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .algo-steps li::before {
+            content: "Step " counter(algo-counter) ":";
+            font-weight: 700;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        /* Code Box */
+        .code-box-wrapper {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--code-bg);
+            border: 1px solid #334155;
+            margin-top: 10px;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            background: #1e293b;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            border-bottom: 1px solid #334155;
+        }
+
+        .copy-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #f8fafc;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        pre code {
+            display: block;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--code-text);
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        /* Terminal Output Box */
+        .terminal-box {
+            background: var(--terminal-bg);
+            border: 1px solid #1f2937;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #111827;
+            border-bottom: 1px solid #1f2937;
+        }
+
+        .terminal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #eab308; }
+        .dot-green { background: #22c55e; }
+
+        .terminal-title {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-left: 6px;
+            font-weight: 500;
+        }
+
+        .terminal-body {
+            padding: 14px 16px;
+            color: var(--terminal-green);
+            font-size: 0.83rem;
+            white-space: pre-wrap;
+            line-height: 1.45;
+        }
+
+        /* Complexity & Viva */
+        .complexity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .complexity-box {
+            background: var(--bg-base);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            font-size: 0.88rem;
+        }
+
+        .viva-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .viva-item {
+            background: var(--bg-base);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .viva-q {
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .viva-a {
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Sign Box */
+        .sign-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar, .sidebar, .copy-btn, .navbar-actions {
+                display: none !important;
+            }
+            .main-container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+            .exp-card {
+                page-break-before: always;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+                margin-bottom: 30px;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            pre code, .terminal-body {
+                white-space: pre-wrap !important;
+                font-size: 9pt !important;
+            }
+            .code-box-wrapper, .terminal-box {
+                border: 1px solid #333 !important;
+                background: #f4f4f4 !important;
+            }
+            pre code {
+                color: #111 !important;
+            }
+            .terminal-body {
+                color: #000 !important;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navbar -->
+    <header class="navbar">
+        <a href="/" class="navbar-brand">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>LAB MANUAL PORTAL</span>
+        </a>
+        <div class="navbar-actions">
+            <a href="/lab-manuals" class="nav-btn">
+                <i class="fa-solid fa-list-check"></i> All Manuals
+            </a>
+            <a href="/ds-lab-manual" class="nav-btn">
+                <i class="fa-solid fa-code"></i> DS in C
+            </a>
+            <a href="/" class="nav-btn">
+                <i class="fa-solid fa-cube"></i> OOPs in C++
+            </a>
+            <button class="nav-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+            <button class="nav-btn primary" onclick="window.print()" title="Print / Save PDF">
+                <i class="fa-solid fa-print"></i> Print Record
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Jump Index -->
+        <aside class="sidebar">
+            <div class="sidebar-title">
+                <i class="fa-solid fa-bars-staggered"></i> Experiments Index
+            </div>
+            <input type="text" class="sidebar-search" id="searchExp" placeholder="Filter experiments..." onkeyup="filterIndex()">
+            <ul class="index-list" id="indexList">
+                <li class="index-item">
+                    <a href="#exp-1">
+                        <span class="exp-badge">Exp 1</span>
+                        <span class="exp-nav-title">Class and Object Implementation (Student Record)</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-2">
+                        <span class="exp-badge">Exp 2</span>
+                        <span class="exp-nav-title">Largest of Three Numbers Using Inline Functions</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-3">
+                        <span class="exp-badge">Exp 3</span>
+                        <span class="exp-nav-title">Swap Private Data Members of Two Classes Using Friend Function</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-4">
+                        <span class="exp-badge">Exp 4</span>
+                        <span class="exp-nav-title">Function Overloading (Area of Geometric Shapes)</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-5">
+                        <span class="exp-badge">Exp 5</span>
+                        <span class="exp-nav-title">Constructors (Default, Parameterized, Copy) & Destructor</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-6">
+                        <span class="exp-badge">Exp 6</span>
+                        <span class="exp-nav-title">Constructor Overloading and Dynamic Memory Allocation</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-7">
+                        <span class="exp-badge">Exp 7</span>
+                        <span class="exp-nav-title">Unary Operator Overloading (Overload - and ++ Operators)</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-8">
+                        <span class="exp-badge">Exp 8</span>
+                        <span class="exp-nav-title">Binary Operator Overloading (Complex Number Addition)</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-9">
+                        <span class="exp-badge">Exp 9</span>
+                        <span class="exp-nav-title">Single and Multilevel Inheritance</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-10">
+                        <span class="exp-badge">Exp 10</span>
+                        <span class="exp-nav-title">Multiple and Hierarchical Inheritance</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-11">
+                        <span class="exp-badge">Exp 11</span>
+                        <span class="exp-nav-title">Virtual Base Class (Resolving Diamond Problem Ambiguity)</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-12">
+                        <span class="exp-badge">Exp 12</span>
+                        <span class="exp-nav-title">Runtime Polymorphism Using Virtual Functions & Pure Virtual Class</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-13">
+                        <span class="exp-badge">Exp 13</span>
+                        <span class="exp-nav-title">File Handling in C++ (Writing and Reading Records)</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-14">
+                        <span class="exp-badge">Exp 14</span>
+                        <span class="exp-nav-title">Templates (Function Template & Generic Stack Class Template)</span>
+                    </a>
+                </li>
+                <li class="index-item">
+                    <a href="#exp-15">
+                        <span class="exp-badge">Exp 15</span>
+                        <span class="exp-nav-title">Exception Handling in C++ (try, catch, throw)</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            
+            <!-- College Record Title Card -->
+            <section class="record-card">
+                <div class="college-header">
+                    <h1 class="college-name">DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING</h1>
+                    <p class="college-sub">Laboratory Practical Record & Manual</p>
+                    <div class="manual-name">OBJECT-ORIENTED PROGRAMMING LABORATORY MANUAL (USING C++)</div>
+                </div>
+
+                <div class="student-meta-grid">
+                    <div class="meta-field">
+                        <span class="meta-label">Course Code</span>
+                        <span class="meta-val">CS-305</span>
+                    </div>
+                    <div class="meta-field">
+                        <span class="meta-label">Target Branch</span>
+                        <span class="meta-val">Computer Science & Engineering / AI & DS</span>
+                    </div>
+                    <div class="meta-field">
+                        <span class="meta-label">Academic Year</span>
+                        <span class="meta-val">2026 - 2027</span>
+                    </div>
+                    <div class="meta-field">
+                        <span class="meta-label">Total Experiments</span>
+                        <span class="meta-val">15 Practical Programs</span>
+                    </div>
+                </div>
+
+                <!-- Complete Record Index Table -->
+                <h3 style="font-size: 1.05rem; font-weight: 700; margin-top: 20px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Practical Index / Syllabus Record Sheet
+                </h3>
+                <div class="index-table-container">
+                    <table class="index-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">Exp No.</th>
+                                <th>Name of the Experiment</th>
+                                <th style="width: 110px;">Date</th>
+                                <th style="width: 70px;">Page No.</th>
+                                <th style="width: 100px;">Faculty Sign</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">1</td>
+                                <td><a href="#exp-1" style="color: inherit; text-decoration: none; font-weight: 500;">Class and Object Implementation (Student Record)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">2</td>
+                                <td><a href="#exp-2" style="color: inherit; text-decoration: none; font-weight: 500;">Largest of Three Numbers Using Inline Functions</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">3</td>
+                                <td><a href="#exp-3" style="color: inherit; text-decoration: none; font-weight: 500;">Swap Private Data Members of Two Classes Using Friend Function</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">5</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">4</td>
+                                <td><a href="#exp-4" style="color: inherit; text-decoration: none; font-weight: 500;">Function Overloading (Area of Geometric Shapes)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">7</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">5</td>
+                                <td><a href="#exp-5" style="color: inherit; text-decoration: none; font-weight: 500;">Constructors (Default, Parameterized, Copy) & Destructor</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">9</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">6</td>
+                                <td><a href="#exp-6" style="color: inherit; text-decoration: none; font-weight: 500;">Constructor Overloading and Dynamic Memory Allocation</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">11</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">7</td>
+                                <td><a href="#exp-7" style="color: inherit; text-decoration: none; font-weight: 500;">Unary Operator Overloading (Overload - and ++ Operators)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">13</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">8</td>
+                                <td><a href="#exp-8" style="color: inherit; text-decoration: none; font-weight: 500;">Binary Operator Overloading (Complex Number Addition)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">15</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">9</td>
+                                <td><a href="#exp-9" style="color: inherit; text-decoration: none; font-weight: 500;">Single and Multilevel Inheritance</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">17</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">10</td>
+                                <td><a href="#exp-10" style="color: inherit; text-decoration: none; font-weight: 500;">Multiple and Hierarchical Inheritance</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">19</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">11</td>
+                                <td><a href="#exp-11" style="color: inherit; text-decoration: none; font-weight: 500;">Virtual Base Class (Resolving Diamond Problem Ambiguity)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">21</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">12</td>
+                                <td><a href="#exp-12" style="color: inherit; text-decoration: none; font-weight: 500;">Runtime Polymorphism Using Virtual Functions & Pure Virtual Class</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">23</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">13</td>
+                                <td><a href="#exp-13" style="color: inherit; text-decoration: none; font-weight: 500;">File Handling in C++ (Writing and Reading Records)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">25</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">14</td>
+                                <td><a href="#exp-14" style="color: inherit; text-decoration: none; font-weight: 500;">Templates (Function Template & Generic Stack Class Template)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">27</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: 700;">15</td>
+                                <td><a href="#exp-15" style="color: inherit; text-decoration: none; font-weight: 500;">Exception Handling in C++ (try, catch, throw)</a></td>
+                                <td>____/____</td>
+                                <td style="text-align: center;">29</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- EXPERIMENT 1 -->
+            <article class="exp-card" id="exp-1">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 1</span>
+                        <h2 class="exp-title">Class and Object Implementation (Student Record)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to create a class named `Student` with data members (Roll Number, Name, Marks in 3 subjects) and member functions to input data, calculate total & percentage, and display student grade card.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code / Dev-C++</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Object-Oriented Programming models real-world entities into Classes (blueprints) and Objects (instances). Encapsulation bundles data (attributes) and methods (functions) inside a class while enforcing access specifiers (private, public).</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define class Student with private data members: rollNo, name, marks[3], total, percentage.</li>
+                        <li>Define public member functions: inputData(), calculate(), and displayData().</li>
+                        <li>In main(), instantiate an object of Student class.</li>
+                        <li>Call member functions using dot (.) operator.</li>
+                        <li>Display output formatted on console.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_1.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-1', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-1">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student {
+private:
+    int rollNo;
+    string name;
+    float marks[3];
+    float total;
+    float percentage;
+
+public:
+    void inputData() {
+        cout &lt;&lt; "Enter Roll Number: ";
+        cin &gt;&gt; rollNo;
+        cin.ignore();
+        cout &lt;&lt; "Enter Student Name: ";
+        getline(cin, name);
+        cout &lt;&lt; "Enter Marks in 3 Subjects (out of 100):\n";
+        total = 0;
+        for (int i = 0; i &lt; 3; i++) {
+            cout &lt;&lt; "  Subject " &lt;&lt; i + 1 &lt;&lt; ": ";
+            cin &gt;&gt; marks[i];
+            total += marks[i];
+        }
+        percentage = total / 3.0;
+    }
+
+    void displayData() const {
+        cout &lt;&lt; "\n========================================\n";
+        cout &lt;&lt; "           STUDENT GRADE REPORT          \n";
+        cout &lt;&lt; "========================================\n";
+        cout &lt;&lt; "Roll Number : " &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; "Name        : " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "----------------------------------------\n";
+        for (int i = 0; i &lt; 3; i++) {
+            cout &lt;&lt; "Subject " &lt;&lt; i + 1 &lt;&lt; "   : " &lt;&lt; marks[i] &lt;&lt; " / 100" &lt;&lt; endl;
+        }
+        cout &lt;&lt; "----------------------------------------\n";
+        cout &lt;&lt; "Total Marks : " &lt;&lt; total &lt;&lt; " / 300" &lt;&lt; endl;
+        cout &lt;&lt; fixed &lt;&lt; setprecision(2);
+        cout &lt;&lt; "Percentage  : " &lt;&lt; percentage &lt;&lt; "%" &lt;&lt; endl;
+        cout &lt;&lt; "Result      : " &lt;&lt; (percentage &gt;= 40.0 ? "PASSED" : "FAILED") &lt;&lt; endl;
+        cout &lt;&lt; "========================================\n";
+    }
+};
+
+int main() {
+    Student s1;
+    cout &lt;&lt; "=== PROGRAM 1: C++ CLASS &amp; OBJECT DEMONSTRATION ===\n";
+    s1.inputData();
+    s1.displayData();
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_1.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 1: C++ CLASS &amp; OBJECT DEMONSTRATION ===
+Enter Roll Number: 101
+Enter Student Name: Rahul Sharma
+Enter Marks in 3 Subjects (out of 100):
+  Subject 1: 85
+  Subject 2: 90
+  Subject 3: 88
+
+========================================
+           STUDENT GRADE REPORT          
+========================================
+Roll Number : 101
+Name        : Rahul Sharma
+----------------------------------------
+Subject 1   : 85 / 100
+Subject 2   : 90 / 100
+Subject 3   : 88 / 100
+----------------------------------------
+Total Marks : 263 / 300
+Percentage  : 87.67%
+Result      : PASSED
+======================================== </div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is the difference between a class and an object?</div>
+                            <div class="viva-a"><strong>Ans:</strong> A class is a user-defined blueprint/type without memory allocation; an object is an instantiated instance of a class that occupies memory.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is data encapsulation?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Wrapping data members and member functions into a single unit (class) while restricting direct outside access via private access specifiers.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 2 -->
+            <article class="exp-card" id="exp-2">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 2</span>
+                        <h2 class="exp-title">Largest of Three Numbers Using Inline Functions</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to find the largest of three numbers using an `inline` member function.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">An `inline` function suggests to the compiler to substitute the function body at each call site during compilation, eliminating the overhead of function call stack frames (pushing arguments, jump, return) for small, performance-critical code.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define inline function findMax(a, b, c) returning the largest integer.</li>
+                        <li>Use nested ternary conditional operators or if-else.</li>
+                        <li>In main(), prompt the user for three numbers.</li>
+                        <li>Call findMax() and display the maximum value.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_2.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-2', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-2">#include &lt;iostream&gt;
+using namespace std;
+
+// Inline function definition
+inline int findMax(int a, int b, int c) {
+    return (a &gt; b) ? ((a &gt; c) ? a : c) : ((b &gt; c) ? b : c);
+}
+
+int main() {
+    int num1, num2, num3;
+
+    cout &lt;&lt; "=== PROGRAM 2: INLINE FUNCTION DEMONSTRATION ===\n";
+    cout &lt;&lt; "Enter three integers: ";
+    cin &gt;&gt; num1 &gt;&gt; num2 &gt;&gt; num3;
+
+    int maxVal = findMax(num1, num2, num3);
+
+    cout &lt;&lt; "\nAmong [" &lt;&lt; num1 &lt;&lt; ", " &lt;&lt; num2 &lt;&lt; ", " &lt;&lt; num3 &lt;&lt; "]\n";
+    cout &lt;&lt; "The Largest Number is: " &lt;&lt; maxVal &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_2.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 2: INLINE FUNCTION DEMONSTRATION ===
+Enter three integers: 45 92 67
+
+Among [45, 92, 67]
+The Largest Number is: 92 </div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is an inline function?</div>
+                            <div class="viva-a"><strong>Ans:</strong> A function that is expanded in-line at the point of each call by the compiler, avoiding function call overhead.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: When does compiler ignore the inline request?</div>
+                            <div class="viva-a"><strong>Ans:</strong> If function contains loops, switch statements, recursive calls, or large code blocks.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 3 -->
+            <article class="exp-card" id="exp-3">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 3</span>
+                        <h2 class="exp-title">Swap Private Data Members of Two Classes Using Friend Function</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to swap the private data values of two distinct classes using a common `friend` function.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">A `friend` function is a non-member function granted access to private and protected members of a class. When swapping data between two classes, pass-by-reference allows in-place modifications.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Forward declare ClassB.</li>
+                        <li>Define ClassA with private member valA and declare friend function swapValues().</li>
+                        <li>Define ClassB with private member valB and declare friend function swapValues().</li>
+                        <li>Implement swapValues(ClassA &a, ClassB &b) to swap using a temp variable.</li>
+                        <li>Instantiate objects, display before swap, call swapValues(), and display after swap.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_3.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-3', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-3">#include &lt;iostream&gt;
+using namespace std;
+
+class ClassB; // Forward declaration
+
+class ClassA {
+private:
+    int valA;
+public:
+    ClassA(int v) : valA(v) {}
+    void display() const { cout &lt;&lt; "ClassA valA = " &lt;&lt; valA &lt;&lt; endl; }
+    friend void swapValues(ClassA &amp;a, ClassB &amp;b);
+};
+
+class ClassB {
+private:
+    int valB;
+public:
+    ClassB(int v) : valB(v) {}
+    void display() const { cout &lt;&lt; "ClassB valB = " &lt;&lt; valB &lt;&lt; endl; }
+    friend void swapValues(ClassA &amp;a, ClassB &amp;b);
+};
+
+// Friend function definition
+void swapValues(ClassA &amp;a, ClassB &amp;b) {
+    int temp = a.valA;
+    a.valA = b.valB;
+    b.valB = temp;
+}
+
+int main() {
+    int x, y;
+    cout &lt;&lt; "=== PROGRAM 3: FRIEND FUNCTION SWAPPING ===\n";
+    cout &lt;&lt; "Enter value for Class A: ";
+    cin &gt;&gt; x;
+    cout &lt;&lt; "Enter value for Class B: ";
+    cin &gt;&gt; y;
+
+    ClassA objA(x);
+    ClassB objB(y);
+
+    cout &lt;&lt; "\n--- Before Swapping ---\n";
+    objA.display();
+    objB.display();
+
+    swapValues(objA, objB);
+
+    cout &lt;&lt; "\n--- After Swapping (via Friend Function) ---\n";
+    objA.display();
+    objB.display();
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_3.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 3: FRIEND FUNCTION SWAPPING ===
+Enter value for Class A: 100
+Enter value for Class B: 500
+
+--- Before Swapping ---
+ClassA valA = 100
+ClassB valB = 500
+
+--- After Swapping (via Friend Function) ---
+ClassA valA = 500
+ClassB valB = 100 </div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is a Friend Function in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> A non-member function defined outside class scope that has full access to private and protected members of the class.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: Is friendship mutual or inherited in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> No, friendship is neither symmetric/mutual nor inherited.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 4 -->
+            <article class="exp-card" id="exp-4">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 4</span>
+                        <h2 class="exp-title">Function Overloading (Area of Geometric Shapes)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to calculate the area of a Circle, Rectangle, and Triangle using Function Overloading (Compile-Time Polymorphism).</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Function Overloading allows multiple functions in the same scope to share the same name with different parameter signatures (number, order, or data types of parameters). The compiler binds the call based on arguments passed at compile time.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define overloaded area() functions:</li>
+                        <li>  1. double area(double radius) -> PI * r * r (Circle)</li>
+                        <li>  2. double area(double length, double breadth) -> l * b (Rectangle)</li>
+                        <li>  3. double area(double base, double height, int isTriangle) -> 0.5 * b * h (Triangle)</li>
+                        <li>Prompt user with menu choices.</li>
+                        <li>Invoke corresponding overloaded function and print area.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_4.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-4', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-4">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+const double PI = 3.141592653589793;
+
+// Overload 1: Circle
+double area(double radius) {
+    return PI * radius * radius;
+}
+
+// Overload 2: Rectangle
+double area(double length, double breadth) {
+    return length * breadth;
+}
+
+// Overload 3: Triangle
+double area(double base, double height, bool isTriangle) {
+    if (isTriangle) return 0.5 * base * height;
+    return 0;
+}
+
+int main() {
+    int choice;
+    cout &lt;&lt; "=== PROGRAM 4: FUNCTION OVERLOADING (AREA CALCULATOR) ===\n";
+    cout &lt;&lt; "1. Area of Circle\n2. Area of Rectangle\n3. Area of Triangle\nEnter choice (1-3): ";
+    cin &gt;&gt; choice;
+
+    switch (choice) {
+        case 1: {
+            double r;
+            cout &lt;&lt; "Enter radius of Circle: ";
+            cin &gt;&gt; r;
+            cout &lt;&lt; "=&gt; Area of Circle = " &lt;&lt; area(r) &lt;&lt; " sq units\n";
+            break;
+        }
+        case 2: {
+            double l, b;
+            cout &lt;&lt; "Enter length and breadth of Rectangle: ";
+            cin &gt;&gt; l &gt;&gt; b;
+            cout &lt;&lt; "=&gt; Area of Rectangle = " &lt;&lt; area(l, b) &lt;&lt; " sq units\n";
+            break;
+        }
+        case 3: {
+            double base, height;
+            cout &lt;&lt; "Enter base and height of Triangle: ";
+            cin &gt;&gt; base &gt;&gt; height;
+            cout &lt;&lt; "=&gt; Area of Triangle = " &lt;&lt; area(base, height, true) &lt;&lt; " sq units\n";
+            break;
+        }
+        default:
+            cout &lt;&lt; "Invalid choice!\n";
+    }
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_4.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 4: FUNCTION OVERLOADING (AREA CALCULATOR) ===
+1. Area of Circle
+2. Area of Rectangle
+3. Area of Triangle
+Enter choice (1-3): 2
+Enter length and breadth of Rectangle: 12.5 8.0
+=&gt; Area of Rectangle = 100 sq units</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is Compile-Time Polymorphism?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Polymorphism resolved during compilation via Function Overloading and Operator Overloading (also called static/early binding).</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: Can function overloading be achieved by changing only the return type?</div>
+                            <div class="viva-a"><strong>Ans:</strong> No, return type alone is not sufficient to distinguish overloaded functions.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 5 -->
+            <article class="exp-card" id="exp-5">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 5</span>
+                        <h2 class="exp-title">Constructors (Default, Parameterized, Copy) & Destructor</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program demonstrating Default Constructor, Parameterized Constructor, Copy Constructor, and Destructor lifecycle of objects.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">A Constructor is a special member function having the same name as the class invoked automatically upon object creation to initialize state. A Destructor (~ClassName) is invoked automatically when an object goes out of scope to reclaim resources.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define class Account with account number and balance.</li>
+                        <li>Implement Default Constructor (initialize to default 0).</li>
+                        <li>Implement Parameterized Constructor (initialize with arguments).</li>
+                        <li>Implement Copy Constructor (deep copy another object's state).</li>
+                        <li>Implement Destructor to print deallocation message.</li>
+                        <li>Create objects in main() and observe invocation orders.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_5.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-5', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-5">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Account {
+private:
+    int accNo;
+    string holderName;
+    double balance;
+
+public:
+    // 1. Default Constructor
+    Account() {
+        accNo = 0;
+        holderName = "Unknown";
+        balance = 0.0;
+        cout &lt;&lt; "[*] Default Constructor Called (Acc: " &lt;&lt; accNo &lt;&lt; ")\n";
+    }
+
+    // 2. Parameterized Constructor
+    Account(int no, string name, double bal) {
+        accNo = no;
+        holderName = name;
+        balance = bal;
+        cout &lt;&lt; "[*] Parameterized Constructor Called for " &lt;&lt; holderName &lt;&lt; " (Acc: " &lt;&lt; accNo &lt;&lt; ")\n";
+    }
+
+    // 3. Copy Constructor
+    Account(const Account &amp;other) {
+        accNo = other.accNo + 1; // new cloned account
+        holderName = other.holderName + " (Joint)";
+        balance = other.balance;
+        cout &lt;&lt; "[*] Copy Constructor Called (Copied from Acc " &lt;&lt; other.accNo &lt;&lt; " to Acc " &lt;&lt; accNo &lt;&lt; ")\n";
+    }
+
+    // Member display function
+    void display() const {
+        cout &lt;&lt; "   [Account " &lt;&lt; accNo &lt;&lt; "] " &lt;&lt; holderName &lt;&lt; " | Balance: $" &lt;&lt; balance &lt;&lt; endl;
+    }
+
+    // Destructor
+    ~Account() {
+        cout &lt;&lt; "[~] Destructor Called: Reclaiming Account " &lt;&lt; accNo &lt;&lt; " (" &lt;&lt; holderName &lt;&lt; ")\n";
+    }
+};
+
+int main() {
+    cout &lt;&lt; "=== PROGRAM 5: CONSTRUCTORS &amp; DESTRUCTOR LIFECYCLE ===\n\n";
+    {
+        cout &lt;&lt; "--- 1. Creating default object ---\n";
+        Account acc1;
+        acc1.display();
+
+        cout &lt;&lt; "\n--- 2. Creating parameterized object ---\n";
+        Account acc2(1001, "Amit Verma", 75000.50);
+        acc2.display();
+
+        cout &lt;&lt; "\n--- 3. Creating object using Copy Constructor ---\n";
+        Account acc3 = acc2; // Copy constructor invocation
+        acc3.display();
+
+        cout &lt;&lt; "\n--- Leaving Inner Scope (Destructors will trigger in reverse order) ---\n";
+    }
+    cout &lt;&lt; "\nAll accounts destroyed successfully.\n";
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_5.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 5: CONSTRUCTORS &amp; DESTRUCTOR LIFECYCLE ===
+
+--- 1. Creating default object ---
+[*] Default Constructor Called (Acc: 0)
+   [Account 0] Unknown | Balance: $0
+
+--- 2. Creating parameterized object ---
+[*] Parameterized Constructor Called for Amit Verma (Acc: 1001)
+   [Account 1001] Amit Verma | Balance: $75000.5
+
+--- 3. Creating object using Copy Constructor ---
+[*] Copy Constructor Called (Copied from Acc 1001 to Acc 1002)
+   [Account 1002] Amit Verma (Joint) | Balance: $75000.5
+
+--- Leaving Inner Scope (Destructors will trigger in reverse order) ---
+[~] Destructor Called: Reclaiming Account 1002 (Amit Verma (Joint))
+[~] Destructor Called: Reclaiming Account 1001 (Amit Verma)
+[~] Destructor Called: Reclaiming Account 0 (Unknown)
+
+All accounts destroyed successfully.</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: Why is the parameter to a copy constructor passed by reference (const ClassName &obj)?</div>
+                            <div class="viva-a"><strong>Ans:</strong> If passed by value, passing the argument would itself call the copy constructor, causing infinite recursive calls and stack overflow.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: Can a destructor be overloaded in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> No, a class has exactly one destructor with no parameters and no return type.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 6 -->
+            <article class="exp-card" id="exp-6">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 6</span>
+                        <h2 class="exp-title">Constructor Overloading and Dynamic Memory Allocation</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program demonstrating Constructor Overloading and Dynamic Array allocation using `new` and `delete` operators.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Constructor Overloading occurs when a class has multiple constructors with different argument lists. Dynamic memory allocation allocates heap memory at runtime using `new[]` and releases it using `delete[]` in destructor preventing memory leaks.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define class DynamicVector with pointer int *arr and size n.</li>
+                        <li>Constructor 1 (DynamicVector()): allocates default size 3.</li>
+                        <li>Constructor 2 (DynamicVector(int size)): dynamically allocates array of custom size.</li>
+                        <li>Constructor 3 (DynamicVector(int size, int initVal)): allocates and fills with initVal.</li>
+                        <li>Destructor ~DynamicVector(): executes delete[] arr.</li>
+                        <li>In main(), test all constructors and display contents.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_6.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-6', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-6">#include &lt;iostream&gt;
+using namespace std;
+
+class DynamicVector {
+private:
+    int* arr;
+    int size;
+
+public:
+    // Overloaded Constructor 1: Default
+    DynamicVector() {
+        size = 3;
+        arr = new int[size]{10, 20, 30};
+        cout &lt;&lt; "[*] Default Constructor: Allocated array of size " &lt;&lt; size &lt;&lt; endl;
+    }
+
+    // Overloaded Constructor 2: Parameterized (Size only)
+    DynamicVector(int s) {
+        size = s;
+        arr = new int[size];
+        for (int i = 0; i &lt; size; i++) arr[i] = (i + 1) * 100;
+        cout &lt;&lt; "[*] Parameterized Constructor: Allocated custom size " &lt;&lt; size &lt;&lt; endl;
+    }
+
+    // Overloaded Constructor 3: Parameterized (Size and default fill value)
+    DynamicVector(int s, int fillVal) {
+        size = s;
+        arr = new int[size];
+        for (int i = 0; i &lt; size; i++) arr[i] = fillVal;
+        cout &lt;&lt; "[*] Parameterized Constructor: Allocated size " &lt;&lt; size &lt;&lt; " filled with " &lt;&lt; fillVal &lt;&lt; endl;
+    }
+
+    void display() const {
+        cout &lt;&lt; "Vector Elements: [ ";
+        for (int i = 0; i &lt; size; i++) {
+            cout &lt;&lt; arr[i] &lt;&lt; " ";
+        }
+        cout &lt;&lt; "]\n";
+    }
+
+    // Destructor to free heap memory
+    ~DynamicVector() {
+        delete[] arr;
+        cout &lt;&lt; "[~] Destructor: Dynamically allocated memory freed.\n";
+    }
+};
+
+int main() {
+    cout &lt;&lt; "=== PROGRAM 6: CONSTRUCTOR OVERLOADING &amp; DYNAMIC MEMORY ===\n\n";
+    
+    cout &lt;&lt; "1. Object V1 (Default):\n";
+    DynamicVector v1;
+    v1.display();
+
+    cout &lt;&lt; "\n2. Object V2 (Custom size 4):\n";
+    DynamicVector v2(4);
+    v2.display();
+
+    cout &lt;&lt; "\n3. Object V3 (Custom size 5 filled with 77):\n";
+    DynamicVector v3(5, 77);
+    v3.display();
+
+    cout &lt;&lt; "\n--- Scope Exit ---\n";
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_6.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 6: CONSTRUCTOR OVERLOADING &amp; DYNAMIC MEMORY ===
+
+1. Object V1 (Default):
+[*] Default Constructor: Allocated array of size 3
+Vector Elements: [ 10 20 30 ]
+
+2. Object V2 (Custom size 4):
+[*] Parameterized Constructor: Allocated custom size 4
+Vector Elements: [ 100 200 300 400 ]
+
+3. Object V3 (Custom size 5 filled with 77):
+[*] Parameterized Constructor: Allocated size 5 filled with 77
+Vector Elements: [ 77 77 77 77 77 ]
+
+--- Scope Exit ---
+[~] Destructor: Dynamically allocated memory freed.
+[~] Destructor: Dynamically allocated memory freed.
+[~] Destructor: Dynamically allocated memory freed.</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(N) for initialization</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(N) heap allocation</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is the difference between malloc() and new in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> malloc() allocates raw uninitialized memory bytes and doesn't call constructors; new allocates memory with proper type and automatically calls object constructor.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is a memory leak?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Failing to release dynamically allocated heap memory before pointers are lost or program terminates.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 7 -->
+            <article class="exp-card" id="exp-7">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 7</span>
+                        <h2 class="exp-title">Unary Operator Overloading (Overload - and ++ Operators)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to overload Unary Minus (`-`) and Prefix/Postfix Increment (`++`) operators.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Operator Overloading allows C++ operators to be given special user-defined meanings when applied to user-defined class objects. Unary operators operate on a single operand (the calling object `*this`).</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define class Point with x and y coordinates.</li>
+                        <li>Overload Unary Minus: Point operator-() const -> returns Point(-x, -y).</li>
+                        <li>Overload Prefix ++: Point& operator++() -> increments ++x, ++y, returns *this.</li>
+                        <li>Overload Postfix ++: Point operator++(int) -> saves old state, increments, returns old state.</li>
+                        <li>In main(), create Point and apply unary operators.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_7.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-7', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-7">#include &lt;iostream&gt;
+using namespace std;
+
+class Point {
+private:
+    int x, y;
+
+public:
+    Point(int x = 0, int y = 0) : x(x), y(y) {}
+
+    void display() const {
+        cout &lt;&lt; "(" &lt;&lt; x &lt;&lt; ", " &lt;&lt; y &lt;&lt; ")" &lt;&lt; endl;
+    }
+
+    // 1. Overloading Unary Minus (-)
+    Point operator-() const {
+        return Point(-x, -y);
+    }
+
+    // 2. Overloading Prefix Increment (++p)
+    Point&amp; operator++() {
+        ++x;
+        ++y;
+        return *this;
+    }
+
+    // 3. Overloading Postfix Increment (p++)
+    Point operator++(int) {
+        Point temp = *this; // save old state
+        x++;
+        y++;
+        return temp;        // return old state
+    }
+};
+
+int main() {
+    Point p1(15, -25);
+
+    cout &lt;&lt; "=== PROGRAM 7: UNARY OPERATOR OVERLOADING ===\n";
+    cout &lt;&lt; "Original Point P1: ";
+    p1.display();
+
+    // Applying Unary Minus
+    Point pNeg = -p1;
+    cout &lt;&lt; "Negated Point (-P1): ";
+    pNeg.display();
+
+    // Applying Prefix ++
+    cout &lt;&lt; "\nApplying Prefix ++ (++P1): ";
+    (++p1).display();
+
+    // Applying Postfix ++
+    cout &lt;&lt; "Applying Postfix ++ (P1++): ";
+    (p1++).display();
+    cout &lt;&lt; "Point P1 after Postfix Increment: ";
+    p1.display();
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_7.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 7: UNARY OPERATOR OVERLOADING ===
+Original Point P1: (15, -25)
+Negated Point (-P1): (-15, 25)
+
+Applying Prefix ++ (++P1): (16, -24)
+Applying Postfix ++ (P1++): (16, -24)
+Point P1 after Postfix Increment: (17, -23)</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: How does compiler differentiate between prefix and postfix operator++ in overloading?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Postfix takes a dummy `int` argument in its signature: operator++(int).</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: Which operators cannot be overloaded in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Scope resolution (::), Member selection (.), Member selection via pointer (.*), Ternary (?:), and sizeof.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 8 -->
+            <article class="exp-card" id="exp-8">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 8</span>
+                        <h2 class="exp-title">Binary Operator Overloading (Complex Number Addition)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to overload the Binary Plus (`+`) operator to add two Complex numbers.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Binary operators take two operands. When overloaded as a member function, the left operand is the invoking object (`*this`) and the right operand is passed as a constant reference argument `const Complex &other`.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define class Complex with real and imag parts.</li>
+                        <li>Overload binary operator+: Complex operator+(const Complex &c) const:</li>
+                        <li>  result.real = real + c.real</li>
+                        <li>  result.imag = imag + c.imag</li>
+                        <li>  return result.</li>
+                        <li>In main(), read two complex numbers C1 and C2.</li>
+                        <li>Execute C3 = C1 + C2 and display C3.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_8.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-8', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-8">#include &lt;iostream&gt;
+using namespace std;
+
+class Complex {
+private:
+    float real;
+    float imag;
+
+public:
+    Complex(float r = 0.0, float i = 0.0) : real(r), imag(i) {}
+
+    void input() {
+        cout &lt;&lt; "Enter Real and Imaginary parts: ";
+        cin &gt;&gt; real &gt;&gt; imag;
+    }
+
+    void display() const {
+        if (imag &gt;= 0)
+            cout &lt;&lt; real &lt;&lt; " + " &lt;&lt; imag &lt;&lt; "i" &lt;&lt; endl;
+        else
+            cout &lt;&lt; real &lt;&lt; " - " &lt;&lt; -imag &lt;&lt; "i" &lt;&lt; endl;
+    }
+
+    // Overloading Binary + Operator
+    Complex operator+(const Complex &amp;c) const {
+        Complex temp;
+        temp.real = this-&gt;real + c.real;
+        temp.imag = this-&gt;imag + c.imag;
+        return temp;
+    }
+};
+
+int main() {
+    Complex c1, c2, c3;
+
+    cout &lt;&lt; "=== PROGRAM 8: BINARY OPERATOR OVERLOADING (+) ===\n";
+    cout &lt;&lt; "Enter Complex Number 1:\n";
+    c1.input();
+
+    cout &lt;&lt; "\nEnter Complex Number 2:\n";
+    c2.input();
+
+    // Adding using overloaded + operator
+    c3 = c1 + c2; // Equivalent to c1.operator+(c2)
+
+    cout &lt;&lt; "\n--- Results ---\n";
+    cout &lt;&lt; "C1 = "; c1.display();
+    cout &lt;&lt; "C2 = "; c2.display();
+    cout &lt;&lt; "C3 (C1 + C2) = "; c3.display();
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_8.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 8: BINARY OPERATOR OVERLOADING (+) ===
+Enter Complex Number 1:
+Enter Real and Imaginary parts: 4.5 3.2
+
+Enter Complex Number 2:
+Enter Real and Imaginary parts: 2.5 -1.2
+
+--- Results ---
+C1 = 4.5 + 3.2i
+C2 = 2.5 - 1.2i
+C3 (C1 + C2) = 7 + 2i</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: Can binary operators be overloaded using friend functions?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Yes, a friend function takes both operands explicitly: friend Complex operator+(const Complex &c1, const Complex &c2).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 9 -->
+            <article class="exp-card" id="exp-9">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 9</span>
+                        <h2 class="exp-title">Single and Multilevel Inheritance</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program demonstrating Multilevel Inheritance where class `Result` is derived from `Marks`, which is derived from `Student`.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Inheritance promotes code reuse. In Single Inheritance, a derived class inherits from one base class. In Multilevel Inheritance, a class is derived from another derived class forming an inheritance chain (A -> B -> C).</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define Base Class Student (rollNo, name).</li>
+                        <li>Define Intermediate Class Marks inheriting Student (marks1, marks2).</li>
+                        <li>Define Derived Class Result inheriting Marks (computes total = marks1 + marks2 and displays result).</li>
+                        <li>In main(), create Result object, invoke input methods and display final card.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_9.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-9', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-9">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+// Base Class
+class Student {
+protected:
+    int rollNo;
+    string name;
+
+public:
+    void getStudentDetails() {
+        cout &lt;&lt; "Enter Roll Number: ";
+        cin &gt;&gt; rollNo;
+        cin.ignore();
+        cout &lt;&lt; "Enter Student Name: ";
+        getline(cin, name);
+    }
+    void putStudentDetails() const {
+        cout &lt;&lt; "Roll Number : " &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; "Name        : " &lt;&lt; name &lt;&lt; endl;
+    }
+};
+
+// Intermediate Derived Class (Single Inheritance from Student)
+class Marks : public Student {
+protected:
+    float m1, m2;
+
+public:
+    void getMarks() {
+        getStudentDetails();
+        cout &lt;&lt; "Enter Marks in Subject 1: ";
+        cin &gt;&gt; m1;
+        cout &lt;&lt; "Enter Marks in Subject 2: ";
+        cin &gt;&gt; m2;
+    }
+    void putMarks() const {
+        putStudentDetails();
+        cout &lt;&lt; "Subject 1 Marks : " &lt;&lt; m1 &lt;&lt; endl;
+        cout &lt;&lt; "Subject 2 Marks : " &lt;&lt; m2 &lt;&lt; endl;
+    }
+};
+
+// Final Derived Class (Multilevel Inheritance from Marks)
+class Result : public Marks {
+private:
+    float totalScore;
+
+public:
+    void calculateResult() {
+        getMarks();
+        totalScore = m1 + m2;
+    }
+    void displayResultCard() const {
+        cout &lt;&lt; "\n========================================\n";
+        cout &lt;&lt; "       MULTILEVEL INHERITANCE REPORT     \n";
+        cout &lt;&lt; "========================================\n";
+        putMarks();
+        cout &lt;&lt; "----------------------------------------\n";
+        cout &lt;&lt; "Total Marks Score: " &lt;&lt; totalScore &lt;&lt; " / 200\n";
+        cout &lt;&lt; "Status           : " &lt;&lt; (totalScore &gt;= 80 ? "PASSED" : "FAILED") &lt;&lt; endl;
+        cout &lt;&lt; "========================================\n";
+    }
+};
+
+int main() {
+    Result res;
+    cout &lt;&lt; "=== PROGRAM 9: MULTILEVEL INHERITANCE (STUDENT -&gt; MARKS -&gt; RESULT) ===\n";
+    res.calculateResult();
+    res.displayResultCard();
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_9.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 9: MULTILEVEL INHERITANCE (STUDENT -&gt; MARKS -&gt; RESULT) ===
+Enter Roll Number: 202
+Enter Student Name: Anjali Gupta
+Enter Marks in Subject 1: 88
+Enter Marks in Subject 2: 94
+
+========================================
+       MULTILEVEL INHERITANCE REPORT     
+========================================
+Roll Number : 202
+Name        : Anjali Gupta
+Subject 1 Marks : 88
+Subject 2 Marks : 94
+----------------------------------------
+Total Marks Score: 182 / 200
+Status           : PASSED
+======================================== </div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is the protected access specifier in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Protected members are inaccessible from outside classes, but accessible within the class and its derived child classes.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: In what order are constructors executed in multilevel inheritance?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Base class constructor executes first, followed by intermediate, and finally derived class constructor.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 10 -->
+            <article class="exp-card" id="exp-10">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 10</span>
+                        <h2 class="exp-title">Multiple and Hierarchical Inheritance</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program demonstrating Multiple Inheritance (derived class inheriting from two base classes: `AcademicMarks` and `SportsScore`).</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Multiple Inheritance occurs when a child class inherits simultaneously from more than one base class (e.g., class Hybrid : public BaseA, public BaseB).</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define Base Class 1: Academic (theory marks).</li>
+                        <li>Define Base Class 2: Sports (sports score/grace points).</li>
+                        <li>Define Derived Class: FinalScore inheriting both Academic and Sports.</li>
+                        <li>Calculate combined score = academic + sports.</li>
+                        <li>Display comprehensive score sheet in main().</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_10.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-10', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-10">#include &lt;iostream&gt;
+using namespace std;
+
+// Base Class 1
+class Academic {
+protected:
+    float academicScore;
+public:
+    void getAcademic(float score) {
+        academicScore = score;
+    }
+    void showAcademic() const {
+        cout &lt;&lt; "Academic Score : " &lt;&lt; academicScore &lt;&lt; " / 100" &lt;&lt; endl;
+    }
+};
+
+// Base Class 2
+class Sports {
+protected:
+    float sportsScore;
+public:
+    void getSports(float score) {
+        sportsScore = score;
+    }
+    void showSports() const {
+        cout &lt;&lt; "Sports Score   : " &lt;&lt; sportsScore &lt;&lt; " / 20" &lt;&lt; endl;
+    }
+};
+
+// Derived Class demonstrating Multiple Inheritance
+class OverallPerformance : public Academic, public Sports {
+private:
+    float totalAggregate;
+
+public:
+    void calculateAggregate(float acad, float sport) {
+        getAcademic(acad);
+        getSports(sport);
+        totalAggregate = academicScore + sportsScore;
+    }
+
+    void displayReport() const {
+        cout &lt;&lt; "\n========================================\n";
+        cout &lt;&lt; "     MULTIPLE INHERITANCE PERFORMANCE   \n";
+        cout &lt;&lt; "========================================\n";
+        showAcademic();
+        showSports();
+        cout &lt;&lt; "----------------------------------------\n";
+        cout &lt;&lt; "Total Aggregate: " &lt;&lt; totalAggregate &lt;&lt; " / 120\n";
+        cout &lt;&lt; "========================================\n";
+    }
+};
+
+int main() {
+    OverallPerformance studentPerf;
+    float acad, sport;
+
+    cout &lt;&lt; "=== PROGRAM 10: MULTIPLE INHERITANCE DEMONSTRATION ===\n";
+    cout &lt;&lt; "Enter Academic Score (0-100): ";
+    cin &gt;&gt; acad;
+    cout &lt;&lt; "Enter Sports Grace Score (0-20): ";
+    cin &gt;&gt; sport;
+
+    studentPerf.calculateAggregate(acad, sport);
+    studentPerf.displayReport();
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_10.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 10: MULTIPLE INHERITANCE DEMONSTRATION ===
+Enter Academic Score (0-100): 89.5
+Enter Sports Grace Score (0-20): 18.0
+
+========================================
+     MULTIPLE INHERITANCE PERFORMANCE   
+========================================
+Academic Score : 89.5 / 100
+Sports Score   : 18 / 20
+----------------------------------------
+Total Aggregate: 107.5 / 120
+======================================== </div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is Multiple Inheritance?</div>
+                            <div class="viva-a"><strong>Ans:</strong> A mechanism in C++ where a class can inherit from more than one parent base class.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is the Diamond problem that can occur in multiple inheritance?</div>
+                            <div class="viva-a"><strong>Ans:</strong> When a derived class inherits two classes that both inherit from a single grandparent base class, creating duplicate copies of the grandparent's members.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 11 -->
+            <article class="exp-card" id="exp-11">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 11</span>
+                        <h2 class="exp-title">Virtual Base Class (Resolving Diamond Problem Ambiguity)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to demonstrate Virtual Base Class in multipath inheritance to prevent duplicate inheritance of base class members.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">In Multipath Inheritance (Diamond shape A -> B, A -> C, and B, C -> D), derived class D receives two copies of base class A. Declaring base class as `virtual` (e.g., `class B : virtual public A`) ensures only a single shared copy of A is inherited.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define Base Class Person with id and name.</li>
+                        <li>Define Faculty inheriting `virtual public Person`.</li>
+                        <li>Define Student inheriting `virtual public Person`.</li>
+                        <li>Define TeachingAssistant inheriting both Faculty and Student.</li>
+                        <li>In main(), instantiate TeachingAssistant and verify unambiguous access.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_11.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-11', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-11">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+// Grandparent Base Class
+class Person {
+public:
+    int personId;
+    void setPerson(int id) {
+        personId = id;
+    }
+    void showPerson() const {
+        cout &lt;&lt; "Person ID: " &lt;&lt; personId &lt;&lt; endl;
+    }
+};
+
+// Intermediate Class 1: Virtual inheritance
+class Faculty : virtual public Person {
+public:
+    string department;
+    void setFaculty(string dept) { department = dept; }
+};
+
+// Intermediate Class 2: Virtual inheritance
+class StudentRole : virtual public Person {
+public:
+    float cgpa;
+    void setStudent(float c) { cgpa = c; }
+};
+
+// Derived Class inheriting both (Diamond structure resolved)
+class TeachingAssistant : public Faculty, public StudentRole {
+public:
+    void setTA(int id, string dept, float c) {
+        setPerson(id); // Unambiguous because of virtual inheritance!
+        setFaculty(dept);
+        setStudent(c);
+    }
+
+    void displayTA() const {
+        cout &lt;&lt; "\n========================================\n";
+        cout &lt;&lt; "      TEACHING ASSISTANT DETAILS (VBC)   \n";
+        cout &lt;&lt; "========================================\n";
+        showPerson();
+        cout &lt;&lt; "Department : " &lt;&lt; department &lt;&lt; endl;
+        cout &lt;&lt; "CGPA       : " &lt;&lt; cgpa &lt;&lt; endl;
+        cout &lt;&lt; "========================================\n";
+    }
+};
+
+int main() {
+    TeachingAssistant ta;
+    cout &lt;&lt; "=== PROGRAM 11: VIRTUAL BASE CLASS (DIAMOND PROBLEM) ===\n";
+    ta.setTA(501, "Computer Science &amp; Engineering", 9.4);
+    ta.displayTA();
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_11.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 11: VIRTUAL BASE CLASS (DIAMOND PROBLEM) ===
+
+========================================
+      TEACHING ASSISTANT DETAILS (VBC)   
+========================================
+Person ID: 501
+Department : Computer Science &amp; Engineering
+CGPA       : 9.4
+======================================== </div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is the purpose of a Virtual Base Class?</div>
+                            <div class="viva-a"><strong>Ans:</strong> To eliminate duplicate copies and ambiguity when a class inherits from two classes that have a common base class.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: How does compiler implement virtual base class internally?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Using Virtual Table (vtable) and Virtual Base Pointer (vbptr) offsets.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 12 -->
+            <article class="exp-card" id="exp-12">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 12</span>
+                        <h2 class="exp-title">Runtime Polymorphism Using Virtual Functions & Pure Virtual Class</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to demonstrate Runtime Polymorphism using Pure Virtual Functions and Abstract Base Class (`Shape` -> `Circle`, `Rectangle`).</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Runtime (Dynamic) Polymorphism is achieved via Virtual Functions. A base class pointer pointing to derived class objects invokes the overridden derived method at runtime through dynamic dispatch (VTABLE mechanism).</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define abstract base class Shape with pure virtual function: virtual void calculateArea() = 0.</li>
+                        <li>Define derived class Circle overriding calculateArea().</li>
+                        <li>Define derived class Rectangle overriding calculateArea().</li>
+                        <li>Create base class pointer Shape *ptr and dynamically assign derived objects.</li>
+                        <li>Invoke calculateArea() polymorphically.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_12.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-12', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-12">#include &lt;iostream&gt;
+using namespace std;
+
+// Abstract Base Class
+class Shape {
+public:
+    // Pure Virtual Function
+    virtual void calculateArea() = 0;
+    virtual void displayInfo() const = 0;
+
+    // Virtual Destructor for safe polymorphic destruction
+    virtual ~Shape() {
+        cout &lt;&lt; "[~] Shape Base Destructor\n";
+    }
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    void calculateArea() override {
+        cout &lt;&lt; "Circle Area: " &lt;&lt; (3.14159 * radius * radius) &lt;&lt; " sq units\n";
+    }
+    void displayInfo() const override {
+        cout &lt;&lt; "[Circle] Radius = " &lt;&lt; radius &lt;&lt; endl;
+    }
+    ~Circle() { cout &lt;&lt; "[~] Circle Destructor\n"; }
+};
+
+class Rectangle : public Shape {
+private:
+    double length, width;
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+    void calculateArea() override {
+        cout &lt;&lt; "Rectangle Area: " &lt;&lt; (length * width) &lt;&lt; " sq units\n";
+    }
+    void displayInfo() const override {
+        cout &lt;&lt; "[Rectangle] Length = " &lt;&lt; length &lt;&lt; ", Width = " &lt;&lt; width &lt;&lt; endl;
+    }
+    ~Rectangle() { cout &lt;&lt; "[~] Rectangle Destructor\n"; }
+};
+
+int main() {
+    cout &lt;&lt; "=== PROGRAM 12: RUNTIME POLYMORPHISM (VIRTUAL FUNCTIONS) ===\n\n";
+
+    // Polymorphic Base Class Pointer
+    Shape* shapePtr = nullptr;
+
+    cout &lt;&lt; "--- 1. Dynamic Dispatch with Circle ---\n";
+    shapePtr = new Circle(7.0);
+    shapePtr-&gt;displayInfo();
+    shapePtr-&gt;calculateArea();
+    delete shapePtr;
+
+    cout &lt;&lt; "\n--- 2. Dynamic Dispatch with Rectangle ---\n";
+    shapePtr = new Rectangle(10.0, 5.0);
+    shapePtr-&gt;displayInfo();
+    shapePtr-&gt;calculateArea();
+    delete shapePtr;
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_12.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 12: RUNTIME POLYMORPHISM (VIRTUAL FUNCTIONS) ===
+
+--- 1. Dynamic Dispatch with Circle ---
+[Circle] Radius = 7
+Circle Area: 153.938 sq units
+[~] Circle Destructor
+[~] Shape Base Destructor
+
+--- 2. Dynamic Dispatch with Rectangle ---
+[Rectangle] Length = 10, Width = 5
+Rectangle Area: 50 sq units
+[~] Rectangle Destructor
+[~] Shape Base Destructor</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1) with one vtable pointer indirection</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is a Pure Virtual Function?</div>
+                            <div class="viva-a"><strong>Ans:</strong> A virtual function declared with `= 0` in base class having no definition in base class, forcing derived classes to provide an implementation.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is an Abstract Class?</div>
+                            <div class="viva-a"><strong>Ans:</strong> A class containing at least one pure virtual function. Abstract classes cannot be directly instantiated.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 13 -->
+            <article class="exp-card" id="exp-13">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 13</span>
+                        <h2 class="exp-title">File Handling in C++ (Writing and Reading Records)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program to write student records to a text file using `ofstream` and retrieve/display them using `ifstream`.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">File handling in C++ utilizes classes from `<fstream>`: `ofstream` (output file stream for writing), `ifstream` (input file stream for reading), and `fstream` (both read/write).</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Open file 'students.txt' using ofstream in write mode.</li>
+                        <li>Write student records (ID, Name, GPA) to file.</li>
+                        <li>Close ofstream.</li>
+                        <li>Open 'students.txt' using ifstream in read mode.</li>
+                        <li>Read file line by line and print on console.</li>
+                        <li>Close ifstream.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_13.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-13', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-13">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string filename = "students_record.txt";
+
+    cout &lt;&lt; "=== PROGRAM 13: FILE HANDLING IN C++ ===\n";
+
+    // 1. Writing to File
+    ofstream outFile(filename);
+    if (!outFile) {
+        cerr &lt;&lt; "[!] Error opening file for writing!\n";
+        return 1;
+    }
+
+    cout &lt;&lt; "[+] Writing student records to '" &lt;&lt; filename &lt;&lt; "'...\n";
+    outFile &lt;&lt; "101,Vikram_Singh,8.8\n";
+    outFile &lt;&lt; "102,Priya_Sharma,9.2\n";
+    outFile &lt;&lt; "103,Rohan_Verma,7.9\n";
+    outFile.close();
+    cout &lt;&lt; "[✓] File written and closed successfully.\n";
+
+    // 2. Reading from File
+    ifstream inFile(filename);
+    if (!inFile) {
+        cerr &lt;&lt; "[!] Error opening file for reading!\n";
+        return 1;
+    }
+
+    cout &lt;&lt; "\n--- Reading Records from File ---\n";
+    string line;
+    int recordCount = 0;
+    while (getline(inFile, line)) {
+        recordCount++;
+        cout &lt;&lt; "Record " &lt;&lt; recordCount &lt;&lt; ": " &lt;&lt; line &lt;&lt; endl;
+    }
+    inFile.close();
+
+    cout &lt;&lt; "\n[✓] Total records read: " &lt;&lt; recordCount &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_13.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 13: FILE HANDLING IN C++ ===
+[+] Writing student records to 'students_record.txt'...
+[✓] File written and closed successfully.
+
+--- Reading Records from File ---
+Record 1: 101,Vikram_Singh,8.8
+Record 2: 102,Priya_Sharma,9.2
+Record 3: 103,Rohan_Verma,7.9
+
+[✓] Total records read: 3</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(N) where N is file size</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: Which header file is required for file stream handling in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> #include <fstream></div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is the difference between ios::app and ios::out file modes?</div>
+                            <div class="viva-a"><strong>Ans:</strong> ios::out overwrites existing content, whereas ios::app appends new data to the end of file.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 14 -->
+            <article class="exp-card" id="exp-14">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 14</span>
+                        <h2 class="exp-title">Templates (Function Template & Generic Stack Class Template)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program implementing Generic Function Template for Swapping and Generic Class Template for Stack.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Templates enable Generic Programming, allowing functions and classes to operate with generic data types `template <typename T>` without duplicating code for int, float, string, etc.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>Define template function customSwap(T &a, T &b).</li>
+                        <li>Define template class GenericStack<T> with push(), pop(), and display().</li>
+                        <li>Instantiate GenericStack<int> and GenericStack<string> in main().</li>
+                        <li>Test operations on both types.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_14.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-14', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-14">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+// 1. Generic Function Template
+template &lt;typename T&gt;
+void customSwap(T &amp;a, T &amp;b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+// 2. Generic Class Template (Stack)
+template &lt;typename T&gt;
+class GenericStack {
+private:
+    T arr[10];
+    int top;
+public:
+    GenericStack() : top(-1) {}
+
+    void push(T val) {
+        if (top == 9) {
+            cout &lt;&lt; "[!] Stack Overflow\n";
+        } else {
+            arr[++top] = val;
+        }
+    }
+
+    T pop() {
+        if (top == -1) {
+            cout &lt;&lt; "[!] Stack Underflow\n";
+            return T();
+        }
+        return arr[top--];
+    }
+
+    void display() const {
+        cout &lt;&lt; "[Stack]: ";
+        for (int i = 0; i &lt;= top; i++) {
+            cout &lt;&lt; arr[i] &lt;&lt; " ";
+        }
+        cout &lt;&lt; endl;
+    }
+};
+
+int main() {
+    cout &lt;&lt; "=== PROGRAM 14: FUNCTION &amp; CLASS TEMPLATES ===\n\n";
+
+    // Testing Function Template
+    int x = 10, y = 20;
+    cout &lt;&lt; "Before Swap: x=" &lt;&lt; x &lt;&lt; ", y=" &lt;&lt; y &lt;&lt; endl;
+    customSwap(x, y);
+    cout &lt;&lt; "After Swap:  x=" &lt;&lt; x &lt;&lt; ", y=" &lt;&lt; y &lt;&lt; endl;
+
+    string s1 = "Hello", s2 = "World";
+    cout &lt;&lt; "\nBefore String Swap: s1=" &lt;&lt; s1 &lt;&lt; ", s2=" &lt;&lt; s2 &lt;&lt; endl;
+    customSwap(s1, s2);
+    cout &lt;&lt; "After String Swap:  s1=" &lt;&lt; s1 &lt;&lt; ", s2=" &lt;&lt; s2 &lt;&lt; endl;
+
+    // Testing Class Template with Int
+    cout &lt;&lt; "\n--- Testing GenericStack&lt;int&gt; ---\n";
+    GenericStack&lt;int&gt; intStack;
+    intStack.push(100);
+    intStack.push(200);
+    intStack.display();
+
+    // Testing Class Template with String
+    cout &lt;&lt; "\n--- Testing GenericStack&lt;string&gt; ---\n";
+    GenericStack&lt;string&gt; strStack;
+    strStack.push("DataStructures");
+    strStack.push("Algorithms");
+    strStack.display();
+
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_14.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 14: FUNCTION &amp; CLASS TEMPLATES ===
+
+Before Swap: x=10, y=20
+After Swap:  x=20, y=10
+
+Before String Swap: s1=Hello, s2=World
+After String Swap:  s1=World, s2=Hello
+
+--- Testing GenericStack&lt;int&gt; ---
+[Stack]: 100 200 
+
+--- Testing GenericStack&lt;string&gt; ---
+[Stack]: DataStructures Algorithms </div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(N)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is Generic Programming?</div>
+                            <div class="viva-a"><strong>Ans:</strong> An approach where code is written in terms of types to-be-specified-later that are then instantiated when needed for specific types.</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What is the difference between typename and class in template header?</div>
+                            <div class="viva-a"><strong>Ans:</strong> Both `template <class T>` and `template <typename T>` are completely identical and interchangeable.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- EXPERIMENT 15 -->
+            <article class="exp-card" id="exp-15">
+                <div class="exp-header">
+                    <div class="exp-title-wrap">
+                        <span class="exp-tag">Experiment No. 15</span>
+                        <h2 class="exp-title">Exception Handling in C++ (try, catch, throw)</h2>
+                    </div>
+                </div>
+
+                <!-- Aim -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-bullseye"></i> AIM / OBJECTIVE</div>
+                    <div class="text-box">To write a C++ program demonstrating Exception Handling to catch Division by Zero and Array Index Out of Bounds errors.</div>
+                </div>
+
+                <!-- Software / Hardware Requirements -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-laptop-code"></i> SOFTWARE / ENVIRONMENT</div>
+                    <div class="text-box">G++ / Clang / VS Code</div>
+                </div>
+
+                <!-- Theory -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-book-open"></i> THEORETICAL BACKGROUND / PREREQUISITES</div>
+                    <div class="text-box">Exception handling transfers control from a point where an exceptional error condition occurs (`throw`) to a handler block (`catch`) inside a monitored block (`try`), preventing program crash.</div>
+                </div>
+
+                <!-- Algorithm -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-diagram-project"></i> STEP-BY-STEP ALGORITHM</div>
+                    <ol class="algo-steps">
+                        <li>Start</li>
+                        <li>In function safeDivide(a, b): if b == 0 throw runtime_error or custom error.</li>
+                        <li>In main(), wrap function call in try block.</li>
+                        <li>Catch exception in catch(const exception &e) block.</li>
+                        <li>Display clean user-friendly error message without crashing.</li>
+                        <li>Stop</li>
+                    </ol>
+                </div>
+
+                <!-- Source Code -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-code"></i> SOURCE CODE (C/C++)</div>
+                    <div class="code-box-wrapper">
+                        <div class="code-header">
+                            <span>program_15.cpp</span>
+                            <button class="copy-btn" onclick="copyCode('code-15', this)">
+                                <i class="fa-regular fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                        <pre><code id="code-15">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+double safeDivide(double numerator, double denominator) {
+    if (denominator == 0.0) {
+        throw runtime_error("Division by zero error: Denominator cannot be 0!");
+    }
+    return numerator / denominator;
+}
+
+int main() {
+    double a, b;
+    cout &lt;&lt; "=== PROGRAM 15: EXCEPTION HANDLING IN C++ ===\n";
+
+    // Test Case 1: Valid Division
+    try {
+        cout &lt;&lt; "\nEnter numerator and denominator: ";
+        cin &gt;&gt; a &gt;&gt; b;
+        double result = safeDivide(a, b);
+        cout &lt;&lt; "[✓] Result: " &lt;&lt; a &lt;&lt; " / " &lt;&lt; b &lt;&lt; " = " &lt;&lt; result &lt;&lt; endl;
+    }
+    catch (const runtime_error &amp;e) {
+        cout &lt;&lt; "[!] CAUGHT EXCEPTION: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+    catch (...) {
+        cout &lt;&lt; "[!] CAUGHT UNKNOWN EXCEPTION!\n";
+    }
+
+    // Test Case 2: Intentional Zero Division
+    cout &lt;&lt; "\n--- Triggering Zero Division Exception ---\n";
+    try {
+        cout &lt;&lt; "Attempting: safeDivide(50, 0)...\n";
+        double res = safeDivide(50, 0);
+        cout &lt;&lt; "Result: " &lt;&lt; res &lt;&lt; endl;
+    }
+    catch (const exception &amp;e) {
+        cout &lt;&lt; "[!] EXCEPTION HANDLED SAFELY: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+
+    cout &lt;&lt; "\nProgram continued execution and terminated normally!\n";
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Terminal Output -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-terminal"></i> SAMPLE INPUT & EXECUTION OUTPUT</div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title">Terminal - gcc program_15.cpp &amp;&amp; ./a.out</span>
+                        </div>
+                        <div class="terminal-body">=== PROGRAM 15: EXCEPTION HANDLING IN C++ ===
+
+Enter numerator and denominator: 25 5
+[✓] Result: 25 / 5 = 5
+
+--- Triggering Zero Division Exception ---
+Attempting: safeDivide(50, 0)...
+[!] EXCEPTION HANDLED SAFELY: Division by zero error: Denominator cannot be 0!
+
+Program continued execution and terminated normally!</div>
+                    </div>
+                </div>
+
+                <!-- Complexity -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-gauge-high"></i> COMPLEXITY ANALYSIS</div>
+                    <div class="complexity-grid">
+                        <div class="complexity-box"><strong>Time Complexity:</strong> O(1)</div>
+                        <div class="complexity-box"><strong>Space Complexity:</strong> O(1)</div>
+                    </div>
+                </div>
+
+                <!-- Viva-Voce Questions -->
+                <div class="exp-section">
+                    <div class="section-heading"><i class="fa-solid fa-comments"></i> VIVA-VOCE QUESTIONS & ANSWERS</div>
+                    <div class="viva-list">
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What are the three keywords used for exception handling in C++?</div>
+                            <div class="viva-a"><strong>Ans:</strong> try (encloses monitored code), throw (raises an exception), catch (handles the exception).</div>
+                        </div>
+                        <div class="viva-item">
+                            <div class="viva-q"><i class="fa-solid fa-circle-question" style="color: var(--primary);"></i> Q: What does catch(...) signify?</div>
+                            <div class="viva-a"><strong>Ans:</strong> It is a catch-all block that handles any type of thrown exception.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result / Signature -->
+                <div class="sign-box">
+                    <div>
+                        <strong>Result:</strong> Program successfully implemented, compiled, and verified.
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Faculty Signature: __________________</div>
+                        <div style="margin-top: 4px; font-size: 0.75rem;">Grade / Marks: [ &nbsp; &nbsp; &nbsp; &nbsp; / 10 ]</div>
+                    </div>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const icon = document.getElementById('themeIcon');
+            icon.className = newTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        // Apply saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const icon = document.getElementById('themeIcon');
+            if (icon) icon.className = savedTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        function copyCode(id, btn) {
+            const codeEl = document.getElementById(id);
+            if (!codeEl) return;
+            const text = codeEl.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const origHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                btn.style.background = '#22c55e';
+                setTimeout(() => {
+                    btn.innerHTML = origHtml;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        function filterIndex() {
+            const q = document.getElementById('searchExp').value.toLowerCase();
+            const items = document.querySelectorAll('#indexList .index-item');
+            items.forEach(it => {
+                const text = it.innerText.toLowerCase();
+                it.style.display = text.includes(q) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

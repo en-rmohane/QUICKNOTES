@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Laboratory Manuals Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --bg-base: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow-md: 0 4px 15px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        [data-theme="dark"] {
+            --bg-base: #0b0f19;
+            --bg-card: #131c2e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --primary-light: rgba(37, 99, 235, 0.15);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        [data-theme="dark"] .hero-title {
+            background: linear-gradient(135deg, #f8fafc 0%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .manual-grid {
+            max-width: 1100px;
+            margin: 30px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 35px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .icon-ds {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        .icon-cpp {
+            background: #fdf4ff;
+            color: #c026d3;
+        }
+        .icon-cd {
+            background: #ecfdf5;
+            color: #059669;
+        }
+        .card-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-c { background: #dbeafe; color: #1e40af; }
+        .tag-cpp { background: #fae8ff; color: #86198f; }
+        .tag-cd { background: #d1fae5; color: #065f46; }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 24px;
+        }
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 25px;
+            font-size: 0.88rem;
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+        }
+        .feature-list li i {
+            color: #22c55e;
+            font-size: 0.85rem;
+        }
+        .btn-launch {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+        .btn-launch:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-badge">
+            <i class="fa-solid fa-graduation-cap"></i> Official College Laboratory Manuals
+        </div>
+        <h1 class="hero-title">Engineering Practical Records Portal</h1>
+        <p class="hero-sub">Complete college-ready lab manuals with Aim, Algorithm, Source Code, Sample Input/Output, Viva-Voce Questions, and Print-ready A4 Record Sheets.</p>
+    </div>
+
+    <div class="manual-grid">
+        <!-- Manual 1: DS in C -->
+        <div class="card">
+            <div>
+                <div class="card-top">
+                    <div class="card-icon icon-ds"><i class="fa-solid fa-sitemap"></i></div>
+                    <span class="card-tag tag-c">15 Programs in C</span>
+                </div>
+                <h2 class="card-title">Data Structures Using C</h2>
+                <p class="card-desc">Comprehensive manual covering 1D/2D Arrays, Matrices, Recursion, Stacks, Linear & Circular Queues, Binary Search Tree, Sequential & Binary Search, Bubble & Insertion Sort, and Singly Linked Lists.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> 15 Full Working C Programs with Output</li>
+                    <li><i class="fa-solid fa-check"></i> Stack, Queue, Circular Queue, BST & Linked List</li>
+                    <li><i class="fa-solid fa-check"></i> Step-by-Step Algorithm & Time Complexity</li>
+                    <li><i class="fa-solid fa-check"></i> College Print Sheet & Viva Voce Q&A</li>
+                </ul>
+            </div>
+            <a href="/ds-lab-manual" class="btn-launch">Open DS Lab Manual</a>
+        </div>
+
+        <!-- Manual 2: OOPs with C++ -->
+        <div class="card">
+            <div>
+                <div class="card-top">
+                    <div class="card-icon icon-cpp"><i class="fa-solid fa-cubes"></i></div>
+                    <span class="card-tag tag-cpp">15 Programs in C++</span>
+                </div>
+                <h2 class="card-title">Object-Oriented Programming (C++)</h2>
+                <p class="card-desc">Complete OOP manual covering Classes & Objects, Inline & Friend Functions, Overloading, Constructors & Destructors, Single/Multilevel/Multiple/Virtual Base Inheritance, Virtual Functions, File Handling, Templates, and Exceptions.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> 15 Full Working C++ Programs with Output</li>
+                    <li><i class="fa-solid fa-check"></i> Unary/Binary Operator & Function Overloading</li>
+                    <li><i class="fa-solid fa-check"></i> Diamond Problem & Runtime Polymorphism</li>
+                    <li><i class="fa-solid fa-check"></i> Templates, Exception Handling & File I/O</li>
+                </ul>
+            </div>
+            <a href="/cpp-lab-manual" class="btn-launch" style="background: #c026d3;">Open OOPs Lab Manual</a>
+        </div>
+
+        <!-- Manual 3: Compiler Design -->
+        <div class="card">
+            <div>
+                <div class="card-top">
+                    <div class="card-icon icon-cd"><i class="fa-solid fa-flask"></i></div>
+                    <span class="card-tag tag-cd">SBITM Betul</span>
+                </div>
+                <h2 class="card-title">Compiler Design Lab</h2>
+                <p class="card-desc">Official AD-604 Lab Manual for SBITM Betul (Branch: AI & DS, Year: III Yr B.E, Sem: 6) with Lexical Analysis, Tokenization, Parsing, and Code Generation.</p>
+                <ul class="feature-list">
+                    <li><i class="fa-solid fa-check"></i> Lexical Analyzer & Token Classifier</li>
+                    <li><i class="fa-solid fa-check"></i> LL(1) & Recursive Descent Parsers</li>
+                    <li><i class="fa-solid fa-check"></i> 3-Address Code Generation</li>
+                </ul>
+            </div>
+            <a href="/compiler-lab-manual" class="btn-launch" style="background: #059669;">Open Compiler Manual</a>
+        </div>
+    </div>
+</body>
+</html>
