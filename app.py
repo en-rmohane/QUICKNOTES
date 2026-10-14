@@ -52,6 +52,11 @@ def ds_lab_manual():
 def cpp_lab_manual():
     return render_template('cpp_lab_manual.html')
 
+@app.route('/oops-exam-solution')
+@app.route('/oops-exam-question-solution')
+def oops_exam_solution():
+    return render_template('oops_exam_solution.html')
+
 @app.route('/lab-manuals')
 def lab_manuals():
     return render_template('lab_manuals.html')

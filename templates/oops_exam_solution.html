@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOPs Exam Question Solutions | QUICK NOTES</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mermaid.js -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #eef2ff;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --text-title: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --code-bg: #0f172a;
+            --code-text: #e2e8f0;
+            --terminal-bg: #090d16;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px -2px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 28px -4px rgba(0,0,0,0.1);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0b0f19;
+            --bg-card: #111827;
+            --bg-sidebar: #0f172a;
+            --text-title: #f8fafc;
+            --text-body: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --primary-light: rgba(79, 70, 229, 0.15);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+            --shadow-lg: 0 12px 32px rgba(0,0,0,0.6);
+            --code-bg: #030712;
+            --terminal-bg: #030712;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            line-height: 1.65;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        /* Top Sticky Header */
+        .top-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 28px;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-title);
+        }
+
+        .nav-brand .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), #818cf8);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-brand .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            line-height: 1.2;
+        }
+
+        .nav-brand .brand-text span {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .search-input {
+            padding: 8px 16px 8px 36px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-body);
+            font-size: 0.88rem;
+            width: 220px;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .search-input:focus {
+            width: 300px;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        .action-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-body);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .action-btn.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .action-btn.primary:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Layout Container */
+        .page-container {
+            display: flex;
+            max-width: 1540px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            gap: 28px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            width: 310px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: var(--bg-sidebar);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 18px 14px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sidebar-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            color: var(--text-muted);
+            margin: 12px 10px 8px;
+        }
+
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-item {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9px 12px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--text-body);
+            font-size: 0.87rem;
+            font-weight: 500;
+            transition: all 0.15s ease;
+        }
+
+        .sidebar-link:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        .sidebar-link.active {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .sidebar-link .q-badge {
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.06);
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .sidebar-link.active .q-badge {
+            background: rgba(255,255,255,0.25);
+            color: white;
+        }
+
+        /* Main Content Container */
+        .content-area {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #312e81 0%, #4f46e5 50%, #06b6d4 100%);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            color: white;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: #e0e7ff;
+            max-width: 800px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 18px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .stat-item i {
+            color: #38bdf8;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .question-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: #cbd5e1;
+        }
+
+        .card-header-bar {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 18px;
+            margin-bottom: 24px;
+        }
+
+        .q-tag-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .q-badge-main {
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .q-meta-tag {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+        }
+
+        .question-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--text-title);
+            line-height: 1.35;
+        }
+
+        /* Section Sub-headings */
+        .sub-header {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 24px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+        }
+
+        /* Bullet and Key Points */
+        .key-list {
+            list-style: none;
+            margin: 14px 0;
+        }
+
+        .key-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .key-list li::before {
+            content: '▪';
+            position: absolute;
+            left: 6px;
+            color: var(--primary);
+            font-size: 1.3rem;
+            line-height: 1.2;
+        }
+
+        /* Styled Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            text-align: left;
+            background: var(--bg-card);
+        }
+
+        .styled-table thead tr {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .styled-table tbody tr:hover {
+            background: rgba(79, 70, 229, 0.04);
+        }
+
+        .styled-table code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Diagrams */
+        .diagram-box {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .ascii-diagram {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--terminal-bg);
+            color: #38bdf8;
+            padding: 18px;
+            border-radius: var(--radius-md);
+            font-size: 0.82rem;
+            overflow-x: auto;
+            text-align: left;
+            line-height: 1.45;
+            border: 1px solid var(--border-color);
+            margin: 16px 0;
+        }
+
+        /* Code Block Wrapper */
+        .code-container {
+            background: var(--code-bg);
+            border-radius: var(--radius-md);
+            margin: 20px 0;
+            overflow: hidden;
+            border: 1px solid #1e293b;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-header-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            color: white;
+        }
+
+        pre code {
+            display: block;
+            padding: 18px 20px;
+            color: var(--code-text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        /* Terminal Output Box */
+        .terminal-box {
+            background: var(--terminal-bg);
+            border: 1px solid #1e293b;
+            border-radius: var(--radius-md);
+            margin: 16px 0;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            padding: 6px 14px;
+            background: #111827;
+            border-bottom: 1px solid #1f2937;
+            font-size: 0.75rem;
+            color: #9ca3af;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            gap: 8px;
+        }
+
+        .terminal-content {
+            padding: 14px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #34d399;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        /* Callout Alerts */
+        .callout-box {
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin: 18px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .callout-box.info {
+            background: rgba(79, 70, 229, 0.08);
+            border-left: 4px solid var(--primary);
+            color: var(--text-body);
+        }
+
+        .callout-box.tip {
+            background: rgba(16, 185, 129, 0.08);
+            border-left: 4px solid var(--success);
+            color: var(--text-body);
+        }
+
+        .callout-box.warning {
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 4px solid var(--warning);
+            color: var(--text-body);
+        }
+
+        .callout-icon {
+            font-size: 1.25rem;
+            margin-top: 2px;
+        }
+
+        .callout-box.info .callout-icon { color: var(--primary); }
+        .callout-box.tip .callout-icon { color: var(--success); }
+        .callout-box.warning .callout-icon { color: var(--warning); }
+
+        .callout-body h4 {
+            font-weight: 700;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+
+        .callout-body p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Toast message */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #0f172a;
+            color: #fff;
+            text-align: center;
+            border-radius: var(--radius-sm);
+            padding: 12px 18px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            right: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #334155;
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            background: var(--primary-hover);
+        }
+
+        /* Responsive */
+        @media (max-width: 1080px) {
+            .page-container {
+                flex-direction: column;
+            }
+            .sidebar-nav {
+                width: 100%;
+                position: static;
+                max-height: 300px;
+            }
+            .search-input:focus {
+                width: 220px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .top-navbar {
+                padding: 10px 14px;
+            }
+            .question-card {
+                padding: 20px 16px;
+            }
+            .hero-banner {
+                padding: 24px 18px;
+            }
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            .card-header-bar {
+                flex-direction: column;
+            }
+            .search-box {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Sticky Header -->
+    <header class="top-navbar">
+        <a href="/" class="nav-brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="brand-text">
+                <h1>QUICK NOTES</h1>
+                <span>OOPM Model Exam Solutions</span>
+            </div>
+        </a>
+
+        <div class="nav-actions">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="filterInput" class="search-input" placeholder="Search questions, classes, syntax...">
+            </div>
+
+            <a href="/" class="action-btn">
+                <i class="fa-solid fa-house"></i> Home
+            </a>
+
+            <button onclick="window.print()" class="action-btn">
+                <i class="fa-solid fa-print"></i> Print
+            </button>
+
+            <button id="themeToggle" class="action-btn" title="Toggle Dark/Light Mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="page-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-nav">
+            <div class="sidebar-title">Part I: Fundamentals & Architecture</div>
+            <ul class="sidebar-list">
+                <li class="sidebar-item">
+                    <a href="#q1a" class="sidebar-link active">
+                        <span>1 A. OOP vs Procedural</span>
+                        <span class="q-badge">College System</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q1b" class="sidebar-link">
+                        <span>1 B. Overloading</span>
+                        <span class="q-badge">Function vs Ctor</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q2a" class="sidebar-link">
+                        <span>2 A. Object Model</span>
+                        <span class="q-badge">Identity/State</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q2b" class="sidebar-link">
+                        <span>2 B. Student Class</span>
+                        <span class="q-badge">Shared vs State</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q3a" class="sidebar-link">
+                        <span>3 A. Inline Functions</span>
+                        <span class="q-badge">Square/Cube</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q3b" class="sidebar-link">
+                        <span>3 B. OOP Paradigm</span>
+                        <span class="q-badge">Large Systems</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q4" class="sidebar-link">
+                        <span>4. Integrated App</span>
+                        <span class="q-badge">Rectangle Model</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-title">Part II: Core Mechanics & Memory</div>
+            <ul class="sidebar-list">
+                <li class="sidebar-item">
+                    <a href="#q5a" class="sidebar-link">
+                        <span>5 A. Class vs Object</span>
+                        <span class="q-badge">Deep Contrast</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q5b" class="sidebar-link">
+                        <span>5 B. Need of Constructor</span>
+                        <span class="q-badge">RAII / Safety</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q6a" class="sidebar-link">
+                        <span>6 A. Static Members</span>
+                        <span class="q-badge">Student Counter</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q6b" class="sidebar-link">
+                        <span>6 B. Access Specifiers</span>
+                        <span class="q-badge">Encapsulation</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q7a" class="sidebar-link">
+                        <span>7 A. Employee Class</span>
+                        <span class="q-badge">Instance vs Static</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#q8" class="sidebar-link">
+                        <span>8. Construction & Destruction</span>
+                        <span class="q-badge">LIFO Stack</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            
+            <!-- Hero Banner -->
+            <section class="hero-banner">
+                <div class="hero-pill">
+                    <i class="fa-solid fa-certificate"></i> Official Model Examination Solutions
+                </div>
+                <h1 class="hero-title">OOPM Exam Question Solutions</h1>
+                <p class="hero-subtitle">
+                    Complete model answers for Object-Oriented Programming & Methodology (C++). Detailed theory, real-world college entities, visual memory layouts, fully compilable C++ code, and terminal outputs.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item"><i class="fa-solid fa-code"></i> ISO C++11/17 Compatible</div>
+                    <div class="stat-item"><i class="fa-solid fa-layer-group"></i> 8 Major Questions (13 Solutions)</div>
+                    <div class="stat-item"><i class="fa-solid fa-diagram-project"></i> Mermaid & ASCII Diagrams</div>
+                    <div class="stat-item"><i class="fa-solid fa-bolt"></i> Instant Clipboard Copy</div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 QUESTION 1 A
+            =========================================== -->
+            <article class="question-card" id="q1a">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 1 A</span>
+                            <span class="q-meta-tag">College Management System</span>
+                        </div>
+                        <h2 class="question-title">Why OOP is Closer to Real-World Problem Solving than Procedural Programming</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-book-open"></i> Definition & Core Concept</div>
+                <p>
+                    <strong>Object-Oriented Programming (OOP)</strong> models software as a collection of interacting objects, each bundling data (attributes) and functions (behaviours), just as real-world entities do. In contrast, <strong>Procedural Programming</strong> models a program as a sequence of procedures (functions) operating on detached, shared global data structures.
+                </p>
+
+                <div class="sub-header"><i class="fa-solid fa-list-check"></i> Why OOP is Closer to the Real World (Key Characteristics)</div>
+                <ul class="key-list">
+                    <li><strong>Problem domain maps directly to code:</strong> A real Student, Teacher, or Course becomes a class with the same name, so the program directly mirrors reality.</li>
+                    <li><strong>Data + behaviour together (Encapsulation):</strong> A real student has a name and registers for courses; OOP packages both in one unit. Procedural code keeps data in structs and logic in unrelated functions.</li>
+                    <li><strong>Data hiding:</strong> Real objects hide internals (you cannot manipulate another person's marks directly). OOP uses private members; procedural global data is exposed to every routine.</li>
+                    <li><strong>Natural hierarchies (Inheritance):</strong> Professor is an Employee; Student is a Person. Procedural code has no direct structural equivalent.</li>
+                    <li><strong>Same message, different response (Polymorphism):</strong> Calling <code>calculatePay()</code> behaves differently for a Professor versus a Clerk.</li>
+                    <li><strong>Bottom-up design and reuse:</strong> Engineers construct reliable, small objects first, then assemble them into complex systems.</li>
+                    <li><strong>Easy change and maintenance:</strong> Adding a new entity (e.g., Hostel) adds an isolated class without touching existing code.</li>
+                </ul>
+
+                <div class="sub-header"><i class="fa-solid fa-table"></i> Real-World Entities of a College Management System</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Entity (Class)</th>
+                                <th>Attributes (Data Members)</th>
+                                <th>Behaviours (Member Functions)</th>
+                                <th>Relationships</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><code>Student</code></td>
+                                <td>rollNo, name, address, semester, marks</td>
+                                <td>register(), payFees(), viewResult()</td>
+                                <td>Enrolls in Course; belongs to Dept; borrows Book</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><code>Teacher / Professor</code></td>
+                                <td>empId, name, designation, salary</td>
+                                <td>teach(), setQuestionPaper(), markAttendance()</td>
+                                <td>Teaches Course; works in Department</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><code>Course</code></td>
+                                <td>courseCode, title, credits</td>
+                                <td>addStudent(), getSyllabus()</td>
+                                <td>Taught by Teacher; taken by many Students (M:N)</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><code>Department</code></td>
+                                <td>deptId, deptName</td>
+                                <td>addFaculty(), listCourses()</td>
+                                <td>Has many Teachers, Students, Courses (Aggregation)</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><code>Library</code></td>
+                                <td>libId, bookCount</td>
+                                <td>issueBook(), returnBook(), calculateFine()</td>
+                                <td>Has many Books; serves Students and Teachers</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td><code>Book</code></td>
+                                <td>isbn, title, author, status</td>
+                                <td>issue(), return()</td>
+                                <td>Belongs to Library; issued to Student</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td><code>Exam</code></td>
+                                <td>examId, date, maxMarks</td>
+                                <td>schedule(), evaluate()</td>
+                                <td>Conducted for Course; produces Result</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td><code>Result / Marksheet</code></td>
+                                <td>rollNo, subjectMarks, grade</td>
+                                <td>computeGrade(), printMarksheet()</td>
+                                <td>Belongs to Student for an Exam</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td><code>Fee Account</code></td>
+                                <td>accountNo, amountDue, amountPaid</td>
+                                <td>payFees(), generateReceipt()</td>
+                                <td>One-to-One per Student</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td><code>Hostel / Room</code></td>
+                                <td>roomNo, capacity, occupants</td>
+                                <td>allocateRoom(), vacate()</td>
+                                <td>Students are allocated to Room</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-diagram-project"></i> Class Relationships Hierarchy</div>
+                <div class="diagram-box">
+                    <pre class="mermaid">
+classDiagram
+    Person <|-- Student
+    Person <|-- Employee
+    Employee <|-- Teacher
+    Employee <|-- Clerk
+    Student "M" --> "N" Course : enrolls in
+    Teacher "M" --> "N" Course : teaches
+    Department o-- Course : offers
+    Department o-- Teacher : has
+    Student "1" --> "M" Book : borrows
+    Library o-- Book : maintains
+                    </pre>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>college_management.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student {                 // Real-world entity -> Class
+private:                        // Data hiding
+    int rollNo;
+    string name;
+public:
+    Student(int r, string n) : rollNo(r), name(n) {}
+
+    void register_for(string course) {            // Behaviour
+        cout &lt;&lt; name &lt;&lt; " (Roll " &lt;&lt; rollNo &lt;&lt; ") registered for " &lt;&lt; course &lt;&lt; endl;
+    }
+};
+
+class Teacher {
+private:
+    string name;
+public:
+    Teacher(string n) : name(n) {}
+
+    void teach(string course) {                   // Behaviour
+        cout &lt;&lt; name &lt;&lt; " teaches " &lt;&lt; course &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Student s(101, "Asha");     // Object = concrete student
+    Teacher t("Dr. Rao");       // Object = concrete teacher
+
+    t.teach("OOPM");
+    s.register_for("OOPM");     // Objects interact via message passing
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="terminal-box">
+                    <div class="terminal-header"><i class="fa-solid fa-terminal"></i> Terminal Output</div>
+                    <div class="terminal-content">Dr. Rao teaches OOPM
+Asha (Roll 101) registered for OOPM</div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-scale-balanced"></i> Comparison: Procedural vs Object-Oriented</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Procedural Programming</th>
+                                <th>Object-Oriented Programming</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Approach</strong></td><td>Top-down</td><td>Bottom-up</td></tr>
+                            <tr><td><strong>Primary Unit</strong></td><td>Function / Procedure</td><td>Object / Class</td></tr>
+                            <tr><td><strong>Data & Functions</strong></td><td>Separate</td><td>Bundled together (Encapsulation)</td></tr>
+                            <tr><td><strong>Data Security</strong></td><td>Global data, little protection</td><td>Access specifiers hide data</td></tr>
+                            <tr><td><strong>Real-World Modeling</strong></td><td>Weak, focuses on actions</td><td>Strong, focuses on entities</td></tr>
+                            <tr><td><strong>Reusability</strong></td><td>Copy/reuse functions</td><td>Inheritance and composition</td></tr>
+                            <tr><td><strong>Extensibility</strong></td><td>Hard; ripple effects</td><td>Easy; add new classes</td></tr>
+                            <tr><td><strong>Polymorphism</strong></td><td>Not supported</td><td>Supported (Static & Dynamic)</td></tr>
+                            <tr><td><strong>Examples</strong></td><td>C, Pascal, FORTRAN</td><td>C++, Java, Python</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout-box tip">
+                    <i class="fa-solid fa-circle-check callout-icon"></i>
+                    <div class="callout-body">
+                        <h4>Real-World Analogy</h4>
+                        <p>In a real college, the Student, Teacher, and Library are autonomous entities cooperating through requests (e.g. submitting a library issue form). OOP works the same way: objects send messages to each other.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 1 B
+            =========================================== -->
+            <article class="question-card" id="q1b">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 1 B</span>
+                            <span class="q-meta-tag">Static Polymorphism</span>
+                        </div>
+                        <h2 class="question-title">Function Overloading and Constructor Overloading in C++</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-book-open"></i> Definition & Core Concept</div>
+                <p>
+                    <strong>Function Overloading</strong> is defining multiple functions with the same name but different parameter lists (different number, type, or order of parameters) in the same scope. <strong>Constructor Overloading</strong> is defining multiple constructors in one class with different parameter lists, so objects can be initialized in different ways. Both represent <strong>compile-time (static) polymorphism</strong>.
+                </p>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>overloading_demo.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// ---- Function Overloading ----
+int    area(int s)            { return s * s; }          // Square
+int    area(int l, int b)     { return l * b; }          // Rectangle
+double area(double r)         { return 3.14159 * r * r; }// Circle
+
+// ---- Constructor Overloading ----
+class Rectangle {
+    int length, breadth;
+public:
+    Rectangle() : length(0), breadth(0) {}                 // Default
+    Rectangle(int s) : length(s), breadth(s) {}            // Square
+    Rectangle(int l, int b) : length(l), breadth(b) {}     // General
+    Rectangle(const Rectangle &r) {                        // Copy
+        length = r.length; breadth = r.breadth;
+    }
+    int getArea() const { return length * breadth; }
+};
+
+int main() {
+    cout &lt;&lt; "Area square: " &lt;&lt; area(4) &lt;&lt; endl;
+    cout &lt;&lt; "Area rect:   " &lt;&lt; area(4, 5) &lt;&lt; endl;
+    cout &lt;&lt; "Area circle: " &lt;&lt; area(2.5) &lt;&lt; endl;
+
+    Rectangle r1;                   // Default
+    Rectangle r2(5);                // Square
+    Rectangle r3(4, 6);             // General
+    Rectangle r4(r3);               // Copy
+    cout &lt;&lt; "Areas: " &lt;&lt; r1.getArea() &lt;&lt; " " &lt;&lt; r2.getArea() &lt;&lt; " "
+         &lt;&lt; r3.getArea() &lt;&lt; " " &lt;&lt; r4.getArea() &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="terminal-box">
+                    <div class="terminal-header"><i class="fa-solid fa-terminal"></i> Terminal Output</div>
+                    <div class="terminal-content">Area square: 16
+Area rect:   20
+Area circle: 19.6349
+Areas: 0 25 24 24</div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-scale-balanced"></i> Function Overloading vs Constructor Overloading</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Function Overloading</th>
+                                <th>Constructor Overloading</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Name</strong></td><td>Any function name, repeated</td><td>Same as class name strictly</td></tr>
+                            <tr><td><strong>Return Type</strong></td><td>Can return any type</td><td>No return type (not even void)</td></tr>
+                            <tr><td><strong>Purpose</strong></td><td>Execute same logical task on varied inputs</td><td>Initialize objects in different states</td></tr>
+                            <tr><td><strong>Invocation</strong></td><td>Explicitly called by caller</td><td>Automatically invoked at object creation</td></tr>
+                            <tr><td><strong>Scope</strong></td><td>Class or global namespace</td><td>Strictly inside a class</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 2 A
+            =========================================== -->
+            <article class="question-card" id="q2a">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 2 A</span>
+                            <span class="q-meta-tag">Object Model</span>
+                        </div>
+                        <h2 class="question-title">"Everything in OOP Revolves Around Objects": Identity, State, and Behaviour</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-book-open"></i> Definition & Core Concept</div>
+                <p>
+                    An <strong>object</strong> is a run-time instance of a class that represents a real-world entity having <strong>identity</strong>, <strong>state</strong>, and <strong>behaviour</strong>. The Object Model conceptual framework views software as cooperating objects, supported by Grady Booch's 4 major principles: <em>Abstraction, Encapsulation, Modularity, and Hierarchy</em>.
+                </p>
+
+                <div class="sub-header"><i class="fa-solid fa-shapes"></i> The Three Essential Properties of an Object</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Meaning</th>
+                                <th>Example (Bank Account Object)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Identity</strong></td>
+                                <td>Unique existence distinguishing it from all other objects (memory address).</td>
+                                <td><code>acc1</code> and <code>acc2</code> are distinct even if both hold ₹5000.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>State</strong></td>
+                                <td>Set of values held by data members at a given time; state changes over time.</td>
+                                <td><code>accNo = 101</code>, <code>holder = "Ravi"</code>, <code>balance = 5000.0</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Behaviour</strong></td>
+                                <td>Operations the object can perform (methods); reads or modifies state.</td>
+                                <td><code>deposit()</code>, <code>withdraw()</code>, <code>checkBalance()</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>object_properties.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class BankAccount {
+    int accNo;              // State
+    double balance;         // State
+public:
+    BankAccount(int n, double b) : accNo(n), balance(b) {}
+    void deposit(double amt)  { balance += amt; }   // Behaviour alters state
+    void show() const { cout &lt;&lt; "Acc " &lt;&lt; accNo &lt;&lt; " Balance: ₹" &lt;&lt; balance &lt;&lt; endl; }
+};
+
+int main() {
+    BankAccount a1(101, 5000), a2(102, 5000);  // Same state values, distinct identity
+    a1.deposit(1000);                          // Mutates only a1's state
+    a1.show();                                 // Acc 101 Balance: ₹6000
+    a2.show();                                 // Acc 102 Balance: ₹5000
+    cout &lt;&lt; (&a1 == &a2 ? "Identical" : "Distinct Objects") &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 2 B
+            =========================================== -->
+            <article class="question-card" id="q2b">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 2 B</span>
+                            <span class="q-meta-tag">Memory Management</span>
+                        </div>
+                        <h2 class="question-title">Student Class with Three Objects: Shared Class Definition, Individual State</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-book-open"></i> Key Concept</div>
+                <p>
+                    A class is defined once. Each instantiated object receives its own independent memory block for data members (state), whereas member functions exist only once in the shared code segment. The implicit <code>this</code> pointer informs member functions which object to manipulate.
+                </p>
+
+                <div class="ascii-diagram">
+  SHARED CODE SEGMENT (Read-Only)      DATA / STACK (Per-Object Memory)
+  +--------------------------------+   s1 (0x1000): ["Asha"  | 1 | 82.5]
+  | Student::setData()             |   s2 (0x1040): ["Ravi"  | 2 | 74.0]
+  | Student::display()             |   s3 (0x1080): ["Meera" | 3 | 91.0]
+  +--------------------------------+   
+       One compiled copy only           Separate storage for each object
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>three_students.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student {
+    string name;       // Individual copy per object
+    int rollNo;
+    float marks;
+public:
+    void setData(string n, int r, float m) { name = n; rollNo = r; marks = m; }
+    void display() const {
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; ", Roll: " &lt;&lt; rollNo &lt;&lt; ", Marks: " &lt;&lt; marks &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Student s1, s2, s3;                 // 3 objects, 1 class
+    s1.setData("Asha", 1, 82.5);
+    s2.setData("Ravi", 2, 74.0);
+    s3.setData("Meera", 3, 91.0);
+    s1.display();
+    s2.display();
+    s3.display();
+    return 0;
+}</code></pre>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 3 A
+            =========================================== -->
+            <article class="question-card" id="q3a">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 3 A</span>
+                            <span class="q-meta-tag">Performance & Compiler</span>
+                        </div>
+                        <h2 class="question-title">Inline Functions for Square and Cube; Inline vs Normal Function Call</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-book-open"></i> Definition & Core Concept</div>
+                <p>
+                    An <strong>inline function</strong> is declared with the keyword <code>inline</code>. It suggests the compiler substitute the function body directly at each call site (inline expansion) at compile time, eliminating standard call overhead (stack frame allocation, register saving, jumping, returning).
+                </p>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>inline_demo.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Inline expansion request
+inline int square(int n) { return n * n; }
+inline int cube(int n)   { return n * n * n; }
+
+int main() {
+    int num = 4;
+    cout &lt;&lt; "Square of " &lt;&lt; num &lt;&lt; " = " &lt;&lt; square(num) &lt;&lt; endl;
+    cout &lt;&lt; "Cube   of " &lt;&lt; num &lt;&lt; " = " &lt;&lt; cube(num)   &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-scale-balanced"></i> Inline vs Normal Function Call</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Inline Function</th>
+                                <th>Normal Function</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Call Mechanism</strong></td><td>Body substituted directly at call site</td><td>Control jumps to function address & returns</td></tr>
+                            <tr><td><strong>Execution Speed</strong></td><td>Faster for small bodies (no overhead)</td><td>Slower due to stack frame setup and jump</td></tr>
+                            <tr><td><strong>Stack Usage</strong></td><td>Zero stack frame overhead</td><td>Allocates activation stack frame per call</td></tr>
+                            <tr><td><strong>Code Size</strong></td><td>Increases (code duplicated at calls)</td><td>Smaller (single compiled subroutine)</td></tr>
+                            <tr><td><strong>Guarantee</strong></td><td>Only a request; compiler may refuse</td><td>Guaranteed function call</td></tr>
+                            <tr><td><strong>Suitable for</strong></td><td>Tiny, frequently used accessors</td><td>Complex routines, loops, recursion</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 3 B
+            =========================================== -->
+            <article class="question-card" id="q3b">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 3 B</span>
+                            <span class="q-meta-tag">Enterprise Architecture</span>
+                        </div>
+                        <h2 class="question-title">Major Features of the OOP Paradigm and How They Help Build Large Systems</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-cubes"></i> 8 Major Features of OOP</div>
+                <ul class="key-list">
+                    <li><strong>1. Objects and Classes:</strong> Blueprint and run-time instances acting as modular building blocks.</li>
+                    <li><strong>2. Abstraction:</strong> Represents essential characteristics while hiding low-level intricacies.</li>
+                    <li><strong>3. Encapsulation:</strong> Wraps state and functions into one protective boundary.</li>
+                    <li><strong>4. Data Hiding:</strong> Internal data is guarded from external mutation via <code>private</code> specifiers.</li>
+                    <li><strong>5. Inheritance:</strong> Derived classes acquire properties of base classes for hierarchical reusability.</li>
+                    <li><strong>6. Polymorphism:</strong> "One interface, multiple implementations" (overloading & virtual overriding).</li>
+                    <li><strong>7. Dynamic Binding:</strong> Method address is resolved dynamically at runtime using <code>vtable</code>.</li>
+                    <li><strong>8. Message Passing:</strong> Loose coupling via explicit member function requests.</li>
+                </ul>
+
+                <div class="sub-header"><i class="fa-solid fa-diagram-project"></i> Inheritance Hierarchy</div>
+                <div class="diagram-box">
+                    <pre class="mermaid">
+classDiagram
+    Shape <|-- Circle
+    Shape <|-- Square
+    class Shape {
+        +virtual void draw()
+    }
+    class Circle {
+        +void draw()
+    }
+    class Square {
+        +void draw()
+    }
+                    </pre>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-table"></i> Benefits in Complex Systems</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Benefit for Large Software</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Encapsulation / Hiding</strong></td><td>Limits ripple effects; prevents accidental state corruption across modules.</td></tr>
+                            <tr><td><strong>Abstraction</strong></td><td>Allows developers to navigate massive architectures at high levels.</td></tr>
+                            <tr><td><strong>Inheritance</strong></td><td>Reuses thoroughly tested code; accelerates enterprise development.</td></tr>
+                            <tr><td><strong>Polymorphism</strong></td><td>Open/Closed principle: add new features without rewriting client logic.</td></tr>
+                            <tr><td><strong>Modularity</strong></td><td>Large distributed engineering teams can work on isolated classes in parallel.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 4
+            =========================================== -->
+            <article class="question-card" id="q4">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 4</span>
+                            <span class="q-meta-tag">Comprehensive Program</span>
+                        </div>
+                        <h2 class="question-title">Single C++ Application Combining Class, Object, Constructor, Destructor, Inline Function, Formal and Actual Arguments</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> Complete C++ Program</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>complete_oop_application.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// ---------- CLASS: blueprint with data + functions ----------
+class Rectangle {
+private:                                  // Data hiding
+    int length;                           // Data members
+    int breadth;
+
+public:
+    // ---------- CONSTRUCTOR: formal arguments (l, b) ----------
+    Rectangle(int l, int b) {
+        length = l;
+        breadth = b;
+        cout &lt;&lt; "Constructor: object created (" &lt;&lt; l &lt;&lt; ", " &lt;&lt; b &lt;&lt; ")" &lt;&lt; endl;
+    }
+
+    // ---------- INLINE FUNCTION (implicitly inline inside class body) ----------
+    inline int area() const { return length * breadth; }
+
+    // ---------- Member function with FORMAL argument 'factor' ----------
+    void scale(int factor) {
+        length *= factor;
+        breadth *= factor;
+    }
+
+    void display() const {
+        cout &lt;&lt; "Length=" &lt;&lt; length &lt;&lt; " Breadth=" &lt;&lt; breadth
+             &lt;&lt; " Area=" &lt;&lt; area() &lt;&lt; endl;
+    }
+
+    // ---------- DESTRUCTOR: no arguments, no return type ----------
+    ~Rectangle() {
+        cout &lt;&lt; "Destructor: object destroyed (" &lt;&lt; length &lt;&lt; ", " &lt;&lt; breadth &lt;&lt; ")" &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Rectangle r1(4, 5);     // OBJECT r1; ACTUAL arguments 4, 5
+    r1.display();           // Message passing
+
+    int f = 2;
+    r1.scale(f);            // ACTUAL argument 'f' passed to FORMAL parameter 'factor'
+    r1.display();
+
+    Rectangle r2(2, 3);     // Second object with independent state
+    r2.display();
+    return 0;               // Automatic destruction in LIFO order (r2 then r1)
+}</code></pre>
+                </div>
+
+                <div class="terminal-box">
+                    <div class="terminal-header"><i class="fa-solid fa-terminal"></i> Terminal Output</div>
+                    <div class="terminal-content">Constructor: object created (4, 5)
+Length=4 Breadth=5 Area=20
+Length=8 Breadth=10 Area=80
+Constructor: object created (2, 3)
+Length=2 Breadth=3 Area=6
+Destructor: object destroyed (2, 3)
+Destructor: object destroyed (8, 10)</div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-list-check"></i> Concept Mapping Matrix</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Where Used in Code</th>
+                                <th>Architectural Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Class</strong></td><td><code>class Rectangle</code></td><td>User-defined type encapsulating dimensions and operations.</td></tr>
+                            <tr><td><strong>Object</strong></td><td><code>r1, r2</code></td><td>Live instances occupying stack memory with individual state.</td></tr>
+                            <tr><td><strong>Constructor</strong></td><td><code>Rectangle(int l, int b)</code></td><td>Automatic initializer invoked immediately upon creation.</td></tr>
+                            <tr><td><strong>Destructor</strong></td><td><code>~Rectangle()</code></td><td>Automatic cleanup routine called when leaving scope.</td></tr>
+                            <tr><td><strong>Inline Function</strong></td><td><code>inline int area()</code></td><td>Body substituted directly at call site to save overhead.</td></tr>
+                            <tr><td><strong>Formal Arguments</strong></td><td><code>l, b</code> and <code>factor</code></td><td>Parameters declared in function signatures to receive inputs.</td></tr>
+                            <tr><td><strong>Actual Arguments</strong></td><td><code>4, 5</code> and <code>f</code></td><td>Concrete values or variables passed during function invocation.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 5 A
+            =========================================== -->
+            <article class="question-card" id="q5a">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 5 A</span>
+                            <span class="q-meta-tag">Foundation</span>
+                        </div>
+                        <h2 class="question-title">Differentiate Between a Class and an Object</h2>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Class</th>
+                                <th>Object</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Definition</strong></td><td>Blueprint / template defining structure and behaviour</td><td>Instance of a class representing a real physical entity</td></tr>
+                            <tr><td><strong>Memory</strong></td><td>Zero RAM allocated for data members when defined</td><td>RAM allocated in Stack/Heap upon object instantiation</td></tr>
+                            <tr><td><strong>Identity</strong></td><td>No runtime identity; just a type identifier</td><td>Unique identity (distinct memory address)</td></tr>
+                            <tr><td><strong>Data Members</strong></td><td>Declared only (specification)</td><td>Holds concrete runtime values (state)</td></tr>
+                            <tr><td><strong>Member Functions</strong></td><td>Defined once as part of class code</td><td>Shares class functions via implicit <code>this</code> pointer</td></tr>
+                            <tr><td><strong>Lifetime</strong></td><td>Exists for the entire program execution</td><td>From constructor creation to destructor cleanup</td></tr>
+                            <tr><td><strong>Creation</strong></td><td>Declared via <code>class</code> keyword</td><td>Created by declaring variable or using <code>new</code></td></tr>
+                            <tr><td><strong>Cardinality</strong></td><td>Defined once per program</td><td>Can instantiate any arbitrary number of objects</td></tr>
+                            <tr><td><strong>Analogy</strong></td><td>Architect's floor plan of a villa</td><td>The physical house built at a specific address</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 5 B
+            =========================================== -->
+            <article class="question-card" id="q5b">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 5 B</span>
+                            <span class="q-meta-tag">Initialization & RAII</span>
+                        </div>
+                        <h2 class="question-title">Why a Constructor is Required in a Class</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-shield-halved"></i> Crucial Reasons for Constructors</div>
+                <ul class="key-list">
+                    <li><strong>Guaranteed Initialization:</strong> Prevents data members from holding undefined stack garbage values.</li>
+                    <li><strong>Automatic Execution:</strong> Invoked implicitly by the runtime, eliminating human oversight of forgetting an <code>init()</code> function.</li>
+                    <li><strong>Object Integrity & Validity:</strong> Guarantees that every object begins its lifecycle in a valid state (e.g. balance ≥ 0).</li>
+                    <li><strong>Resource Acquisition (RAII):</strong> Acquires dynamic memory (<code>new</code>), opens files, or sets network connections at creation.</li>
+                    <li><strong>Initialization Flexibility:</strong> Overloaded constructors support default, parameterized, and copy creation.</li>
+                </ul>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>constructor_demo.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Account {
+    int accNo;
+    double balance;
+public:
+    Account() : accNo(0), balance(0.0) {}                    // Default Constructor
+    Account(int n, double b) : accNo(n), balance(b) {}       // Parameterized Constructor
+    Account(const Account &a) : accNo(a.accNo), balance(a.balance) {} // Copy Constructor
+    void show() const { cout &lt;&lt; "Acc " &lt;&lt; accNo &lt;&lt; " : ₹" &lt;&lt; balance &lt;&lt; endl; }
+};
+
+int main() {
+    Account a1;                 // Default constructor called automatically
+    Account a2(101, 5000);      // Parameterized constructor
+    Account a3(a2);             // Copy constructor
+    a1.show(); a2.show(); a3.show();
+    return 0;
+}</code></pre>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 6 A
+            =========================================== -->
+            <article class="question-card" id="q6a">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 6 A</span>
+                            <span class="q-meta-tag">Static Semantics</span>
+                        </div>
+                        <h2 class="question-title">Static Data Members and Static Member Functions (Student Counter)</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-book-open"></i> Definition & Core Concept</div>
+                <p>
+                    A <strong>static data member</strong> is a class-level variable declared with <code>static</code>; exactly one copy is shared universally across all objects in the data segment. A <strong>static member function</strong> has no implicit <code>this</code> pointer, can access only static variables, and can be invoked through the class name directly (<code>Student::getTotal()</code>).
+                </p>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>static_student_counter.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student {
+    string name;
+    int rollNo;
+    static int totalStudents;            // Shared universally across ALL objects
+public:
+    Student(string n, int r) : name(n), rollNo(r) {
+        totalStudents++;                 // Increments single shared copy
+    }
+    ~Student() { totalStudents--; }      // Decrements upon destruction
+    static int getTotal() { return totalStudents; }   // Static member function
+};
+
+// Explicit external definition & allocation in Data Segment
+int Student::totalStudents = 0;
+
+int main() {
+    cout &lt;&lt; "Initial count: " &lt;&lt; Student::getTotal() &lt;&lt; endl;   // 0 (no objects yet)
+    Student s1("Asha", 1);
+    Student s2("Ravi", 2);
+    Student s3("Meera", 3);
+    cout &lt;&lt; "Total students: " &lt;&lt; Student::getTotal() &lt;&lt; endl;  // 3
+
+    {
+        Student s4("Kiran", 4);
+        cout &lt;&lt; "Inside block: " &lt;&lt; Student::getTotal() &lt;&lt; endl; // 4
+    }                                                           // s4 destroyed here
+
+    cout &lt;&lt; "After block: " &lt;&lt; Student::getTotal() &lt;&lt; endl;     // 3
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-circle-question"></i> Why Instance Variables Fail for This</div>
+                <ul class="key-list">
+                    <li>An instance variable gets copied into each object, so <code>s1.count</code> and <code>s2.count</code> would each equal 1; neither knows the global count.</li>
+                    <li>Instance variables cannot be read prior to creating the first object.</li>
+                    <li>Using procedural global variables destroys encapsulation and data protection.</li>
+                </ul>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 6 B
+            =========================================== -->
+            <article class="question-card" id="q6b">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 6 B</span>
+                            <span class="q-meta-tag">Security & Encapsulation</span>
+                        </div>
+                        <h2 class="question-title">Access Modifiers (private, public, protected): Encapsulation and Data Hiding</h2>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Specifier</th>
+                                <th>Accessible Inside Same Class</th>
+                                <th>Accessible in Derived Class</th>
+                                <th>Accessible Outside Class (main)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>private</code></td><td>Yes</td><td>No</td><td>No</td></tr>
+                            <tr><td><code>protected</code></td><td>Yes</td><td>Yes</td><td>No</td></tr>
+                            <tr><td><code>public</code></td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>access_modifiers.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Account {
+private:
+    double balance;                  // Hidden: direct outside access prohibited
+protected:
+    int accNo;                       // Visible to derived classes only
+public:
+    Account(int n, double b) : accNo(n), balance(b) {}
+    void deposit(double amt) {       // Controlled, validated interface
+        if (amt > 0) balance += amt;
+    }
+    double getBalance() const { return balance; }
+};
+
+class Savings : public Account {
+public:
+    Savings(int n, double b) : Account(n, b) {}
+    void showAcc() const {
+        cout &lt;&lt; "Acc No: " &lt;&lt; accNo &lt;&lt; endl; // Allowed: protected in base
+        // cout &lt;&lt; balance;                  // ERROR: private in base!
+    }
+};
+
+int main() {
+    Account a(101, 5000);
+    a.deposit(500);
+    cout &lt;&lt; "Balance: ₹" &lt;&lt; a.getBalance() &lt;&lt; endl; // 5500
+    // a.balance = 0;                                // COMPILE ERROR: private!
+    Savings s(102, 1000);
+    s.showAcc();
+    return 0;
+}</code></pre>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 7 A
+            =========================================== -->
+            <article class="question-card" id="q7a">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 7 A</span>
+                            <span class="q-meta-tag">Practical Classification</span>
+                        </div>
+                        <h2 class="question-title">Employee Class: Instance Members vs Static Members</h2>
+                    </div>
+                </div>
+
+                <p>
+                    <em>Assumption:</em> The attributes are <strong>Employee ID, Employee Name, Basic Salary, Department, and Company Name</strong>.
+                </p>
+
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Member Type</th>
+                                <th>Justification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Employee ID</strong></td><td>Instance</td><td>Unique identifier per employee; identifies individual objects.</td></tr>
+                            <tr><td><strong>Employee Name</strong></td><td>Instance</td><td>Differs for each employee person.</td></tr>
+                            <tr><td><strong>Basic Salary</strong></td><td>Instance</td><td>Different employees earn different salaries.</td></tr>
+                            <tr><td><strong>Department</strong></td><td>Instance</td><td>Employees work in various departments (IT, HR, Sales).</td></tr>
+                            <tr><td><strong>Company Name</strong></td><td><strong>Static</strong></td><td>Shared identically across all staff. One shared copy saves memory and guarantees global update consistency.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>employee_static_demo.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Employee {
+private:
+    int    empId;                  // Instance: unique per employee
+    string empName;                // Instance
+    float  basicSalary;            // Instance
+    string department;             // Instance
+    static string companyName;     // STATIC: one shared copy for all employees
+
+public:
+    Employee(int id, string name, float sal, string dept)
+        : empId(id), empName(name), basicSalary(sal), department(dept) {}
+
+    static void setCompany(string c) { companyName = c; }
+    static string getCompany()       { return companyName; }
+
+    void display() const {
+        cout &lt;&lt; "ID: " &lt;&lt; empId &lt;&lt; ", Name: " &lt;&lt; empName
+             &lt;&lt; ", Salary: ₹" &lt;&lt; basicSalary &lt;&lt; ", Dept: " &lt;&lt; department
+             &lt;&lt; ", Company: " &lt;&lt; companyName &lt;&lt; endl;
+    }
+};
+
+string Employee::companyName = "TechSoft Ltd";   // External static definition
+
+int main() {
+    Employee e1(1, "Asha",  50000, "IT");
+    Employee e2(2, "Ravi",  42000, "HR");
+    e1.display();
+    e2.display();
+
+    // Rebranding updates all objects simultaneously
+    Employee::setCompany("TechSoft Global");
+    e1.display();
+    e2.display();
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="terminal-box">
+                    <div class="terminal-header"><i class="fa-solid fa-terminal"></i> Terminal Output</div>
+                    <div class="terminal-content">ID: 1, Name: Asha, Salary: ₹50000, Dept: IT, Company: TechSoft Ltd
+ID: 2, Name: Ravi, Salary: ₹42000, Dept: HR, Company: TechSoft Ltd
+ID: 1, Name: Asha, Salary: ₹50000, Dept: IT, Company: TechSoft Global
+ID: 2, Name: Ravi, Salary: ₹42000, Dept: HR, Company: TechSoft Global</div>
+                </div>
+            </article>
+
+            <!-- ==========================================
+                 QUESTION 8
+            =========================================== -->
+            <article class="question-card" id="q8">
+                <div class="card-header-bar">
+                    <div>
+                        <div class="q-tag-container">
+                            <span class="q-badge-main">Question 8</span>
+                            <span class="q-meta-tag">Lifecycle & Scope</span>
+                        </div>
+                        <h2 class="question-title">Construction and Destruction of Objects; BankAccount Class; Block Execution Sequence</h2>
+                    </div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-code"></i> C++ Implementation Code with Resource Management</div>
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-header-dots">
+                            <span class="code-dot dot-red"></span>
+                            <span class="code-dot dot-yellow"></span>
+                            <span class="code-dot dot-green"></span>
+                        </div>
+                        <span>bank_account_lifecycle.cpp</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class BankAccount {
+private:
+    int     accNo;
+    string  holder;
+    double  balance;
+    string *log;                    // Dynamic memory resource
+
+public:
+    // CONSTRUCTOR: Acquires dynamic memory resource
+    BankAccount(int n, string h, double b) : accNo(n), holder(h), balance(b) {
+        log = new string("Account opened");
+        cout &lt;&lt; "[Constructor] Account " &lt;&lt; accNo &lt;&lt; " opened for " &lt;&lt; holder &lt;&lt; endl;
+    }
+
+    void deposit(double amt)  { balance += amt; *log = "Deposit made"; }
+    void display() const {
+        cout &lt;&lt; "  " &lt;&lt; accNo &lt;&lt; " | " &lt;&lt; holder &lt;&lt; " | ₹" &lt;&lt; balance
+             &lt;&lt; " | " &lt;&lt; *log &lt;&lt; endl;
+    }
+
+    // DESTRUCTOR: Releases acquired dynamic memory
+    ~BankAccount() {
+        delete log;
+        cout &lt;&lt; "[Destructor] Account " &lt;&lt; accNo &lt;&lt; " closed" &lt;&lt; endl;
+    }
+};
+
+int main() {
+    cout &lt;&lt; "--- main starts ---" &lt;&lt; endl;
+    {   // Block begins
+        BankAccount a1(101, "Asha", 5000);
+        BankAccount a2(102, "Ravi", 3000);
+        BankAccount a3(103, "Meera", 8000);
+        a1.deposit(1000);
+        a1.display();
+        a2.display();
+        a3.display();
+    }   // Block ends: Destructors invoked in reverse order (LIFO: a3 -> a2 -> a1)
+    cout &lt;&lt; "--- main ends ---" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="terminal-box">
+                    <div class="terminal-header"><i class="fa-solid fa-terminal"></i> Terminal Output</div>
+                    <div class="terminal-content">--- main starts ---
+[Constructor] Account 101 opened for Asha
+[Constructor] Account 102 opened for Ravi
+[Constructor] Account 103 opened for Meera
+  101 | Asha | ₹6000 | Deposit made
+  102 | Ravi | ₹3000 | Account opened
+  103 | Meera | ₹8000 | Account opened
+[Destructor] Account 103 closed
+[Destructor] Account 102 closed
+[Destructor] Account 101 closed
+--- main ends ---</div>
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-layer-group"></i> LIFO Destruction Call Stack Diagram</div>
+                <div class="ascii-diagram">
+  CONSTRUCTION ORDER (Push to Stack):   a1  -->  a2  -->  a3
+  DESTRUCTION ORDER (Popped from Stack): a3  -->  a2  -->  a1  (Strict LIFO)
+
+  STACK MEMORY:
+  +---------------+
+  |   a3 (Meera)  |  <--- Created LAST  --> Destroyed FIRST
+  +---------------+
+  |   a2 (Ravi)   |
+  +---------------+
+  |   a1 (Asha)   |  <--- Created FIRST --> Destroyed LAST
+  +---------------+
+                </div>
+
+                <div class="sub-header"><i class="fa-solid fa-scale-balanced"></i> Constructor vs Destructor</div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Constructor</th>
+                                <th>Destructor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Purpose</strong></td><td>Initialize object state & acquire resources</td><td>Clean up state & release resources</td></tr>
+                            <tr><td><strong>Name</strong></td><td><code>ClassName()</code></td><td><code>~ClassName()</code></td></tr>
+                            <tr><td><strong>Arguments</strong></td><td>Accepts multiple overloaded arguments</td><td><strong>Zero arguments strictly</strong></td></tr>
+                            <tr><td><strong>Overloading</strong></td><td>Allowed</td><td><strong>Not allowed</strong> (only one per class)</td></tr>
+                            <tr><td><strong>Invoked</strong></td><td>At object instantiation</td><td>When leaving scope or via delete</td></tr>
+                            <tr><td><strong>Order</strong></td><td>Declaration order (FIFO)</td><td>Reverse declaration order (LIFO)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" title="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Toast Notification -->
+    <div id="toast">Code copied to clipboard!</div>
+
+    <script>
+        // Copy Code Functionality
+        function copyCode(btn) {
+            const pre = btn.closest('.code-container').querySelector('pre code');
+            const code = pre.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                showToast("Code copied to clipboard!");
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                }, 2000);
+            });
+        }
+
+        // Toast Trigger
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
+        }
+
+        // Theme Toggle (Dark / Light)
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            }
+        });
+
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Search Filter for Questions
+        const filterInput = document.getElementById('filterInput');
+        filterInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.question-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Sidebar active link spy
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.question-card');
+            const links = document.querySelectorAll('.sidebar-link');
+            let current = '';
+
+            cards.forEach(card => {
+                const cardTop = card.offsetTop - 120;
+                if (window.scrollY >= cardTop) {
+                    current = card.getAttribute('id');
+                }
+            });
+
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
