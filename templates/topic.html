@@ -8,24 +8,55 @@
         <a href="/">Home</a> &raquo; <a href="{{ url_for('course_home', subject=subject) }}">{{ course_title }}</a> &raquo; {{ topic.title }}
     </div>
     
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
-        <h1 style="margin-bottom: 0;">{{ topic.title }}</h1>
-        <a href="{{ url_for('board_view', subject=subject, slug=topic.slug) }}" target="_blank" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 12px rgba(37,99,235,0.3); display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+        <h1 style="margin-bottom: 0; font-size: 2.1rem; color: #0f172a; font-weight: 800;">{{ topic.title }}</h1>
+        <a href="{{ url_for('board_view', subject=subject, slug=topic.slug) }}" target="_blank" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 14px rgba(37,99,235,0.35); display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s;">
             <span>🖥️ Smart Board / PPT Mode</span>
         </a>
     </div>
     
-    <div class="article-meta">
+    <div class="article-meta" style="margin-bottom: 25px; color: #64748b; font-size: 0.92rem;">
         <span><i class="icon-calendar"></i> Subject: {{ course_title }}</span> | 
-        <span>Last Updated : {{ "2026-05-04" }}</span>
+        <span>Format: Comprehensive Line-by-Line Guide with Interactive Code & Visual Diagrams</span>
     </div>
 
     <div class="article-content">
         {{ topic.content | safe }}
     </div>
     
-    <div class="article-nav">
+    <div class="article-nav" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
         <a href="{{ url_for('course_home', subject=subject) }}" class="btn-nav">&laquo; Back to {{ course_title }}</a>
+        <a href="{{ url_for('board_view', subject=subject, slug=topic.slug) }}" target="_blank" class="btn-nav" style="background: #1e3a8a;">Launch Smart Board &raquo;</a>
     </div>
 </div>
+
+<script>
+function copyCode(btn) {
+    var container = btn.closest('.program-card, .code-box');
+    if (!container) return;
+    var codeElem = container.querySelector('code, pre');
+    if (!codeElem) return;
+    var text = codeElem.innerText;
+    
+    navigator.clipboard.writeText(text).then(function() {
+        var originalText = btn.innerHTML;
+        btn.innerHTML = '✓ Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+            btn.innerHTML = originalText;
+            btn.classList.remove('copied');
+        }, 2000);
+    }).catch(function(err) {
+        // Fallback for older browsers
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        btn.innerHTML = '✓ Copied!';
+        setTimeout(function() { btn.innerHTML = '📋 Copy'; }, 2000);
+    });
+}
+</script>
 {% endblock %}

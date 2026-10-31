@@ -9,13 +9,18 @@
     
     <div class="course-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 30px;">
         {% for id, info in subjects.items() %}
-            {% set theme_color = '#5b3cc4' if id == 'gk' else '#0f9d58' %}
-            {% set bg_gradient = 'linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%)' if id == 'gk' else 'white' %}
-            {% set border_style = '2px solid #5b3cc4' if id == 'gk' else '1px solid #eee' %}
-            <div class="course-card" style="background: {{ bg_gradient }}; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: {{ border_style }}; transition: transform 0.3s ease;">
+            {% set theme_color = '#2563eb' if id == 'python' else ('#5b3cc4' if id == 'gk' else '#0f9d58') %}
+            {% set bg_gradient = 'linear-gradient(135deg, #ffffff 0%, #eff6ff 100%)' if id == 'python' else ('linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%)' if id == 'gk' else 'white') %}
+            {% set border_style = '2px solid #2563eb' if id == 'python' else ('2px solid #5b3cc4' if id == 'gk' else '1px solid #eee') %}
+            <div class="course-card" style="background: {{ bg_gradient }}; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: {{ border_style }}; transition: transform 0.3s ease; position: relative;">
+                {% if id == 'python' %}
+                <div style="position: absolute; top: 15px; right: 15px; background: #dbeafe; color: #1e40af; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">BASIC TO ADVANCED</div>
+                {% endif %}
                 <h2 style="color: {{ theme_color }}; margin-bottom: 10px;">{{ info.title }}</h2>
                 <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;">
-                    {% if id == 'gk' %}
+                    {% if id == 'python' %}
+                        Comprehensive Python 3 notes covering fundamentals, memory models, OOP, decorators, generators, concurrency, and interview gotchas.
+                    {% elif id == 'gk' %}
                         Learn general knowledge, history, and polity through engaging stories and interactive illustrations.
                     {% else %}
                         Master the core concepts of {{ info.title }} with our detailed, topic-wise quick notes.

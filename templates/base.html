@@ -28,6 +28,25 @@
         }
     </style>
     {% endif %}
+    {% if subject == 'python' %}
+    <style>
+        .sidebar h3 {
+            border-bottom: 2px solid #2563eb !important;
+            color: #1e40af !important;
+        }
+        .sidebar .unit-title {
+            color: #1d4ed8 !important;
+        }
+        .sidebar li a.active {
+            background-color: #2563eb !important;
+            color: white !important;
+        }
+        .sidebar li a:hover {
+            background-color: #eff6ff !important;
+            color: #1d4ed8 !important;
+        }
+    </style>
+    {% endif %}
 </head>
 <body>
     <header class="navbar">
@@ -42,7 +61,8 @@
         </label>
         <nav class="nav-links">
             <a href="/">Home</a>
-            <a href="{{ url_for('oops_exam_solution') }}" style="color: #4f46e5; font-weight: 600;"><i class="fa-solid fa-graduation-cap"></i> OOPs Exam Solutions</a>
+            <a href="{{ url_for('course_home', subject='python') }}" style="color: #ffea79; font-weight: 600;"><i class="fa-brands fa-python"></i> 🐍 Python Guide</a>
+            <a href="{{ url_for('oops_exam_solution') }}" style="color: #e0e7ff; font-weight: 600;"><i class="fa-solid fa-graduation-cap"></i> OOPs Exam Solutions</a>
             <a href="/cpp-lab-manual">C++ Lab</a>
             <a href="/ds-lab-manual">DS Lab</a>
             <a href="/compiler-lab-manual">Compiler Lab</a>

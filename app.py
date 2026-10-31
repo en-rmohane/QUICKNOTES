@@ -5,11 +5,16 @@ from ada_data import ada_data
 from networking_data import networking_data
 from gk_data import gk_data
 from cpp_oop_data import cpp_oop_data
+from python_data import python_data
 
 app = Flask(__name__)
 
 # Subject mapping
 SUBJECTS = {
+    'python': {
+        'title': 'Python Programming Master Guide',
+        'data': python_data
+    },
     'compiler': {
         'title': 'Compiler Design',
         'data': compiler_data

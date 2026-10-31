@@ -271,7 +271,7 @@
         let currentFontSize = 19;
 
         document.addEventListener('DOMContentLoaded', () => {
-            sections = Array.from(document.querySelectorAll('.concept-section'));
+            sections = Array.from(document.querySelectorAll('.concept-section, .points-to-remember-card'));
             
             // Listen for Arrow Keys navigation
             document.addEventListener('keydown', (e) => {
@@ -284,6 +284,27 @@
                 }
             });
         });
+
+        function copyCode(btn) {
+            var container = btn.closest('.program-card, .code-box');
+            if (!container) return;
+            var codeElem = container.querySelector('code, pre');
+            if (!codeElem) return;
+            var text = codeElem.innerText;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                var originalText = btn.innerHTML;
+                btn.innerHTML = '✓ Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function() {
+                btn.innerHTML = '✓ Copied!';
+                setTimeout(function() { btn.innerHTML = '📋 Copy'; }, 2000);
+            });
+        }
 
         function navigateSection(direction) {
             if (!sections.length) return;
